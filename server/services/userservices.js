@@ -16,3 +16,15 @@ exports.register=(data,callback)=>{
     callback.send(err)
 }
 }
+exports.login=(data,callback)=>{
+    console.log("userservice login 1");
+    usermodel.login(data,(err,data)=>{
+        console.log("userservid login 2");
+        if(err){
+            return callback(err);
+        }
+        else {
+            return callback(null,data);
+        }
+    })
+}
