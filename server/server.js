@@ -3,6 +3,8 @@ var mongoose=require("mongoose");
 var config=require("./configuration/dbconfig");
 var bodyparser=require('body-parser');
 var expressValidator=require('express-validator');
+const dotenv=require('dotenv');
+dotenv.config();
 var express=require('express');
 var app=express();
 

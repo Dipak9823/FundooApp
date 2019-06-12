@@ -72,6 +72,19 @@ class usermodel {
         })
 
     }
+
+    verification(body,callback){
+        console.log("In model verification");
+        user.findOne({'email':body.email},{"isVerfied":true},(err,result)=>{
+            if(err) {
+                return callback(err);
+            }
+            else {
+                return callback(null,result);
+            }
+        })
+
+    }
     login(body,callback) {
         console.log("In a login model 1");
         console.log(body);
@@ -105,6 +118,49 @@ class usermodel {
             else{
                 console.log("Email and password are incorrect");
                 return callback("Invalid User")
+            }
+        })
+    }
+
+    forgotPassword(body,callback){
+        console.log("In forgotpassword 1");
+        console.log();
+        user.findOne({email: body.email},(err,res)=>{
+            if(err) {
+                console.log("error");
+                return callback(err);
+            }
+            else{
+                if(res!==undefined && body.email===res.email){
+                    console.log("Forgot password");
+                    return callback(null,res);
+                }
+                else {
+                    return callback("Email is Wrong");
+                }
+            }
+        })
+
+    }
+
+    resetPassword(req,callback) {
+        console.log("In a model resetpassword");
+
+        let newPassword=bcrypt.hashSync(req.body.password,salt);
+        user.updateOne({_id:req.decoded.payload.user_id},{password:newPassword},(err,res)=>{
+            if(err) {
+                console.log(err);
+                return callback(err);
+            }
+            else if(res){
+                console.log(res);
+                console.log("Password Change successfully");
+                return callback(null,res);
+
+            }
+            else {
+
+                return callback("id does not match");
             }
         })
     }

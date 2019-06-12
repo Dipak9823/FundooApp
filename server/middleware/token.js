@@ -3,7 +3,7 @@ var config=require('../configuration/dbconfig')
 module.exports={
 
     generateToken(payload){
-        jwt.sign({payload},config.secret,{expiresIn: '1d'});
+        var token=jwt.sign({payload},config.secret,{expiresIn: '1d'});
 
         const obj={
             success: true,

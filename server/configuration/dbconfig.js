@@ -1,6 +1,6 @@
 
 
 module.exports={
-    url="mongodb://localhost/fundoApp",
+    url:"mongodb://localhost/fundoApp",
     secret:"worldisfullofdevelopers"
 };

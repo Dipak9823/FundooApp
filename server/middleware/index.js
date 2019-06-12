@@ -1,7 +1,7 @@
 var jwt=require("jsonwebtoken");
 var config=require("../configuration/dbconfig");
 
-let checkToken=(req,res,next) => {
+const checkToken=(req,res,next) => {
     let token1=req.headers['token'];
 
     if(token1) {
@@ -26,4 +26,6 @@ let checkToken=(req,res,next) => {
     }
 };
 
-module.exports=checkToken;
+module.exports={
+    checkToken:checkToken
+}
