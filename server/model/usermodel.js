@@ -31,9 +31,10 @@ class usermodel {
                 console.log("Error in registration");
                 return callback(err);
             }
-            else if(data >0){
+            else if(data !== undefined){
                  console.log("This email is already available here");
-                 return callback(null,response)
+                 var response = { "error": true, "message": "Email already exists ", "errorCode": 404 };
+                 return callback(response);
              }
             else {
                 

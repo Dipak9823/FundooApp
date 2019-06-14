@@ -21,7 +21,7 @@ exports.register=(req,res)=> {
             }
             var obj=token.generateToken(payload);
             console.log(obj);
-            const url=`http://localhost:8000/#!/login/${obj.token}`;
+            const url=`http://localhost:8000/#!/verification/${obj.token}`;
             console.log(url,req.body.email);
             nodemailer.sendmail(url,req.body.email);
 
