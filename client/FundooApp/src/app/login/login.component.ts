@@ -17,6 +17,6 @@ export class LoginComponent implements OnInit {
   }
   onSubmit():void {
     console.log(this.loginForm.controls.email.value);
-    console.log(this.loginForm.get('password').value);
+    console.log(this.loginForm.get("password").value);
   }
 }

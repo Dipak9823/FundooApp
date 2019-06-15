@@ -1,3 +1,82 @@
-<p>
-  register works!
-</p>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <div class="maindiv">
+  <table>
+  
+  <tr>
+  <td><label for="name">Name :-</label></td>
+  </tr>
+  <div formGroupName="name">
+  <tr>
+  <td><label >First Name:-</label>
+  <td><label for="lastname">LastName:-</label>
+  </tr>
+  
+  <tr>
+    <td><input id="firstname" formControlName="firstname" type="text"></td>
+    <td><input id="lastname" formControlName="lastname" type="text"></td>
+  </tr>
+  </div>
+  
+  <tr>
+  <td><label for="username">User Name:-</label></td>
+  </tr>
+  
+  <tr>
+  <td><input id="username" formControlName="username" type="text"></td>
+  </tr>
+  <tr>
+  <td><label for="email">Email </label></td>
+  </tr>
+  <tr>
+  <td><input id="email" formControlName="email" type="text"></td>
+  </tr>
+  
+  <tr>
+  <td><label for="password">Password</label></td>
+  </tr>
+
+  <tr>
+  <td><input id="password" formControlName="password" type="password"></td>
+  </tr>
+  
+  <tr>
+  <td><label for="pnumber">Phone_Number</label></td>
+  </tr>
+
+  <tr>
+  <td><input id="pnumber" formControlName="pnumber" type="number"></td>
+  </tr>
+  <div formGroupName="address">
+  <tr>
+  <td><label for="address">Address:-</label></td>
+  </tr>
+  
+  <tr>
+  <td><label for="street">Street</label></td>
+  <td><label for="city">City</label></td>
+  </tr>
+  
+  <tr>
+  <td><input id="street" formControlName="street" type="text"></td>
+  <td><input id="city" formControlName="city" type="text"></td>
+  </tr>
+  
+  <tr>
+  <td><label for="state">State:-</label></td>
+  <td><label for="zipcode">Zip Code</label>
+  
+  </tr>
+   
+  <tr>
+  <td><input id="state" formControlName="state" type="text"></td>
+  <td><input id="zipcode" formControlName="zipcode" type="text"></td>
+  </tr>
+</div>
+  <tr>
+    <td><input type="submit" value="Submit"></td>
+  </tr>
+</table>
+</div>
+
+
+</form>
