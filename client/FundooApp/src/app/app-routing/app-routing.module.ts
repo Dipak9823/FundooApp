@@ -2,10 +2,10 @@ import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes,RouterOutlet} from '@angular/router';
-import { LoginComponent } from '../login/login.component';
-import { RegisterComponent} from '../register/register.component';
-import { ResetpasswordComponent} from '../resetpassword/resetpassword.component';
-import { ForgopasswordComponent} from '../forgopassword/forgopassword.component';
+import { LoginComponent } from '../Component/login/login.component';
+import { RegisterComponent} from '../Component/register/register.component';
+import { ResetpasswordComponent} from '../Component/resetpassword/resetpassword.component';
+import { ForgopasswordComponent} from '../Component/forgopassword/forgopassword.component';
 import { BrowserModule } from '@angular/platform-browser';
 //import { RootService} from '../root.service';
 const appRoutes: Routes=[

@@ -1,4 +1,7 @@
-<form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+<div class="alert alert-danger" *ngIf="errorMsg">
+  {{errorMsg} }
+</div>
+  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <div class="maindiv">
   <table>
   
@@ -12,7 +15,7 @@
   </tr>
   
   <tr>
-    <td><input id="firstname" formControlName="firstname" type="text"></td>
+    <td><input id="firstname" formControlName="firstname"  type="text"></td>
     <td><input id="lastname" formControlName="lastname" type="text"></td>
   </tr>
   </div>
@@ -44,7 +47,7 @@
   </tr>
 
   <tr>
-  <td><input id="pnumber" formControlName="pnumber" type="number"></td>
+  <td><input id="pnumber" formControlName="phone_number" type="number"></td>
   </tr>
   <div formGroupName="address">
   <tr>
@@ -71,12 +74,12 @@
   <td><input id="state" formControlName="state" type="text"></td>
   <td><input id="zipcode" formControlName="zipcode" type="text"></td>
   </tr>
-</div>
+ </div>
   <tr>
     <td><input type="submit" value="Submit"></td>
   </tr>
-</table>
-</div>
+ </table>
+ </div>
 
 
 </form>
