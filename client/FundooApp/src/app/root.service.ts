@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse}  from '@angular/common/http';
-import { catchError} from 'rxjs/operators/';
+import { catchError, tap} from 'rxjs/operators/';
 import { throwError} from 'rxjs';
 
 @Injectable({
@@ -23,8 +23,17 @@ register(userData){
   }
 
 
-login(email:string,password:string){
-  return this.http.post(`${this.url}/login`,{email:email,password:password})     
+login(email:string,password:string){ 
+  return this.http.post(`${this.url}/login`,{email:email,password:password});     
 }
+
+forgotpassword(email:string){
+  return this.http.post(`${this.url}/forgotpassword`,{email:email})
+}
+
+resetpassword(password:string){
+  return this.http.post(`${this.url}/resetpassword`,password)
+}
+
 }
 

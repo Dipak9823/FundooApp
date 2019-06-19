@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { RootService} from './root.service';
 import { ForgopasswordComponent } from './Component/forgopassword/forgopassword.component';
 import { ResetpasswordComponent } from './Component/resetpassword/resetpassword.component';
+import { KeepnotesComponent } from './Component/keepnotes/keepnotes.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ResetpasswordComponent } from './Component/resetpassword/resetpassword.
     RegisterComponent,
     ForgopasswordComponent,
     ResetpasswordComponent,
+    KeepnotesComponent,
     //AppRoutingModule
   ],
   imports: [

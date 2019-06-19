@@ -36,26 +36,9 @@ export class RegisterComponent implements OnInit {
          zipcode: new FormControl('')
        })
      })
-     console.log(this.u)
-  //   this.registerForm = this.formBuilder.group({
-  //       name: this.formBuilder.group({
-  //         firstname:[this.u.name.firstname, Validators.required],
-  //         lastname:['', Validators.required]
-  //       }),
-  //     username : ['', Validators.required],
-  //      email: ['', Validators.required],
-  //      password: ['', Validators.required],
-  //      pnumber: ['', Validators.required],
-  //       address: this.formBuilder.group({
-  //         street: ['', Validators.required],
-  //         city: ['', Validators.required],
-  //     state:['', Validators.required],
-  //       zipcode:['', Validators.required]
-  //       })
-  //  })
-
+   
     console.log(this.registerForm.value);
-      }
+  }
   onSubmit():void{
 
     console.log(this.u)
@@ -65,6 +48,7 @@ export class RegisterComponent implements OnInit {
     },(error)=>{
         //console.log('error during post is',error);
         this.errorMsg=error.statustext;
+        console.log(this.errorMsg)
     })
 
     console.log(this.registerForm.value);
