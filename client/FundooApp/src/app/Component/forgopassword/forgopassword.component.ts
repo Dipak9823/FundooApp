@@ -23,7 +23,7 @@ export class ForgopasswordComponent implements OnInit {
   }
 
   onSubmit(){
-    this.rootservice.forgotpassword(this.forgotpassword.value.email).subscribe((Response)=>
+    this.rootservice.forgotpassword(this.forgotpassword.value.email).subscribe(
       Response=>{
         console.log("The response provided by server is :-",Response);
       },

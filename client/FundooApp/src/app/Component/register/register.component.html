@@ -1,7 +1,7 @@
 <div class="alert alert-danger" *ngIf="errorMsg">
   {{errorMsg} }
 </div>
-  <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <form class="formregister" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <div class="maindiv">
   <table>
   
@@ -76,9 +76,10 @@
   </tr>
  </div>
   <tr>
-    <td><input type="submit" value="Submit"></td>
+    <td></td>
   </tr>
  </table>
+ <button type="submit" md-raised-button>Submit</button>
  </div>
 
 

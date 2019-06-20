@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { CommonModule} from '@angular/common';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './Component/login/login.component';
 import { RegisterComponent } from './Component/register/register.component';
@@ -13,26 +13,45 @@ import { RootService} from './root.service';
 import { ForgopasswordComponent } from './Component/forgopassword/forgopassword.component';
 import { ResetpasswordComponent } from './Component/resetpassword/resetpassword.component';
 import { KeepnotesComponent } from './Component/keepnotes/keepnotes.component';
-
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatButtonModule, MatInputModule, MatFormFieldModule, MatCheckboxModule, MatSidenavModule,MatIconModule,MatListModule, MatToolbarModule} from '@angular/material';
+import { MatMenuModule} from '@angular/material/menu'
+import { FlexLayoutModule} from '@angular/flex-layout';
 @NgModule({
   declarations: [
+    
     AppComponent,
     LoginComponent,
     RegisterComponent,
     ForgopasswordComponent,
     ResetpasswordComponent,
     KeepnotesComponent,
+   
     //AppRoutingModule
   ],
   imports: [
+    CommonModule,
     BrowserModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
-
+    HttpClientModule,
+    BrowserAnimationsModule,
+    MatButtonModule,
+    MatCheckboxModule,
+    MatIconModule,
+    MatListModule,
+    MatSidenavModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatToolbarModule,
+    MatMenuModule,
+    FlexLayoutModule
+  
   ],
+
   providers: [RootService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
+ 

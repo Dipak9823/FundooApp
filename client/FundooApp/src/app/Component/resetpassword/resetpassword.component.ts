@@ -35,7 +35,7 @@ export class ResetpasswordComponent implements OnInit {
       console.log("Password and Confirm password does not match");
     }
     else {
-      this.rootservice.resetpassword(this.resetpassword.value.password).subscribe((response)=>
+      this.rootservice.resetpassword(this.resetpassword.value.password).subscribe(
        response=>{
         console.log("Password Reset Successfully",response);
        },
