@@ -1,6 +1,9 @@
 
 
 module.exports={
-    url:"mongodb://localhost/fundoApp",
-    secret:"worldisfullofdevelopers"
+    url:"mongodb://localhost/projectDbs",
+    secret:"worldisfullofdevelopers",
+    accesskey:"",
+    secretkey:"",
+    region:"us-east-2"
 };

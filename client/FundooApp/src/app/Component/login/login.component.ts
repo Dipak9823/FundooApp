@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
 
       console.log(response);
       localStorage.setItem('token', response.token);
-      localStorage.setItem('email', this.loginForm.value.email)
+      
       console.log("Token stored" + localStorage.getItem("token"));
 
       this.router.navigate(['/keepnotes']);

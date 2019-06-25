@@ -6,19 +6,21 @@ import { Router} from '@angular/router'
   styleUrls: ['./keepnotes.component.css']
 })
 export class KeepnotesComponent implements OnInit {
-  email:string;
+  
   token:string;
 
   constructor(private router:Router)  { }
 
   ngOnInit() {
-    this.email=localStorage.getItem('email');
     this.token=localStorage.getItem('token');
+    console.log(this.token);
   }
 
   onlogout(){
-    localStorage.removeItem('email');
+    console.log("Logout");
     localStorage.removeItem('token');
-    this.router.navigate['/login'];
+    console.log(1); 
+    this.router.navigate(['/login']);
+    console.log(2)
   }
 }

@@ -3,6 +3,7 @@ var config=require('../configuration/dbconfig');
 var jwt=require('jsonwebtoken');
 var token=require('../middleware/token')
 var nodemailer=require('../middleware/mail');
+var singleupload=require('../middleware/img-uploading');
 exports.register=(req,res)=> {
     console.log("controller1");
     responseresult={};
@@ -21,7 +22,7 @@ exports.register=(req,res)=> {
             }
             var obj=token.generateToken(payload);
             console.log(obj);
-            const url=`http://localhost:8000/#!/verification/${obj.token}`;
+            const url=`http://localhost:8000/#!/verification/:${obj.token}`;
             console.log(url,req.body.email);
             nodemailer.sendmail(url,req.body.email);
 
@@ -58,11 +59,21 @@ exports.login=(req,res)=>{
             return res.status(400).send(responseresult);
         }
         else {
-            let token=jwt.sign({email:req.body.email, _id: data[0]._id}, config.secret, {expiresIn : '1d'});
-            
+            email=req.body.email
+            let token1=jwt.sign({email:email}, config.secret, {expiresIn : '1d'});
+            console.log(token);
+            client.set(email.toString(), token1,redis.print)
+            client.get(email.toString(),function(error,entries){
+                if(error){
+                    console.log("Error in redis",error);
+                }
+                else {
+                    console.log("Run successfully",entries);
+                }
+            }  )
             return res.status(200).send({
                 message:'token generated',
-                token:token
+                token:token1
             });
         }
 
@@ -72,6 +83,7 @@ exports.login=(req,res)=>{
 exports.forgotPassword=(req,res)=>{
     const responseresult={}
     userservice.forgotPassword(req.body,(err,data)=>{
+        console.log(data);
         if(err) {
             responseresult.success=false,
             responseresult.error=err,
@@ -82,7 +94,7 @@ exports.forgotPassword=(req,res)=>{
                 email:req.body.email
             }
             var obj=token.generateToken(payload);
-            const url=`http://localhost:8000/resetPassword/${obj.token}`;
+            const url=`http://localhost:8000/resetPassword/:${obj.token}`;
             nodemailer.sendmail(url,req.body.email);
             res.status(200).send(url);
         }
@@ -105,6 +117,20 @@ exports.resetPassword=(req,res)=>{
             res.status(200).send(responseresult);
         }
     })
+exports.uploadimg = function(req,res){
+    console.log("Upload image controller");
+    responseresult={}
+    var upload = singleupload.single('image');
+
+    upload(req, res, function(err) {
+
+        if (err) {
+          return res.status(422).send({errors: [{title: 'File Upload Error', detail: err.message}] });
+        }
+    
+        return res.json({'imageUrl': req.file.location});
+      });
+    }
 
 
 }

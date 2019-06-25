@@ -14,8 +14,8 @@ import { ForgopasswordComponent } from './Component/forgopassword/forgopassword.
 import { ResetpasswordComponent } from './Component/resetpassword/resetpassword.component';
 import { KeepnotesComponent } from './Component/keepnotes/keepnotes.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import {MatButtonModule, MatInputModule, MatFormFieldModule, MatCheckboxModule, MatSidenavModule,MatIconModule,MatListModule, MatToolbarModule} from '@angular/material';
-import { MatMenuModule} from '@angular/material/menu'
+import {MatButtonModule, MatLabel, MatHint ,MatInputModule, MatFormFieldModule, MatCheckboxModule, MatSidenavModule,MatIconModule,MatListModule, MatToolbarModule} from '@angular/material';
+import { MatMenuModule,MatCardModule} from '@angular/material'
 import { FlexLayoutModule} from '@angular/flex-layout';
 @NgModule({
   declarations: [
@@ -46,6 +46,8 @@ import { FlexLayoutModule} from '@angular/flex-layout';
     MatInputModule,
     MatToolbarModule,
     MatMenuModule,
+    MatCardModule,
+    
     FlexLayoutModule
   
   ],

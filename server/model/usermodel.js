@@ -11,7 +11,12 @@ var userschema = new mongoose.Schema({
     email: String,
     password: String,
     phone_no: Number,
-    address: { street: String, zeepcode: Number, city: String, state: String }
+    address: { 
+        street: String,  
+        city: String, 
+        state: String,
+        zipcode: Number 
+    }
 
 });
 
@@ -31,7 +36,7 @@ class usermodel {
                 console.log("Error in registration");
                 return callback(err);
             }
-            else if(data !== undefined){
+            else if(data !== null){
                  console.log("This email is already available here");
                  var response = { "error": true, "message": "Email already exists ", "errorCode": 404 };
                  return callback(response);
@@ -41,8 +46,8 @@ class usermodel {
 
                 var newUser = new user({
                     name: {
-                        firstname: body.firstname,
-                        lastname: body.lastname
+                        firstname: body.name.firstname,
+                        lastname: body.name.lastname
                     },
 
                     username: body.username,
@@ -50,10 +55,11 @@ class usermodel {
                     password: hash(body.password),
                     phone_no: body.number,
                     address: {
-                        street: body.street,
-                        zipcode: body.zipcode,
-                        city: body.city,
-                        state: body.state
+                        street: body.address.street,
+                        city: body.address.city,
+                        state: body.address.state,
+                        zipcode: body.address.zipcode
+                        
                     }
                 })
 
@@ -96,17 +102,17 @@ class usermodel {
                 console.log("Error login");
                 return callback(err);
             }
-            else if(data !== undefined){
+            else if(data != null){
                 console.log(1); 
-                bcrypt.compare(body.password,data.password,(err,res)=>{
+                bcrypt.compare(body.password,data.password).then(function(res){
                     
-                    if(err) {
-                        console.log("Error in log in");
-                        return callback(err);
-                    }
-                    else if(res) {
-                        console.log("Successfully login");
+                    if(res) {
+                        console.log("Successfully Login");
                         return callback(null,res);
+                    }
+                    else if(err) {
+                        console.log("error in login");
+                        return callback(err);
                     }
                     else {
                         console.log("Password is wrong");

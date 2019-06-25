@@ -4,7 +4,9 @@
   <form class="formregister" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
   <div class="maindiv">
   <table>
-  
+    
+      
+      
   <tr>
   <td><label for="name">Name :-</label></td>
   </tr>
@@ -15,8 +17,20 @@
   </tr>
   
   <tr>
-    <td><input id="firstname" formControlName="firstname"  type="text"></td>
-    <td><input id="lastname" formControlName="lastname" type="text"></td>
+    <td>
+      <mat-form-field appearance="outline">
+      <mat-label>First Name</mat-label>
+      <input matInput id="firstname" formControlName="firstname"  type="text">
+      <mat-hint>Hint</mat-hint>
+      </mat-form-field>  
+    </td>
+    <td>
+      <mat-form-field appearance="outline">
+      <mat-label>Last Name</mat-label>
+      <input matInput id="lastname" formControlName="lastname" type="text">
+      <mat-hint>Hint</mat-hint>
+      </mat-form-field>  
+    </td>
   </tr>
   </div>
   
@@ -25,13 +39,25 @@
   </tr>
   
   <tr>
-  <td><input id="username" formControlName="username" type="text"></td>
+  <td>
+    <mat-form-field appearance="outline">
+    <mat-label>User Name</mat-label>
+    <input matInput id="username" formControlName="username" type="text" placeholder="Enter Your Username">
+    <mat-hint>Hint</mat-hint>
+    </mat-form-field>  
+  </td>
   </tr>
   <tr>
   <td><label for="email">Email </label></td>
   </tr>
   <tr>
-  <td><input id="email" formControlName="email" type="text"></td>
+  <td>
+    <mat-form-field appearance="outline">
+    <mat-label>Email</mat-label>
+    <input matInput id="email" formControlName="email" type="text" placeholder="Enter Your Email">
+    <mat-hint>Hint</mat-hint>
+    </mat-form-field>  
+  </td>
   </tr>
   
   <tr>
@@ -39,7 +65,16 @@
   </tr>
 
   <tr>
-  <td><input id="password" formControlName="password" type="password"></td>
+  <td>
+    <mat-form-field appearance="outline">
+    <mat-label>Password</mat-label>
+    <input matInput id="password" formControlName="password" [type]="hide ? 'password' : 'text'" placeholder="Enter Your Password">
+    <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'" [attr.aria-pressed]="hide">
+        <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+    <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+  </td>
   </tr>
   
   <tr>
@@ -47,7 +82,13 @@
   </tr>
 
   <tr>
-  <td><input id="pnumber" formControlName="phone_number" type="number"></td>
+  <td>
+    <mat-form-field appearance="outline">
+    <mat-label>Phone_Number</mat-label>
+    <input matInput id="pnumber" formControlName="phone_number" type="number" placeholder="Enter Your Phone Number">
+    <mat-hint>Hint</mat-hint>
+    </mat-form-field>  
+  </td>
   </tr>
   <div formGroupName="address">
   <tr>
@@ -60,8 +101,20 @@
   </tr>
   
   <tr>
-  <td><input id="street" formControlName="street" type="text"></td>
-  <td><input id="city" formControlName="city" type="text"></td>
+  <td>
+    <mat-form-field appearance="outline">
+    <mat-label>Street</mat-label>
+    <input matInput id="street" formControlName="street" type="text" placeholder="Street">
+    <mat-hint>Hint</mat-hint>
+    </mat-form-field>  
+  </td>
+  <td>
+    <mat-form-field appearance="outline">
+    <mat-label>City</mat-label>
+    <input matInput id="city" formControlName="city" type="text" placeholder="City">
+    <mat-hint>Hint</mat-hint>
+    </mat-form-field>
+  </td>
   </tr>
   
   <tr>
@@ -71,15 +124,27 @@
   </tr>
    
   <tr>
-  <td><input id="state" formControlName="state" type="text"></td>
-  <td><input id="zipcode" formControlName="zipcode" type="text"></td>
+  <td>
+    <mat-form-field appearance="outline">
+    <mat-label>State</mat-label>
+    <input matInput id="state" formControlName="state" type="text" placeholder="State">
+    <mat-hint>Hint</mat-hint>
+    </mat-form-field>  
+  </td>
+  <td>
+    <mat-form-field appearance="outline">
+    <mat-label>Zip Code</mat-label>
+    <input matInput id="zipcode" formControlName="zipcode" type="text" placeholder="Zip Code">
+    <mat-hint>Hint</mat-hint>
+    </mat-form-field>  
+  </td>
   </tr>
  </div>
   <tr>
     <td></td>
   </tr>
  </table>
- <button type="submit" md-raised-button>Submit</button>
+ <input type="submit" value="Submit">
  </div>
 
 

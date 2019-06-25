@@ -7,7 +7,7 @@ import { throwError} from 'rxjs';
   providedIn: 'root'
 })
 export class RootService {
-
+ 
 url="http://localhost:8000";
   constructor(private http: HttpClient) { }
 
@@ -32,7 +32,7 @@ forgotpassword(email:string){
 }
 
 resetpassword(password:string){
-  return this.http.post(`${this.url}/resetpassword`,password)
+  return this.http.post(`${this.url}/resetpassword/:token`,password)
 }
 
 }
