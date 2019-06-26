@@ -1,48 +1,59 @@
-<div fxLayout="column" fxLayoutAlign="end">
-<div fxLayoutAlign="center start"> 
-<mat-toolbar>
-    <div>
+<div flex-direction="row" fxShow.gt-xs>
+    
+
+  <mat-toolbar >
+    <div fxFlex="4">
         <button mat-icon-button (click)="sidenav.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
     </div>
-    <div>
+    <div fxFlex="4" >
       <img mat-img src="https://ssl.gstatic.com/keep/keep.ico" />
     </div>
     
+    <div fxFlex>
+      <span class="title">FundooNotes</span>
+    </div>
       
     
-        <div>
-            <mat-card fxLayoutAlign="center center" class="searchInput">
-              <button mat-icon-button class="searchButton">
-                <mat-icon>search</mat-icon>
-              </button>
-              <input mat-input class="searchInput" placeholder="Search">
-            </mat-card>
-          </div>
+    <div fxFlex fxHide="true" fxShow.sm>
+        <mat-card  fxLayoutAlign="center center" class="searchInput">
+          <button mat-icon-button class="searchButton">
+            <mat-icon>search</mat-icon>
+          </button>
+          <input mat-input class="searchInput" placeholder="Search">
+        </mat-card>
+      </div>
     
-              
-    
-        <div class="logout">
-            
-          <div>
-            <div >
-              <button mat-icon-button (click)="onlogout()">
-                <mat-icon>logout</mat-icon>
-              </button>
-              <div >
-                <mat-card *ngIf="flag===true">
-                  <button mat-icon-button >Logout</button>
-                </mat-card>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div fxFlex="5">
+      <button mat-icon-button>
+        <mat-icon>refresh</mat-icon>
+      </button>
+    </div>  
+         
+    <div fxFlex="5">
+      <button mat-icon-button>
+        <mat-icon>settings</mat-icon>
+      </button>
+    </div>
+    <div>
+    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+    <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="onlogout()">Sign Out!</button>
+    <button mat-menu-item>Change your Password</button>
+    </mat-menu>
+   </div>
+          
 </mat-toolbar>
 
-<mat-sidenav-container class="example-container">
-        <mat-sidenav #sidenav mode="side">
-          <mat-nav-list>
+</div>
+
+
+<!--Sidenav bar is open After click menu button of sidenavbar-->
+<!-- <div fxLayout="column" fxLayoutAlign="start" fxFlex="50"> -->
+    <mat-sidenav-container class="example-container">
+        <mat-sidenav #sidenav mode="side" class="sidenav">
+            <mat-nav-list>
             <a mat-list-item routerLink='/first'>First Component</a>
             <a mat-list-item routerLink='/second'>Second Component</a>
           </mat-nav-list>
@@ -51,5 +62,8 @@
           <router-outlet></router-outlet>
         </mat-sidenav-content>
 </mat-sidenav-container>
-</div>
-</div>
+<!-- </div> -->
+
+
+
+
