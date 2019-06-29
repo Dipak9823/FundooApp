@@ -28,7 +28,7 @@ const checkToken=(req,res,next) => {
 
 const checkRedis=(req,res,next) => {
     //let token1=req.headers['token'];
-    var redisToken=client.get("email",(err,print)=>{
+    var redisToken=client.get("token",(err,print)=>{
         if(err) {
             console.log("Error in redis",err);
         }

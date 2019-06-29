@@ -62,8 +62,8 @@ exports.login=(req,res)=>{
             email=req.body.email
             let token1=jwt.sign({email:email}, config.secret, {expiresIn : '1d'});
             console.log(token);
-            client.set(email.toString(), token1,redis.print)
-            client.get(email.toString(),function(error,entries){
+            client.set(token1, token1,redis.print)
+            client.get(token1,function(error,entries){
                 if(error){
                     console.log("Error in redis",error);
                 }
@@ -94,7 +94,7 @@ exports.forgotPassword=(req,res)=>{
                 email:req.body.email
             }
             var obj=token.generateToken(payload);
-            const url=`http://localhost:8000/resetPassword/:${obj.token}`;
+            const url=`http://localhost:4200/resetPassword/:${obj.token}`;
             nodemailer.sendmail(url,req.body.email);
             res.status(200).send(url);
         }

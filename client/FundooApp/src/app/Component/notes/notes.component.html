@@ -1,8 +1,48 @@
+
+
+
+<div fxLayout="column" fxLayoutAlign="center center" class="input">
+
 <div>
-
-<mat-card>
-
+<mat-card   class="noteInput" fxLayoutAlign="start center">
+        <input matInput (click)="popOut()" placeholder="Take a note" class="inputnote">
+       <button mat-icon-button fxFlexAlign="end center" >
+            <mat-icon>format_color_fill</mat-icon>
+        </button>
+        <button mat-icon-button>
+                <mat-icon>Home</mat-icon>
+        </button>
+        <button mat-icon-button >
+                <mat-icon>insert_photo</mat-icon>
+        </button> 
 </mat-card>
-
-
 </div>
+<!-- </div>
+<div fxLayout="row" fxLayoutAlign="center center" class="">  -->
+<div fxLayout="column" style="margin:10%">  
+<mat-card  class="noteInputPop" fxLayoutAlign="start center">
+        
+        <input matInput placeholder="Title" class="inputLabelPop">
+        
+        <input matInput placeholder="Take a input" class="inputnote">
+      </mat-card>
+      </div>
+</div>  
+
+<!-- <div>
+        <mat-card *ngIf="!popup" (click)="onPopup()" class="popupCard" style="    margin-bottom: 10%;">
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div>
+              <input matInput type="text" placeholder="Take a Note..." class="topinput" style="font-size: 18px">
+    
+              <button mat-icon-button matTooltip="Brush" routerLink="/dashboard" style="margin-right: 3px">
+                <mat-icon style="font-size: 18px !important">brush</mat-icon>
+              </button>
+    
+              <button mat-icon-button matTooltip="Image" routerLink="/dashboard" style="margin-right: 3px">
+                <mat-icon style="font-size: 18px !important">photo</mat-icon>
+              </button>
+            </div>
+          </div>
+        </mat-card>
+      </div> -->

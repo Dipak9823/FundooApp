@@ -16,7 +16,7 @@ import { KeepnotesComponent } from './Component/keepnotes/keepnotes.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatLabel,MatInputModule, MatCheckboxModule, MatSidenavModule,MatIconModule,MatListModule, MatToolbarModule} from '@angular/material';
 import {  MatFormFieldModule} from '@angular/material';
-import { MatMenuModule,MatCardModule} from '@angular/material'
+import { MatMenuModule,MatCardModule,MatExpansionModule} from '@angular/material'
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { NotesComponent } from './Component/notes/notes.component';
 @NgModule({
@@ -33,7 +33,7 @@ import { NotesComponent } from './Component/notes/notes.component';
     //AppRoutingModule
   ],
   imports: [
-    CommonModule,
+    CommonModule,    
     BrowserModule,
     AppRoutingModule,
     FormsModule,
@@ -50,13 +50,14 @@ import { NotesComponent } from './Component/notes/notes.component';
     MatToolbarModule,
     MatMenuModule,
     MatCardModule,
-    
+    MatExpansionModule,
     FlexLayoutModule
   
   ],
 
   providers: [RootService],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }
  

@@ -7,14 +7,18 @@ import { RegisterComponent} from '../Component/register/register.component';
 import { ResetpasswordComponent} from '../Component/resetpassword/resetpassword.component';
 import { ForgopasswordComponent} from '../Component/forgopassword/forgopassword.component';
 import { KeepnotesComponent } from '../Component/keepnotes/keepnotes.component'
+import { NotesComponent} from '../Component/notes/notes.component';
 import { BrowserModule } from '@angular/platform-browser';
 //import { RootService} from '../root.service';
 const appRoutes: Routes=[
   {path: 'login', component: LoginComponent},
   {path: 'register' , component: RegisterComponent},
   {path: 'forgotpassword', component: ForgopasswordComponent},
-  {path: 'resetpassword', component: ResetpasswordComponent},
-  {path: 'keepnotes', component: KeepnotesComponent},
+  {path: 'resetpassword:token', component: ResetpasswordComponent},
+  {path: 'keepnotes', component: KeepnotesComponent,children:[
+    {path:'notes',component:NotesComponent}
+  ]},
+  // {path: 'notes', component: NotesComponent},
   {path: '',  redirectTo:'/login', pathMatch:'full'}
 ];
 
