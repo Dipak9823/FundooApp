@@ -6,13 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./notes.component.css']
 })
 export class NotesComponent implements OnInit {
-  popup:boolean;
+popUp: boolean;
   constructor() { }
 
   ngOnInit() {
   }
 
   popOut(){
-    this.popup=true;
+    this.popUp=true;
   }
 }

@@ -1,33 +1,89 @@
 
 
 
-<div fxLayout="column" fxLayoutAlign="center center" class="input">
-
-<div>
-<mat-card   class="noteInput" fxLayoutAlign="start center">
-        <input matInput (click)="popOut()" placeholder="Take a note" class="inputnote">
-       <button mat-icon-button fxFlexAlign="end center" >
+<div   fxLayout="column" fxLayoutAlign="" class="input">
+<mat-card   *ngIf="!popUp" (click)="popOut()" class="noteInput" fxLayoutAlign="">
+        <div fxLayoutAlign="start center">
+        <input matInput  placeholder="Take a note" class="inputnote">
+        </div>  
+        <div fxLayoutAlign="end center">
+        <button mat-icon-button fxFlexAlign="end center" >
             <mat-icon>format_color_fill</mat-icon>
         </button>
         <button mat-icon-button>
-                <mat-icon>Home</mat-icon>
+            <mat-icon>brush</mat-icon>
         </button>
         <button mat-icon-button >
-                <mat-icon>insert_photo</mat-icon>
+            <mat-icon>image</mat-icon>
         </button> 
+        
+      </div>
 </mat-card>
 </div>
-<!-- </div>
-<div fxLayout="row" fxLayoutAlign="center center" class="">  -->
-<div fxLayout="column" style="margin:10%">  
-<mat-card  class="noteInputPop" fxLayoutAlign="start center">
+  
+<div   class="popinput">  
+<mat-card  *ngIf="popUp" class="noteInputPop" fxLayoutAlign="">
+      <div style="display:flex; flex-direction:column;">
+        <div>
+          <input matInput placeholder="Title" class="inputLabelPop" >
+        </div>
+    
+        <div style="margin-top:20px;">  
+          <input matInput placeholder="Take a input" class="inputNotePop">
+        </div>
+        <div style="margin-top:12px;">
+          <button mat-icon-button matTooltip="Remind me" [matMenuTriggerFor]="reminder">
+              <mat-icon style="font-size: 17px !important">add_alert</mat-icon>
+          </button>
+          <mat-menu #reminder="matMenu">
+              <p mat-menu-item>Reminder:</p>
+              <button mat-menu-item >Later Tody   8pm</button>
+              <button mat-menu-item>Tomorrow    8am</button>
+              <button mat-menu-item>Next Week   Monday 8am</button>
+          </mat-menu>
+
+          <button mat-icon-button matTooltip="Collaborator">
+              <mat-icon style="font-size: 17px !important">group_add</mat-icon>
+          </button>
+
+          <button mat-icon-button matTooltip="Change color">
+              <mat-icon style="font-size: 17px !important">palette</mat-icon>
+          </button>
+
+          <button mat-icon-button matTooltip="Add image">
+              <mat-icon style="font-size: 17px !important">image</mat-icon>
+          </button>
+
+          <button mat-icon-button matTooltip="Archive">
+              <mat-icon style="font-size: 17px !important">archive</mat-icon>
+          </button>
+
+          <button mat-icon-button matTooltip="More" [matMenuTriggerFor]="more"> 
+              <mat-icon style="font-size: 17px !important">more_vert</mat-icon>
+          </button>
+          <mat-menu #more="matMenu">
+              <button mat-menu-item >Add Label</button>
+              <button mat-menu-item>Add Drawing</button>
+              <button mat-menu-item>Show CheckBoxes</button>
+          </mat-menu>
+
+          <button mat-icon-button matTooltip="undo">
+              <mat-icon style="font-size: 17px !important">undo</mat-icon>
+          </button>
+
+          <button mat-icon-button matTooltip="redo">
+              <mat-icon style="font-size: 17px !important">redo</mat-icon>
+          </button>
+          
+          <button mat-button (click)="onSubmit()">Close</button>
+        </div>
+
         
-        <input matInput placeholder="Title" class="inputLabelPop">
-        
-        <input matInput placeholder="Take a input" class="inputnote">
-      </mat-card>
       </div>
-</div>  
+
+</mat-card>
+</div>
+
 
 <!-- <div>
         <mat-card *ngIf="!popup" (click)="onPopup()" class="popupCard" style="    margin-bottom: 10%;">

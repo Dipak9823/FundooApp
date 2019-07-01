@@ -14,7 +14,7 @@ const appRoutes: Routes=[
   {path: 'login', component: LoginComponent},
   {path: 'register' , component: RegisterComponent},
   {path: 'forgotpassword', component: ForgopasswordComponent},
-  {path: 'resetpassword:token', component: ResetpasswordComponent},
+  {path: 'resetpassword/:token', component: ResetpasswordComponent},
   {path: 'keepnotes', component: KeepnotesComponent,children:[
     {path:'notes',component:NotesComponent}
   ]},
