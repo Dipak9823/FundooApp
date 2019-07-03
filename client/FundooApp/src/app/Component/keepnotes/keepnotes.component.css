@@ -21,7 +21,7 @@ mat-toolbar{
 .searchInput{
   display: flex;
   border:none;
-  height: 5vw;
+  height: 3vw;
   width: 50vw;
   background-color: #f1f3f3;
   border-radius: 8px;

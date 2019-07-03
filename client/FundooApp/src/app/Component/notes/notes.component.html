@@ -1,6 +1,4 @@
 
-
-
 <div   fxLayout="column" fxLayoutAlign="" class="input">
 <mat-card   *ngIf="!popUp" (click)="popOut()" class="noteInput" fxLayoutAlign="">
         <div fxLayoutAlign="start center">
@@ -24,12 +22,13 @@
 <div   class="popinput">  
 <mat-card  *ngIf="popUp" class="noteInputPop" fxLayoutAlign="">
       <div style="display:flex; flex-direction:column;">
+        
         <div>
-          <input matInput placeholder="Title" class="inputLabelPop" >
+          <input matInput placeholder="Title" class="inputLabelPop" [(ngModel)]="noteModel.title">
         </div>
     
         <div style="margin-top:20px;">  
-          <input matInput placeholder="Take a input" class="inputNotePop">
+          <input matInput placeholder="Take a input" class="inputNotePop" [(ngModel)]="noteModel.description" >
         </div>
         <div style="margin-top:12px;">
           <button mat-icon-button matTooltip="Remind me" [matMenuTriggerFor]="reminder">
@@ -42,13 +41,37 @@
               <button mat-menu-item>Next Week   Monday 8am</button>
           </mat-menu>
 
-          <button mat-icon-button matTooltip="Collaborator">
+          <button mat-icon-button matTooltip="Collaborator" >
               <mat-icon style="font-size: 17px !important">group_add</mat-icon>
           </button>
 
-          <button mat-icon-button matTooltip="Change color">
+          <mat-menu #color="matMenu" yPosition="above">
+            <div class="colors">
+              <button  class="circle" style="background: #ffffff" mat-mini-fab ></button>
+              <button  class="circle" style="background: #c58a82" mat-mini-fab></button>
+              <button  class="circle" style="background: #b7d5c4" mat-mini-fab></button>
+              <button class="circle" style="background: #f04a0e" mat-mini-fab></button>
+            </div>
+            <div class="colors">
+              <button class="circle" style="background: #7c90c1" mat-mini-fab></button>
+              <button class="circle" style="background: #a367b5" mat-mini-fab></button>
+              <button class="circle" style="background: #0a2d77" mat-mini-fab></button>
+              <button class="circle" style="background: #ebe307" mat-mini-fab></button>
+            </div>
+            <div class="colors">
+              <button class="circle" style="background: #770a0a" mat-mini-fab></button>
+              <button class="circle" style="background: #0a7722" mat-mini-fab></button>
+              <button class="circle" style="background: #000105" mat-mini-fab></button>
+              <button class="circle" style="background: #f309d4" mat-mini-fab></button>
+            </div>
+           
+        </mat-menu>
+         
+          <button mat-icon-button matTooltip="Change color" [matMenuTriggerFor]="color">
               <mat-icon style="font-size: 17px !important">palette</mat-icon>
           </button>
+         
+
 
           <button mat-icon-button matTooltip="Add image">
               <mat-icon style="font-size: 17px !important">image</mat-icon>
@@ -77,10 +100,7 @@
           
           <button mat-button (click)="onSubmit()">Close</button>
         </div>
-
-        
       </div>
-
 </mat-card>
 </div>
 

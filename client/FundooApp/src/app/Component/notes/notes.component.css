@@ -50,4 +50,26 @@
   outline:none;
 }
 
+.circle{
+  height:25px;
+  width:25px;
+  border: 1px solid gray;
+  margin-left:6px;
+  margin-right:6px;
+  margin-bottom:6px;
+  margin-top:6px;
+ 
+}
+.colors{
+  display:flex;
+  flex-wrap:wrap;
+  
+}
 
+.colors button:hover{
+  border:2px solid black;
+}
+
+.colors button:active{
+  border:2px solid black;
+}
