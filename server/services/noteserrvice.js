@@ -1,8 +1,8 @@
 var notemodel=require('../model/notemodel');
 
-module.exports.noteaddServices=(body,callback)=>{
+module.exports.noteaddServices=(req,callback)=>{
     console.log("Service 1");
-    notemodel.addNotes(body,(err,data)=>{
+    notemodel.addNotes(req,(err,data)=>{
         console.log("Service 2");
         if(err) {
             return callback(err);

@@ -60,17 +60,17 @@ exports.login=(req,res)=>{
         }
         else {
             email=req.body.email
-            let token1=jwt.sign({email:email}, config.secret, {expiresIn : '1d'});
-            console.log(token);
+            let token1=jwt.sign({_id:data._id}, config.secret, {expiresIn : '1d'});
+            
+            console.log("controller 2",data);
             client.set(token1, token1,redis.print)
-            client.get(token1,function(error,entries){
-                if(error){
-                    console.log("Error in redis",error);
-                }
-                else {
-                    console.log("Run successfully",entries);
-                }
-            }  )
+            // client.keys('*',(err,reply) => {
+            //     if(err)
+            //     console.log(err);
+            //     else
+            //     console.log(reply);
+                
+            // })
             return res.status(200).send({
                 message:'token generated',
                 token:token1
@@ -94,7 +94,7 @@ exports.forgotPassword=(req,res)=>{
                 email:req.body.email
             }
             var obj=token.generateToken(payload);
-            const url=`http://localhost:4200/resetPassword/:${obj.token}`;
+            const url=`http://localhost:4200/resetpassword/:${obj.token}`;
             nodemailer.sendmail(url,req.body.email);
             res.status(200).send(url);
         }

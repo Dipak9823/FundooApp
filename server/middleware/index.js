@@ -3,16 +3,21 @@ var config=require("../configuration/dbconfig");
 
 const checkToken=(req,res,next) => {
     let token1=req.headers['token'];
-
-    if(token1) {
-        jwt.verify(token1,config.secret,(err,decoded)=>{
+    client.get(token1,(err,print)=>{
+        console.log(print);
+    if(err) {
+        console.log("Error in Get token");
+    }    
+    else if(print) {
+        jwt.verify(print,config.secret,(err,decoded)=>{
             if(err) {
                 return res.send({
                     success: false,
-                    message : "token is not value"
+                    message : "token is not valid"
                 })
             }
             else {
+                console.log("Valid Token");
                 req.decoded=decoded;
                 next();
             }
@@ -24,43 +29,44 @@ const checkToken=(req,res,next) => {
             message : "Auth token is not supplied"
         })
     }
+})
 };
 
-const checkRedis=(req,res,next) => {
-    //let token1=req.headers['token'];
-    var redisToken=client.get("token",(err,print)=>{
-        if(err) {
-            console.log("Error in redis",err);
-        }
-        else {
-            console.log("run successfully",print);
-        }
-    })
-    if(redisToken) {
-        jwt.verify(redisToken,config.secret,(err,decoded)=>{
-            if(err) {
-                return res.send({
-                    success: false,
-                    message : "token is not value"
-                })
-            }
-            else {
-                req.decoded=decoded;
-                next();
-            }
+// const checkRedis=(req,res,next) => {
+//     //let token1=req.headers['token'];
+//     var redisToken=client.get("token",(err,print)=>{
+//         if(err) {
+//             console.log("Error in redis",err);
+//         }
+//         else {
+//             console.log("run successfully",print);
+//         }
+//     })
+//     if(redisToken) {
+//         jwt.verify(redisToken,config.secret,(err,decoded)=>{
+//             if(err) {
+//                 return res.send({
+//                     success: false,
+//                     message : "token is not value"
+//                 })
+//             }
+//             else {
+//                 req.decoded=decoded;
+//                 next();
+//             }
         
-        });
-    } else {
-        return res.send({
-            success: false,
-            message : "Auth token is not supplied"
-        })
-    }
-};
+//         });
+//     } else {
+//         return res.send({
+//             success: false,
+//             message : "Auth token is not supplied"
+//         })
+//     }
+// };
 
 
 
 module.exports={
     checkToken:checkToken,
-    checkRedis: checkRedis
+//    checkRedis: checkRedis
 }

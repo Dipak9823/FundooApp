@@ -1,0 +1,23 @@
+{
+    "registration":{
+        "name":{
+            "firstname":"Piyush",
+            "lastname" :"Bhoye"
+        },
+        "username":"piyush@123",
+        "email":"piyush123@gmail.com",
+        "password":"piyush123",
+       " phone_no": 7055446655,
+    "address": { 
+        "street": "nakane Road",  
+        "city": "Dhule", 
+        "state": "Maharashtra",
+        "zipcode": 424002 
+    }
+    },
+
+    "login" :{
+        "email" :"dipakpatil007dkp@gmail.com",
+        "password": "anuj123"
+    }
+}

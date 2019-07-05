@@ -36,3 +36,5 @@ mongoose.connect(config.url,{useNewUrlParser:true}).then(
     ()=>{   console.log("Connected to database") },
     err=>{  console.log("Error in connection",err)}
 ) 
+
+module.exports=app;

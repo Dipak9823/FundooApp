@@ -35,5 +35,13 @@ resetpassword(password:string){
   return this.http.post(`${this.url}/resetpassword/:token`,password)
 }
 
+notes(note,token) {
+  return this.http.post(`${this.url}/notes`,note, {
+    headers:{
+      'token':token
+    }
+  }
+  );
+}
 }
 

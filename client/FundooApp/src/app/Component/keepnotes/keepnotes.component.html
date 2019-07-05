@@ -23,7 +23,7 @@
           </button>
           <input mat-input class="searchInput" placeholder="Search">
         </mat-card>
-      </div>
+    </div>
     
     <div fxFlex="5">
       <button mat-icon-button>
@@ -51,22 +51,25 @@
 
 <!--Sidenav bar is open After click menu button of sidenavbar-->
 <!-- <div fxLayout="column" fxLayoutAlign="start" fxFlex="50"> -->
-    <mat-sidenav-container style="width:27%;float:left;" class="example-container">
+    <mat-sidenav-container>
         <mat-sidenav #sidenav mode="side" class="sidenav">
             <mat-nav-list>
             <h3>FundooNotes</h3>
-            <a mat-list-item routerLink='notes' >notes</a>
-            <a mat-list-item routerLink='second'>Second Component</a>
-            <mat-divider></mat-divider>
+            <div><button mat-button style="width:100%" [routerLink]="['notes']">
+                <mat-icon>lightbulb_outline</mat-icon><span style="margin:28%">Note</span>
+              </button>
+            </div>
+                        
           </mat-nav-list>
         </mat-sidenav>
-        <mat-sidenav-content>
-          <!-- <router-outlet></router-outlet>  -->
+        <mat-sidenav-content class="sidenavcontent">
+          <!-- <app-notes></app-notes> -->
+           <router-outlet></router-outlet>  
         </mat-sidenav-content>
 </mat-sidenav-container>
 <!-- </div> -->
 
-<router-outlet></router-outlet>
+<!-- <router-outlet></router-outlet> -->
 
 
 

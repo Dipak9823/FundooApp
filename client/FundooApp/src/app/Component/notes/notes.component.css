@@ -51,13 +51,13 @@
 }
 
 .circle{
-  height:25px;
-  width:25px;
-  border: 1px solid gray;
-  margin-left:6px;
-  margin-right:6px;
-  margin-bottom:6px;
-  margin-top:6px;
+  height: 40px;
+  width: 40px;
+  box-sizing: border-box;
+  margin :3px 3px 3px 3px;
+  border-radius: 100%;
+  border: 1px solid #dadada;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
  
 }
 .colors{

@@ -3,7 +3,7 @@ var mongoose=require("mongoose");
 var noteSchema=new mongoose.Schema({
 
    userid:{
-       type: Number
+       type: String
    },
 
    label:{
@@ -19,8 +19,8 @@ var noteSchema=new mongoose.Schema({
    },
 
    trash:{
-       type:Boolean,
-       default:false
+       type:Boolean
+       
     },
 
    reminder:{
@@ -33,21 +33,21 @@ var note=mongoose.model('addnotes',noteSchema);
 
 class NoteModel{
 
-    addNotes(body,callback){
-        console.log("User model addNotes",body);
+    addNotes(req,callback){
+        console.log("Note model addNotes",req.body);
                     var newnotes=new note({
-                    userid: body.userid,
-                    label: body.label,
-                    description:body.description,
-                    color: body.color,
-                    trash: body.trash,
-                    reminder: body.reminder
+                    userid: req.decoded._id,
+                    label: req.body.label,
+                    description:req.body.description,
+                    color: req.body.color,
+                    trash: req.body.trash,
+                    reminder: req.body.reminder
                 })
 
             newnotes.save((err,result)=>
             {
                 if(err){
-                    console.log("Error in saving data");
+                    console.log("Error in saving data",err);
                         return callback(err);
                 }
                 else {
@@ -108,7 +108,7 @@ class NoteModel{
         }
     }
 
-    showNotes(body,callback) {
+    getAllNotes(body,callback) {
         note.find({ },(err,result)=> {
             if(err) {
                 console.log("Userid does not find in our database",err);

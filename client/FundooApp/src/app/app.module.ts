@@ -19,6 +19,7 @@ import {  MatFormFieldModule} from '@angular/material';
 import { MatMenuModule,MatCardModule,MatExpansionModule} from '@angular/material'
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { NotesComponent } from './Component/notes/notes.component';
+
 @NgModule({
   declarations: [
     
@@ -29,7 +30,7 @@ import { NotesComponent } from './Component/notes/notes.component';
     ResetpasswordComponent,
     KeepnotesComponent,
     NotesComponent,
-   
+       
     //AppRoutingModule
   ],
   imports: [

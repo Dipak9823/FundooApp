@@ -3,13 +3,13 @@ var usermodel=require("../model/usermodel");
 exports.register=(data,callback)=>{
     console.log("userservice 1",data);
     try{
-    usermodel.register(data,(err,data)=>{
+    usermodel.register(data,(err,result)=>{
         console.log("userservice 2");
         if(err){
             return callback(err)
         }
         else {
-            return callback(null,data);
+            return callback(null,result);
         }
     });
 }catch(err){console.log(err);
@@ -34,13 +34,13 @@ exports.verification=(req,callback)=>{
 }
 exports.login=(data,callback)=>{
     console.log("userservice login 1");
-    usermodel.login(data,(err,data)=>{
+    usermodel.login(data,(err,result)=>{
         console.log("userservid login 2");
         if(err){
             return callback(err);
         }
         else {
-            return callback(null,data);
+            return callback(null,result);
         }
     })
 }

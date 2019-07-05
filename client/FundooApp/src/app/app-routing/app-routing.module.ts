@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import {FormsModule} from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule, Routes,RouterOutlet} from '@angular/router';
+import { RouterModule, Routes} from '@angular/router';
 import { LoginComponent } from '../Component/login/login.component';
 import { RegisterComponent} from '../Component/register/register.component';
 import { ResetpasswordComponent} from '../Component/resetpassword/resetpassword.component';
@@ -9,25 +9,24 @@ import { ForgopasswordComponent} from '../Component/forgopassword/forgopassword.
 import { KeepnotesComponent } from '../Component/keepnotes/keepnotes.component'
 import { NotesComponent} from '../Component/notes/notes.component';
 import { BrowserModule } from '@angular/platform-browser';
-//import { RootService} from '../root.service';
+import { RootService} from '../root.service';
 const appRoutes: Routes=[
   {path: 'login', component: LoginComponent},
   {path: 'register' , component: RegisterComponent},
   {path: 'forgotpassword', component: ForgopasswordComponent},
   {path: 'resetpassword/:token', component: ResetpasswordComponent},
+  {path:'notes',component:NotesComponent},
   {path: 'keepnotes', component: KeepnotesComponent,children:[
-    {path:'notes',component:NotesComponent}
+    {path:'notes',component:NotesComponent},
   ]},
-  // {path: 'notes', component: NotesComponent},
   {path: '',  redirectTo:'/login', pathMatch:'full'}
 ];
 
 @NgModule({
   imports: [
-    BrowserModule,
+   
     RouterModule.forRoot(appRoutes),
-    FormsModule
-    
+       
   ],
   /*declarations:[
     LoginComponent,

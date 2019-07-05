@@ -108,7 +108,7 @@ class usermodel {
                     
                     if(res) {
                         console.log("Successfully Login");
-                        return callback(null,res);
+                        return callback(null,data);
                     }
                     else if(err) {
                         console.log("error in login");

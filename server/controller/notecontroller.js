@@ -2,9 +2,11 @@ var noteservice=require('../services/noteserrvice');
 
 module.exports.noteAddController=(req,res)=>{
     console.log("Add note Controller 1 ");
-    noteservice.noteaddServices(req.body,(err,result)=>{
+    console.log(req.decoded._id);
+    responseResult={};
+    noteservice.noteaddServices(req,(err,result)=>{
         console.log("Addnote controller 2",result);
-        responseResult={};
+        
         if(err) {
             resposneResult.sucess=false;
             responseResult.error=err;
