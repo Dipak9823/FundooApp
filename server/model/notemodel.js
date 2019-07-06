@@ -61,7 +61,7 @@ class NoteModel{
 
     updateNotes(body,callback) {
         console.log("notemodel");
-        note.update({"userid":body.userid},{
+        note.updateOne({"userid":body.userid},{
             $set:{
                     "description":body.description
                  }
@@ -79,47 +79,60 @@ class NoteModel{
     }
 
     trashNotes(body,callback) {
-        note.update({"userid":body._id},{
+        note.updateOne({"userid":body._id},{
             $set:{"trash": body.trash}
         },(err,result)=>{
             if(err) {
                 console.log("Error in finding Id",err);
-                callback(err);
+                return callback(err);
             }
             else {
                 console.log("Delete Notes Successfully",result);
-                callback(null,result);
+                return callback(null,result);
             }
         })
     }
 
     updateLabel(body,callback) {
-        note.update({"userid":body.userid},{
+        note.updateOne({"userid":body.userid},{
             $set:{"label" :body.label}
         }),(err,result)=>{
             if(err) {
                 console.log("Error in finding id",err);
-                callback(err);
+                return callback(err);
             }
             else {
                 console.log("Successfully Updated");
-                callback(null,result);
+                return callback(null,result);
             }
         }
     }
 
     getAllNotes(body,callback) {
-        note.find({ },(err,result)=> {
+        note.find({'userid': body.userid},(err,result)=> {
             if(err) {
                 console.log("Userid does not find in our database",err);
-                callback(err);
+                return callback(err);
             }
             else{
-                console.log("Successfully Run");
-                callback(null,result);
+                console.log("Successfully Run",result);
+                return callback(null,result);
             }
 
         });
+    }
+
+    deleteNotes(body,callback) {
+        note.remove({'_id':body.noteid},(err,result)=>{
+            if(err) {
+                console.log("_id doesn't match",err);
+                return callback(err);
+            }
+            else {
+                console.log("Successfully Run ",result);
+                return callback(null,result);
+            }
+        })
     }
 
 }

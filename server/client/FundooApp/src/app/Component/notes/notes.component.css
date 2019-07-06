@@ -1,0 +1,75 @@
+
+.input{
+  padding-top:4%;
+}
+
+
+.noteInput{
+    display: flex;
+  border:none;
+  height: 4vw;
+  width: 60vw;
+  border-radius: 8px;
+  font-size: 15px;
+  box-shadow: 3px 3px 5px 5px rgba(0, 0, 0, 0.14);
+  outline: none;
+
+}
+
+  
+.inputnote{
+    display: flex;
+  border:none;
+  font-size: 15px;
+    outline: none;
+   box-shadow:none ; 
+   width:25vw;
+
+}  
+
+.noteInputPop{
+  height: 15vw;
+  width: 60vw;
+  border:none;
+  outline:none;
+  border-radius: 8px;
+  font-size: 15px;
+  box-shadow: 3px 3px 5px 5px rgba(0, 0, 0, 0.14);
+}
+.inputLabelPop{
+  font-size: 15px;
+  border:none;
+  outline:none;
+  margin-bottom:10px;
+}
+
+.inputNotePop{
+    
+    font-size: 15px;
+    border:none;
+  outline:none;
+}
+
+.circle{
+  height: 40px;
+  width: 40px;
+  box-sizing: border-box;
+  margin :3px 3px 3px 3px;
+  border-radius: 100%;
+  border: 1px solid #dadada;
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.14);
+ 
+}
+.colors{
+  display:flex;
+  flex-wrap:wrap;
+  
+}
+
+.colors button:hover{
+  border:2px solid black;
+}
+
+.colors button:active{
+  border:2px solid black;
+}

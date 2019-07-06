@@ -17,12 +17,12 @@
     },
 
     "login" :{
-        "email" :"dipakpatil007dkp@gmail.com",
-        "password": "anuj123"
+        "email" :"dipakpatil007@gmail.com",
+        "password": "anu"
     },
 
     "forgetpassword":{
-        "email":"patildipak363@gmail.com"
+        "email":"patildipak3@gmail.com"
     },
 
     "resetpassword":{
@@ -39,21 +39,21 @@
     },
 
     "deletenotes":{
-        "_id": "5d1efd40a8f3821f7783fd73"
+        "_id": "5d1efd40a8f3821f7783fd"
     },
 
     "updatenotes":{
-        "_id": "5d1ef5ad70573e1bc4b83c8d",
+        "_id": "5d1ef5ad70573e1bc4b83c",
         "description":"Mr Robot"
     },
 
     "updatelabel":{
-        "_id":"5d1ef5ad70573e1bc4b83c8d",
+        "_id":"5d1ef5ad70573e1bc4b83c",
         "label":"series"
     },
 
     "trash":{
-        "_id":"5d1ef5ad70573e1bc4b83c8d",
+        "_id":"5d1ef5ad70573e1bc4b83c",
         "trash" : true
     }
 

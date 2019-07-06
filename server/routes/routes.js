@@ -13,7 +13,8 @@ router.post('/resetPassword/:token',middleware.checkToken,userController.resetPa
 router.post('/uploadimg',upload.single('image'));
 router.post('/notes',middleware.checkToken,noteController.noteAddController);
 router.post('/updatenote',noteController.noteUpdateController);
-router.post('/trashnote',noteController.noteTrashController);
+router.post('/trashnotes',noteController.noteTrashController);
 router.post('/updatelabel',noteController.noteUpdateLableController);
 router.post('/shownote',noteController.noteShowController);
+router.post('/deletenotes',noteController.noteDeleteController);
 module.exports=router;

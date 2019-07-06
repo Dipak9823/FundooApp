@@ -59,3 +59,15 @@ module.exports.noteUpdateLabel=(body,callback)=>{
         }
     })
 }
+
+module.exports.noteDeleteServices=(body,callback)=>{
+    notemodel.deleteNotes(body,(err,data)=>{
+    if(err) {
+        return callback(err);
+    }
+    else {
+        return callback(null,data);
+    }
+})
+}
+

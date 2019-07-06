@@ -87,3 +87,21 @@ module.exports.noteUpdateLableController=(req,res)=>{
         }
     })
 }
+
+module.exports.noteDeleteController=(req,res)=>{
+    console.log("Controller 1");
+    responseResult={};
+    noteservice.noteDeleteServices(req.body,(err,result)=>{
+        console.log("Controller 2");
+        if(err) {
+            responseResult.success=false;
+            responseResult.error=err;
+            res.status(400).send(responseResult);
+        }
+        else {
+            responseResult.success=true;
+            responseResult.result=result;
+            res.status(200).send(responseResult);
+        }
+    })
+}
