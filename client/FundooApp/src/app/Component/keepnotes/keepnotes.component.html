@@ -55,16 +55,33 @@
         <mat-sidenav #sidenav mode="side" class="sidenav">
             <mat-nav-list>
             <h3>FundooNotes</h3>
-            <div><button mat-button style="width:100%" [routerLink]="['notes']">
+            <div style="padding-top:5%;"><button mat-button style="width:100%" [routerLink]="['notes']">
                 <mat-icon>lightbulb_outline</mat-icon><span style="margin:28%">Note</span>
               </button>
             </div>
-                        
+            
+            <div style="padding-top:5%;padding-bottom:5%;"><button mat-button style="width:100%" [routerLink]="['']">
+              <mat-icon>add_alert_outlined</mat-icon><span style="margin:22%">Reminder</span>
+            </button>
+          </div>
+
+          <mat-divider></mat-divider>
+          <div style="padding-top:8%; padding-bottom:15%;">
+          <label>Labels</label>
+        </div>
+          <mat-divider></mat-divider>
+       
+          <div style="margin-top:8%"><button mat-button style="width:100%" [routerLink]="['archive']">
+            <mat-icon>archive_outlined</mat-icon><span style="margin:22%">Archive</span>
+          </button>
+        </div>
+        
           </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content class="sidenavcontent">
           <!-- <app-notes></app-notes> -->
            <router-outlet></router-outlet>  
+           
         </mat-sidenav-content>
 </mat-sidenav-container>
 <!-- </div> -->

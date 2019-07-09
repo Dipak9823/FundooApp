@@ -1,3 +1,10 @@
+/*********************************************************************************************************************
+ *  @Purpose : Here we execute our all connections 
+ *  @File :  server.js
+ *  @Author : DipakPatil
+ *  @Version : 1.0
+ *  @Since : 
+ ***********************************************************************************************************************/
 var routes=require("./routes/routes");
 var mongoose=require("mongoose");
 var cors=require("cors");
@@ -11,19 +18,18 @@ dotenv.config();
 var express=require('express');
 var app=express();
 app.use(cors());
-/*app.get('/',function(req,res){
-
-    res.send("Hello World");
-});*/
-
+/* Here, resdis createclient function is declared */
 client=redis.createClient();
+/* Connection of redis cache */
 client.on('connect', function(){
     console.log("Connected to redis");
 } )
-
+/* use expressvalidator for validating data coming from request*/
 app.use(expressValidator());
+/* use body-parser for to take parsing our json data*/
 app.use(bodyparser.urlencoded({extended:false}));
 app.use(bodyparser.json());
+/* Here call routes function */
 app.use('/',routes);
 /*Server Establishment*/
 app.listen(8000,()=>{

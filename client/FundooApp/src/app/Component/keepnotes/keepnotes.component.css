@@ -42,3 +42,13 @@ mat-toolbar{
   display: flex;
   outline: none;
 }
+.mat-button{
+  border-top-right-radius: 20px;
+  border-bottom-right-radius: 20px;
+}
+.mat-button:focus{
+ background-color: orange;
+}
+.mat-button:hover{
+  background-color: lightgray;
+ }

@@ -8,8 +8,10 @@ import { ResetpasswordComponent} from '../Component/resetpassword/resetpassword.
 import { ForgopasswordComponent} from '../Component/forgopassword/forgopassword.component';
 import { KeepnotesComponent } from '../Component/keepnotes/keepnotes.component'
 import { NotesComponent} from '../Component/notes/notes.component';
+import { AchievenotesComponent} from '../Component/achievenotes/achievenotes.component';
+import { ArchiveComponent} from '../Component/archive/archive.component'
 import { BrowserModule } from '@angular/platform-browser';
-import { RootService} from '../root.service';
+import { RootService} from '../Services/root.service';
 const appRoutes: Routes=[
   {path: 'login', component: LoginComponent},
   {path: 'register' , component: RegisterComponent},
@@ -18,6 +20,8 @@ const appRoutes: Routes=[
   {path:'notes',component:NotesComponent},
   {path: 'keepnotes', component: KeepnotesComponent,children:[
     {path:'notes',component:NotesComponent},
+    {path: 'achievenotes', component:AchievenotesComponent },
+    {path: 'archive', component:ArchiveComponent}
   ]},
   {path: '',  redirectTo:'/login', pathMatch:'full'}
 ];

@@ -1,3 +1,12 @@
+/*********************************************************************************************************************
+ * @purpose : Here We send mail to the particular mail
+ * @File : mail.js
+ * @author : DipakPatil
+ * @version : 1.0
+ * @since :
+ ***********************************************************************************************************************/
+
+
 const nodemailer=require('nodemailer');
 
 exports.sendmail=(url,email)=>{
@@ -5,8 +14,8 @@ exports.sendmail=(url,email)=>{
         service: 'gmail',
         
         auth:{
-            user:process.env.user,
-            pass:process.env.pass
+            user:'',
+            pass:''
         }
     });
 

@@ -1,3 +1,12 @@
+/*********************************************************************************************************************
+ * @purpose : Here we write all our user services
+ * @File : userservice.js
+ * @author : DipakPatil
+ * @version : 1.0
+ * @since : 
+ ***********************************************************************************************************************/
+
+
 var usermodel=require("../model/usermodel");
 
 exports.register=(data,callback)=>{
@@ -17,11 +26,9 @@ exports.register=(data,callback)=>{
 }
 }
 
-exports.verification=(req,callback)=>{
+exports.verification=(data,callback)=>{
     console.log("userservice verification 1");
-    var data={
-        email: req.decoded.payload.email
-    }
+    
     usermodel.verification(data,(err,data)=>{
         console.log("userservice verification 2");
         if(err) {

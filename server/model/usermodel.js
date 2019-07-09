@@ -1,3 +1,12 @@
+/*********************************************************************************************************************
+ * @purpose : Here we write user schemas and api
+ * @File : usermodel.js
+ * @author : DipakPatil
+ * @version : 1.0
+ * @since :
+ ***********************************************************************************************************************/
+
+
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
 //var schema=mongoose.Schema;
@@ -16,6 +25,10 @@ var userschema = new mongoose.Schema({
         city: String, 
         state: String,
         zipcode: Number 
+    },
+    isVerfied:{
+        type:Boolean,
+        default:false
     }
 
 });
@@ -28,6 +41,10 @@ function hash(password) {
 }
 
 class usermodel {
+
+/**
+ * @Description : here register the user
+ */
     register(body, callback) {
         console.log("usermodel 1")
         user.findOne({ "email": body.email }, (err, data) => {
@@ -80,9 +97,12 @@ class usermodel {
 
     }
 
-    verification(body,callback){
+/**
+ * @Description : here , verified registered user
+ */
+    verification(data,callback){
         console.log("In model verification");
-        user.findOne({'email':body.email},{"isVerfied":true},(err,result)=>{
+        user.findOne({'_id':data.id},{"isVerfied":true},(err,result)=>{
             if(err) {
                 return callback(err);
             }
@@ -102,6 +122,9 @@ class usermodel {
                 console.log("Error login");
                 return callback(err);
             }
+            // else if(!data.isVerfied){
+            //     return callback(err);
+            // }
             else if(data != null){
                 console.log(1); 
                 bcrypt.compare(body.password,data.password).then(function(res){
@@ -128,11 +151,14 @@ class usermodel {
             }
         })
     }
+/**
+ * @Description : here , we perform forgot password api
+ */
 
     forgotPassword(body,callback){
         console.log("In forgotpassword 1");
         console.log();
-        user.findOne({email: body.email},(err,res)=>{
+        user.findOne({"email": body.email},(err,res)=>{
             if(err) {
                 console.log("error");
                 return callback(err);
@@ -150,11 +176,15 @@ class usermodel {
 
     }
 
+/**
+ * @Description : here , perform resetpassword api
+ */
+
     resetPassword(req,callback) {
         console.log("In a model resetpassword");
 
         let newPassword=bcrypt.hashSync(req.body.password,salt);
-        user.updateOne({_id:req.decoded.payload.user_id},{password:newPassword},(err,res)=>{
+        user.updateOne({_id:req.decoded.payload.id},{password:newPassword},(err,res)=>{
             if(err) {
                 console.log(err);
                 return callback(err);

@@ -20,11 +20,11 @@
   </div>
     
   <div   class="popinput" fxLayout="column" fxLayoutAlign="start center"   >  
-  <mat-card  *ngIf="popUp" class="noteInputPop" [ngStyle]="{'background-color':color}" >
-        <div >
+  <mat-card  *ngIf="popUp" class="noteInputPop" [ngStyle]="{'background':color}" >
+        
           
           <div>
-            <input matInput placeholder="Title" class="inputLabelPop" [(ngModel)]="noteModel.title">
+            <input matInput placeholder="Title" class="inputLabelPop" [(ngModel)]="noteModel.label">
           </div>
       
           <div style="margin-top:20px;">   
@@ -102,11 +102,11 @@
             
             <button mat-button (click)="onSubmit()">Close</button>
           </div>
-        </div>
+       
   </mat-card>
   </div>
   
-  
+  <app-achievenotes></app-achievenotes>
   <!-- <div>
           <mat-card *ngIf="!popup" (click)="onPopup()" class="popupCard" style="    margin-bottom: 10%;">
             <div fxLayout="row" fxLayoutAlign="space-between center">

@@ -1,3 +1,12 @@
+/*********************************************************************************************************************
+ * @purpose : here we write notes schemas and api
+ * @File : notemodel.js
+ * @author : DipakPatil
+ * @version : 1.0
+ * @since :
+ ***********************************************************************************************************************/
+
+
 var mongoose=require("mongoose");
 
 var noteSchema=new mongoose.Schema({
@@ -18,9 +27,9 @@ var noteSchema=new mongoose.Schema({
        type:String
    },
 
-   trash:{
+   archive:{
        type:Boolean
-       
+
     },
 
    reminder:{
@@ -33,6 +42,9 @@ var note=mongoose.model('addnotes',noteSchema);
 
 class NoteModel{
 
+/**
+ * @Description : here we save notes
+ */
     addNotes(req,callback){
         console.log("Note model addNotes",req.body);
                     var newnotes=new note({
@@ -40,7 +52,7 @@ class NoteModel{
                     label: req.body.label,
                     description:req.body.description,
                     color: req.body.color,
-                    trash: req.body.trash,
+                    archive: req.body.archive,
                     reminder: req.body.reminder
                 })
 
@@ -58,7 +70,9 @@ class NoteModel{
     }
      
     
-
+/**
+ * @Description : Here update existing note
+ */
     updateNotes(body,callback) {
         console.log("notemodel");
         note.updateOne({"userid":body.userid},{
@@ -78,21 +92,14 @@ class NoteModel{
         })
     }
 
-    trashNotes(body,callback) {
-        note.updateOne({"userid":body._id},{
-            $set:{"trash": body.trash}
-        },(err,result)=>{
-            if(err) {
-                console.log("Error in finding Id",err);
-                return callback(err);
-            }
-            else {
-                console.log("Delete Notes Successfully",result);
-                return callback(null,result);
-            }
-        })
-    }
+/**
+ * @Description : here stored a trash notes
+ */
+   
 
+/**
+ * @Descritpion :  using this api update the existing note label
+ */    
     updateLabel(body,callback) {
         note.updateOne({"userid":body.userid},{
             $set:{"label" :body.label}
@@ -108,8 +115,12 @@ class NoteModel{
         }
     }
 
+/**
+ * @Description : using this api get all notes from database
+ */
+
     getAllNotes(body,callback) {
-        note.find({'userid': body.userid},(err,result)=> {
+        note.find({},(err,result)=> {
             if(err) {
                 console.log("Userid does not find in our database",err);
                 return callback(err);
@@ -122,8 +133,28 @@ class NoteModel{
         });
     }
 
+/**
+ * @Description : Here all the trash notes are displayed
+ */
+    trashNotes(body,callback) {
+        note.find({'trash':true},(err,result)=>{
+            console.log(result)
+            if(err) {
+                console.log("Error in finding trash");
+                return callback(err);
+            }
+            else {
+                console.log(result);
+                return callback(null,result);
+            }
+        })
+    }
+
+/**
+ * @Description : using this api delete all notes from the database
+ */
     deleteNotes(body,callback) {
-        note.remove({'_id':body.noteid},(err,result)=>{
+        note.deleteOne({'_id':body.noteid},(err,result)=>{
             if(err) {
                 console.log("_id doesn't match",err);
                 return callback(err);
@@ -136,5 +167,7 @@ class NoteModel{
     }
 
 }
+
+ 
 
 module.exports=new NoteModel();

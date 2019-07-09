@@ -1,3 +1,12 @@
+/*********************************************************************************************************************
+ * @purpose : Here upload image on aws 
+ * @File : img-uploading.js
+ * @author : DipakPatil
+ * @version : 1.0
+ * @since :
+ ***********************************************************************************************************************/
+
+
 var aws = require('aws-sdk')
 var multer = require('multer')
 var multerS3 = require('multer-s3')

@@ -1,8 +1,8 @@
-import { Component, OnInit,EventEmitter, Input, Output } from '@angular/core';
+import { Component, OnInit,EventEmitter, Input, Output} from '@angular/core';
 
-import { RootService} from '../../root.service';
+import { RootService} from '../../Services/root.service';
 import { NoteModel } from "../../model/notemodel";
-
+import { AchievenotesComponent} from "../achievenotes/achievenotes.component"
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
@@ -25,7 +25,7 @@ export class NotesComponent implements OnInit {
     '#4e0a77',
   ];
   @Input() color:string;
-  @Output() event: EventEmitter<any> = new EventEmitter<any>();
+  @Output() event = new EventEmitter();
  popUp: boolean;
  isArchive:boolean;
 noteModel:NoteModel=new NoteModel();
@@ -43,9 +43,10 @@ noteModel:NoteModel=new NoteModel();
   popOut(){
     this.popUp=true;
   }
-  public changeColor(color: string): void {
+  changeColor(color){
     this.color = color;
-    this.event.emit(color);
+  console.log(this.color);
+    this.event.emit(this.color);
    // this.show = false;
   }
 
@@ -58,7 +59,7 @@ noteModel:NoteModel=new NoteModel();
    this.noteModel.color=this.color;
    this.noteModel.archive=this.isArchive;
    // console.log("The Data is:-",this.addNote.value);
-   console.log("Note is created"+this.noteModel.title)
+   console.log("Note is created"+this.noteModel.label)
    console.log("Note is created"+this.noteModel.description)
     console.log("Color is",this.noteModel.color);
     console.log("Archive=",this.noteModel.archive);
@@ -68,7 +69,7 @@ noteModel:NoteModel=new NoteModel();
       (response:any)=>{
         console.log(response);
         if(response.status===200) {
-          this.noteModel.title=null;
+          this.noteModel.label=null;
           this.noteModel.description=null;
           console.log("Data Save");
         }

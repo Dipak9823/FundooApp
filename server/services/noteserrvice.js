@@ -1,3 +1,12 @@
+/*********************************************************************************************************************
+ * @purpose : Here we write all note services
+ * @File : notesevice.js
+ * @author : DipakPatil
+ * @version : 1.0
+ * @since : 
+ ***********************************************************************************************************************/
+
+
 var notemodel=require('../model/notemodel');
 
 module.exports.noteaddServices=(req,callback)=>{
@@ -27,19 +36,10 @@ module.exports.noteUpdateServices=(body,callback)=>{
     })
 }
 
-module.exports.noteTrashServices=(body,callback)=>{
-    notemodel.trashNotes(body,(err,data)=>{
-        if(err) {
-            return callback(err);
-        }
-        else {
-            return callback(null,data);
-        }
-    })
-}
 
-module.exports.noteShowServices=(body,callback)=>{
-    notemodel.showNotes(body,(err,data)=>{
+
+module.exports.getAllNoteService=(body,callback)=>{
+    notemodel.getAllNotes(body,(err,data)=>{
         if(err) {
             return callback(err);
         }
@@ -52,6 +52,17 @@ module.exports.noteShowServices=(body,callback)=>{
 module.exports.noteUpdateLabel=(body,callback)=>{
     notemodel.updateLabel(body,(err,data)=>{
         if(err){
+            return callback(err);
+        }
+        else {
+            return callback(null,data);
+        }
+    })
+}
+
+module.exports.noteTrashServices=(body,callback)=>{
+    notemodel.trashNotes(body,(err,data)=>{
+        if(err) {
             return callback(err);
         }
         else {

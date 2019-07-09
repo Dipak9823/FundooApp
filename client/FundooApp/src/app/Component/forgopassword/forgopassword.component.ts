@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {FormGroup,FormBuilder,FormControl,Validators} from '@angular/forms'
-import { RootService} from '../../root.service';
+import { RootService} from '../../Services/root.service';
 @Component({
   selector: 'app-forgopassword',
   templateUrl: './forgopassword.component.html',

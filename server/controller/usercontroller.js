@@ -1,3 +1,10 @@
+/*********************************************************************************************************************
+ * @purpose : Here write all user controllers
+ * @File : usercontroller.js
+ * @author : DipakPatil
+ * @version : 1.0
+ * @since :
+ ***********************************************************************************************************************/
 var userservice=require('../services/userservices');
 var config=require('../configuration/dbconfig');
 var jwt=require('jsonwebtoken');
@@ -18,7 +25,7 @@ exports.register=(req,res)=> {
             responseresult.success=true;
             responseresult.result=data;
             var payload={
-                email: req.body.email
+                id: req.body._id
             }
             var obj=token.generateToken(payload);
             console.log(obj);
@@ -34,11 +41,14 @@ exports.register=(req,res)=> {
 
 exports.verification=(req,res)=>{
     var responseresult={}
-    userservice.verification(req.body,(err,data)=>{
+    var obj={
+        id:req.decoded.payload.id
+    }
+    userservice.verification(obj,(err,data)=>{
         if(err){
             responseresult.success=false;
             responseresult.error=err;
-            res.status(200).send(responseresult);
+            res.status(400).send(responseresult);
         }
         else {
             responseresult.success=true;
@@ -91,7 +101,7 @@ exports.forgotPassword=(req,res)=>{
         }
         else{
             const payload={
-                email:req.body.email
+                id:req.body._id
             }
             var obj=token.generateToken(payload);
             const url=`http://localhost:4200/resetpassword/:${obj.token}`;

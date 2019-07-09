@@ -9,16 +9,18 @@ import { FormsModule } from '@angular/forms';
 import {AppRoutingModule} from './app-routing/app-routing.module';
 import { ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { RootService} from './root.service';
+import { RootService} from './Services/root.service';
 import { ForgopasswordComponent } from './Component/forgopassword/forgopassword.component';
 import { ResetpasswordComponent } from './Component/resetpassword/resetpassword.component';
 import { KeepnotesComponent } from './Component/keepnotes/keepnotes.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatLabel,MatInputModule, MatCheckboxModule, MatSidenavModule,MatIconModule,MatListModule, MatToolbarModule} from '@angular/material';
-import {  MatFormFieldModule} from '@angular/material';
+import {  MatFormFieldModule, MatDialogModule} from '@angular/material';
 import { MatMenuModule,MatCardModule,MatExpansionModule} from '@angular/material'
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { NotesComponent } from './Component/notes/notes.component';
+import { AchievenotesComponent } from './Component/achievenotes/achievenotes.component';
+import { ArchiveComponent } from './Component/archive/archive.component';
 
 @NgModule({
   declarations: [
@@ -30,6 +32,8 @@ import { NotesComponent } from './Component/notes/notes.component';
     ResetpasswordComponent,
     KeepnotesComponent,
     NotesComponent,
+    AchievenotesComponent,
+    ArchiveComponent,
        
     //AppRoutingModule
   ],

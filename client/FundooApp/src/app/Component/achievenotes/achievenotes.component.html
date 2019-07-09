@@ -1,0 +1,12 @@
+
+<div fxLayout="row wrap" fxLayoutAlign="center start">
+<mat-card *ngFor="let items of noteDetailsArray" [ngStyle]="{'background-color':'white' }" (click)="openDialog()">
+  <mat-card-title>
+   {{items.label}}
+  </mat-card-title>
+  <mat-card-content>
+    {{items.description}}
+  </mat-card-content>
+  <!-- <button mat-button (click)="deleteNote(items._id)">Delete</button> -->
+</mat-card>
+</div>

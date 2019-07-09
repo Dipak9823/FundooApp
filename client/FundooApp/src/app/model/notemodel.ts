@@ -1,5 +1,5 @@
 export class NoteModel{
-    title:string;
+    label:string;
     description:string;
     color:string;
     archive:boolean;
