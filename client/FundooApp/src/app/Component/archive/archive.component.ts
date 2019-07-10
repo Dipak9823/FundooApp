@@ -21,8 +21,8 @@ export class ArchiveComponent implements OnInit {
         
         //console.log("response",res);
         this.notes=res;
-        var sample = this.notes.result;
-        
+        var sample = this.notes.message;
+      
         console.log("notes",sample);
 
         sample.forEach(element => {

@@ -1,22 +1,23 @@
-<div flex-direction="row" fxShow.gt-xs>
+<div fxLayout="row nowrap"  >
     
 
   <mat-toolbar >
-    <div fxFlex="4">
+    <div fxLayoutAlign="space-between">
+    <div >
         <button mat-icon-button (click)="sidenav.toggle()">
             <mat-icon>menu</mat-icon>
         </button>
     </div>
-    <div fxFlex="4" >
+    <div  >
       <img mat-img src="https://ssl.gstatic.com/keep/keep.ico" />
     </div>
     
-    <div fxFlex>
+    <div>
       <span class="title">FundooNotes</span>
     </div>
       
     
-    <div fxFlex >
+    <div>
         <mat-card  fxLayoutAlign="center center" class="searchInput">
           <button mat-icon-button class="searchButton">
             <mat-icon>search</mat-icon>
@@ -25,25 +26,38 @@
         </mat-card>
     </div>
     
-    <div fxFlex="5">
+    
+    <div>
       <button mat-icon-button>
         <mat-icon>refresh</mat-icon>
       </button>
     </div>  
          
-    <div fxFlex="5">
+    <div *ngIf="toggle==true">
+      <button mat-icon-button (click)="list()">
+        <mat-icon>view_agenda</mat-icon>
+      </button>
+    </div>  
+
+    <div *ngIf="toggle==false">
+        <button mat-icon-button (click)="list()">
+          <mat-icon style="font-size:30px">view_module</mat-icon>
+        </button>
+      </div>  
+  
+    <div>
       <button mat-icon-button>
         <mat-icon>settings</mat-icon>
       </button>
     </div>
-    <div>
+    <div >
     <button mat-button [matMenuTriggerFor]="menu">Menu</button>
     <mat-menu #menu="matMenu">
     <button mat-menu-item (click)="onlogout()">Sign Out!</button>
     <button mat-menu-item>Change your Password</button>
     </mat-menu>
    </div>
-          
+  </div>         
 </mat-toolbar>
 
 </div>
@@ -61,7 +75,7 @@
             </div>
             
             <div style="padding-top:5%;padding-bottom:5%;"><button mat-button style="width:100%" [routerLink]="['']">
-              <mat-icon>add_alert_outlined</mat-icon><span style="margin:22%">Reminder</span>
+              <mat-icon>notifications_none</mat-icon><span style="margin:22%">Reminder</span>
             </button>
           </div>
 

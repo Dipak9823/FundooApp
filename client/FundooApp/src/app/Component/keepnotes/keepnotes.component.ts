@@ -8,14 +8,16 @@ import { Router} from '@angular/router'
 export class KeepnotesComponent implements OnInit {
   
   token:string;
-
+  toggle:any= true;
   constructor(private router:Router)  { }
 
   ngOnInit() {
     this.token=localStorage.getItem('token');
     console.log(this.token);
   }
-
+  list() {
+    this.toggle=!this.toggle;
+  }
   onlogout(){
     console.log("Logout");
     localStorage.removeItem('token');

@@ -53,7 +53,7 @@ achievenotes(token){
 }
 
 archivenotes(token) {
-  return this.http.get(`${this.url}/trashnotes`,{
+  return this.http.get(`${this.url}/archive`,{
     headers:{
       'token' :token
     }

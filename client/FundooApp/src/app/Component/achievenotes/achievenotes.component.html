@@ -1,12 +1,62 @@
 
-<div fxLayout="row wrap" fxLayoutAlign="center start">
+<div fxLayout="row wrap" fxLayoutAlign="center start" >
 <mat-card *ngFor="let items of noteDetailsArray" [ngStyle]="{'background-color':'white' }" (click)="openDialog()">
+  
   <mat-card-title>
    {{items.label}}
   </mat-card-title>
   <mat-card-content>
     {{items.description}}
   </mat-card-content>
-  <!-- <button mat-button (click)="deleteNote(items._id)">Delete</button> -->
+  <mat-card-actions>
+      <div fxLayoutAlign="space-between">
+      <button mat-icon-button matTooltip="reminder">
+          <mat-icon style="font-size: 20px !important">notifications_none</mat-icon>
+      </button>
+       <mat-menu #reminder="matMenu">
+        <p mat-menu-item>Reminder:</p>
+        <button mat-menu-item >Later Tody   8pm</button>
+        <button mat-menu-item>Tomorrow    8am</button>
+        <button mat-menu-item>Next Week   Monday 8am</button>
+       </mat-menu>
+    
+    <button mat-icon-button matTooltip="Collaborator" >
+        <mat-icon style="font-size: 20px !important">group_add</mat-icon>
+    </button>
+    
+
+
+    <mat-menu #color="matMenu" yPosition="above">
+      
+      <div class="colors">
+        <div  mat-menu-item (click)="changeColor(paint)" *ngFor="let paint of defaultColors" class="circle" [ngStyle]="{'background':paint}" ></div>
+      </div>
+  </mat-menu>
+   
+    <button mat-icon-button matTooltip="Change color" [matMenuTriggerFor]="color" >
+        <mat-icon style="font-size: 20px !important">palette_outline</mat-icon>
+    </button>
+   
+
+
+    <button mat-icon-button matTooltip="Add image">
+        <mat-icon style="font-size: 20px !important">image</mat-icon>
+    </button>
+
+    <button mat-icon-button matTooltip="Archive" (click)="Archive()">
+        <mat-icon style="font-size: 20px !important">archive_outline</mat-icon>
+    </button>
+
+    <button mat-icon-button matTooltip="More" [matMenuTriggerFor]="more"> 
+        <mat-icon style="font-size: 20px !important">more_vert</mat-icon>
+    </button>
+    <mat-menu #more="matMenu">
+        <button mat-menu-item >Add Label</button>
+        <button mat-menu-item>Add Drawing</button>
+        <button mat-menu-item>Show CheckBoxes</button>
+    </mat-menu>
+  </div>
+</mat-card-actions>
+
 </mat-card>
 </div>
