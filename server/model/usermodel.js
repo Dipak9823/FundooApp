@@ -9,6 +9,7 @@
 
 var mongoose = require('mongoose');
 var bcrypt = require('bcrypt');
+var upload=require('../middleware/img-uploading');
 //var schema=mongoose.Schema;
 
 var userschema = new mongoose.Schema({
@@ -25,6 +26,9 @@ var userschema = new mongoose.Schema({
         city: String, 
         state: String,
         zipcode: Number 
+    },
+    imgUrl:{
+        type:String
     },
     isVerfied:{
         type:Boolean,
@@ -201,8 +205,34 @@ class usermodel {
             }
         })
     }
+/**
+ * @Description  : Image Uploading Function
+ */
+    singleUploadImg(imgObj,callback){
+        console.log("Usermodel 1");
+        const singleUpload = upload.single('image')
+        singleUpload(imgObj,callback,(err,result)=>{
+            
+            if(err) {
+                callback(err);
+            }
+            else {
+                console.log(imgObj.file.location);
+                
+                 user.updateOne({'_id':"5d09baf8eeea040b03abda0f"},
+                        {$set:{
+                                'imgUrl':imgObj.file.location
+                            }},{upsert : true})
 
-};
+                return callback(null,result)
+            }
+
+        })
+    }
+
+    
+
+
 
 //usermodel.prototype.register=(body,callback)=>{
 
@@ -254,5 +284,6 @@ class usermodel {
 // })
 
 //}
+}
 
 module.exports = new usermodel();

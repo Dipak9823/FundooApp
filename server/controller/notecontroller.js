@@ -91,6 +91,51 @@ module.exports.noteUpdateLableController=(req,res)=>{
     })
 }
 
+module.exports.noteArchiveController=(req,res)=>{
+    console.log("Controller 1");
+    console.log(req.decoded._id);
+    archiveobj={
+        _id:req.decoded._id
+    }
+    responseResult={};
+    noteservice.noteArchiveServices(archiveobj,(err,result)=>{
+        console.log("Controller 2",result);
+        if(err) {
+            responseResult.success=false;
+            responseResult.error=err;
+            res.status(400).send(responseResult);
+        }
+        else {
+            responseResult.success=true;
+            responseResult.message=result;
+            res.status(200).send(responseResult);
+        }
+     })
+} 
+
+module.exports.noteUpdateArchiveController=(req,res)=>{
+    console.log("controller 1",req.body);
+    archiveObj={
+        userid:req.decoded._id,
+        _id:req.body._id,
+        archive:req.body.archive
+    }
+    responseResult={}
+    noteservice.noteUpdateArchiveServices(archiveObj,(err,result)=>{
+        console.log("Controller 2");
+        if(err) {
+            responseResult.success=false;
+            responseResult.error=err;
+            res.status(400).send(responseResult);
+        }
+        else {
+            responseResult.success=true;
+            responseResult.message=result;
+            res.status(200).send(responseResult);
+        }
+    })
+}
+
 module.exports.noteTrashController=(req,res)=>{
     console.log("Controller 1");
     responseResult={};
@@ -108,6 +153,7 @@ module.exports.noteTrashController=(req,res)=>{
         }
      })
 } 
+
 
 module.exports.noteDeleteController=(req,res)=>{
     console.log("Controller 1");

@@ -8,8 +8,12 @@ export class UpdateService {
   url=environment.baseUrl;
   constructor(private http: HttpClient) { }
 
-  archive(archive,token){
-    return this.http.put(`${this.url}/archive`,archive,token);
+  archive(token,model){
+    return this.http.put(`${this.url}/archive`,model,{
+      headers:{
+        'token':token
+      }
+    });
   }
 
 }

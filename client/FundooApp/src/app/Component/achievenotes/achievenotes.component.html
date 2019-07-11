@@ -29,7 +29,7 @@
     <mat-menu #color="matMenu" yPosition="above">
       
       <div class="colors">
-        <div  mat-menu-item (click)="changeColor(paint)" *ngFor="let paint of defaultColors" class="circle" [ngStyle]="{'background':paint}" ></div>
+        <div  mat-menu-item (click)="changeColor(paint,items._id)" *ngFor="let paint of defaultColors" class="circle" [ngStyle]="{'background':paint}" ></div>
       </div>
   </mat-menu>
    
@@ -43,7 +43,7 @@
         <mat-icon style="font-size: 20px !important">image</mat-icon>
     </button>
 
-    <button mat-icon-button matTooltip="Archive" (click)="Archive()">
+    <button mat-icon-button matTooltip="Archive" (click)="archive(items._id)">
         <mat-icon style="font-size: 20px !important">archive_outline</mat-icon>
     </button>
 

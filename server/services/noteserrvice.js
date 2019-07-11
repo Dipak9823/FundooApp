@@ -60,6 +60,31 @@ module.exports.noteUpdateLabel=(body,callback)=>{
     })
 }
 
+module.exports.noteArchiveServices=(archiveobj,callback)=>{
+    notemodel.archiveNotes(archiveobj,(err,data)=>{
+        if(err) {
+            return callback(err);
+        }
+        else {
+            return callback(null,data);
+        }
+    })
+}
+
+module.exports.noteUpdateArchiveServices=(archiveObj,callback)=>{
+    console.log("service 1");
+    notemodel.updateArchiveNotes(archiveObj,(err,data)=>{
+        console.log("service 2");
+        if(err) {
+            return callback(err);
+        }
+        else {
+            return callback(null,data);
+        }
+    })
+}
+
+
 module.exports.noteTrashServices=(body,callback)=>{
     notemodel.trashNotes(body,(err,data)=>{
         if(err) {
@@ -70,6 +95,7 @@ module.exports.noteTrashServices=(body,callback)=>{
         }
     })
 }
+
 
 module.exports.noteDeleteServices=(body,callback)=>{
     notemodel.deleteNotes(body,(err,data)=>{

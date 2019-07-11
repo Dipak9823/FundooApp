@@ -7,31 +7,49 @@
  ***********************************************************************************************************************/
 
 
-var aws = require('aws-sdk')
-var multer = require('multer')
-var multerS3 = require('multer-s3')
-var config=require("../configuration/dbconfig"); 
+const aws = require('aws-sdk');
+const multer = require('multer')
+const multerS3 = require('multer-s3');
+const config=require('../configuration/dbconfig');
+let conf = {
+AccessKeyID : config.accesskey,
+secretAccessKey : config.secretkey,
+region : 'us-east-2',
+};
+const s3 = new aws.S3();
+/**
+* @description : filter image file by extension
+* @param {* requested from frontend } req 
+* @param {* requested from frontend } file 
+* @param {* response to backend } callback 
+*/
 
-aws.config.update({
-  accessKeyId: config.accesskey,
-  secretAccessKey: config.secretkey,
-  region:config.region
-})
+const fileFilter = function(req,file,callback){
+if(file.mimetype === 'image/jpeg' || file.mimetype === 'image/png'){
+callback(null,true)
+}
+else{
+callback(new Error("Invalid MIME type , only jpeg & png"),false)
+}
+}
 
-var s3 = new aws.S3({  })
- 
+/**
+* @description : Passing images to aws Bucket using multer-s3.
+*/
 var upload = multer({
-  storage: multerS3({
-    s3: s3,
-    acl: 'public-read',
-    bucket: 'fundooappimg',
-    metadata: function (req, file, cb) {
-      cb(null, {fieldName: 'APP-Image'});
-    },
-    key: function (req, file, cb) {
-      cb(null, Date.now().toString())
-    }
-  })
+fileFilter,
+storage : multerS3({
+s3 : s3,
+bucket : 'fundooappimg',
+acl : 'public-read',
+metadata : function(req,file,callback){
+callback(null,
+{fieldName : "Test Meta Data"})
+},
+key : function(req,file,callback){
+callback(null,Date.now().toString())
+}
+})
 })
 
-module.exports=upload;
+module.exports = upload;

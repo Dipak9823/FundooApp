@@ -21,7 +21,8 @@ import { FlexLayoutModule} from '@angular/flex-layout';
 import { NotesComponent } from './Component/notes/notes.component';
 import { AchievenotesComponent } from './Component/achievenotes/achievenotes.component';
 import { ArchiveComponent } from './Component/archive/archive.component';
-
+import { ProfiledialogComponent } from './Component/profiledialog/profiledialog.component';
+import { ImageCropperModule } from 'ngx-image-cropper'
 @NgModule({
   declarations: [
     
@@ -34,6 +35,7 @@ import { ArchiveComponent } from './Component/archive/archive.component';
     NotesComponent,
     AchievenotesComponent,
     ArchiveComponent,
+    ProfiledialogComponent,
        
     //AppRoutingModule
   ],
@@ -50,16 +52,18 @@ import { ArchiveComponent } from './Component/archive/archive.component';
     MatIconModule,
     MatListModule,
     MatSidenavModule,
-    MatFormFieldModule,
+    MatFormFieldModule, 
     MatInputModule,
     MatToolbarModule,
     MatMenuModule,
     MatCardModule,
     MatExpansionModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatDialogModule,
+    ImageCropperModule
   
   ],
-
+  entryComponents:[ ProfiledialogComponent] ,
   providers: [RootService],
   bootstrap: [AppComponent],
 

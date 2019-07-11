@@ -10,7 +10,7 @@ var config=require('../configuration/dbconfig');
 var jwt=require('jsonwebtoken');
 var token=require('../middleware/token')
 var nodemailer=require('../middleware/mail');
-var singleupload=require('../middleware/img-uploading');
+var upload=require('../middleware/img-uploading');
 exports.register=(req,res)=> {
     console.log("controller1");
     responseresult={};
@@ -127,20 +127,30 @@ exports.resetPassword=(req,res)=>{
             res.status(200).send(responseresult);
         }
     })
-exports.uploadimg = function(req,res){
-    console.log("Upload image controller");
-    responseresult={}
-    var upload = singleupload.single('image');
-
-    upload(req, res, function(err) {
-
-        if (err) {
-          return res.status(422).send({errors: [{title: 'File Upload Error', detail: err.message}] });
-        }
-    
-        return res.json({'imageUrl': req.file.location});
-      });
-    }
-
-
 }
+    exports.uploadFile= (req,res) => {
+    try{
+            var response = { };
+          
+            userservice.singleUploadServices(req,(err,result) => {
+            if(err){
+                response.sucess = false,
+                response.error = err,
+                res.status(400).send(response)
+            }
+            else{
+                response.sucess = true,
+                //response.result = req.file.location,
+                res.status(200).send(response);
+            }
+        })
+    }
+        catch(error){
+            console.log("file upload Controller Catch ");
+            res.status(400).send({
+                success : false,
+                message : "file upload Controller catch"
+            });
+        } 
+ }
+

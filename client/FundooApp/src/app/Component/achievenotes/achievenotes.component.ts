@@ -3,6 +3,7 @@ import { RootService } from '../../Services/root.service';
 import { UpdateService} from '../../Services/update.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog,MatDialogConfig,MAT_DIALOG_DATA} from '@angular/material/dialog'
+import { UpdateArchiveModel } from 'src/app/model/updatearchivemodel';
 @Component({
   selector: 'app-achievenotes',
   templateUrl: './achievenotes.component.html',
@@ -29,6 +30,7 @@ export class AchievenotesComponent implements OnInit {
   @Input() color:string;
   @Output() event = new EventEmitter();
   noteDetailsArray = [];
+  model:UpdateArchiveModel=new UpdateArchiveModel();
   //aseUrl = 'http://34.213.106.173/api/notes/trashNotes'
   constructor( private service:RootService,private http:HttpClient,
                private updateservice: UpdateService    
@@ -67,9 +69,13 @@ export class AchievenotesComponent implements OnInit {
    
   }
 
-  Archive(){
+  archive(id){
     this.isArchive=!this.isArchive;
-    this.updateservice.archive(this.token,this.isArchive).subscribe(
+    console.log(id)
+    this.model._id=id;
+    this.model.archive=this.isArchive;
+    console.log(this.model);
+    this.updateservice.archive(this.token,this.model).subscribe(
       (response:any)=>{
         console.log(response);
         

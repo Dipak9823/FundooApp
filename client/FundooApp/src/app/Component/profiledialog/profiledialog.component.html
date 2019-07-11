@@ -1,0 +1,20 @@
+<form [formGroup]="uploadform" (ngSubmit)="onSubmit()">
+<input type="file" name="profiel" (change)="onFileSelected($event)">
+
+<div fxLayout="row" fxLayoutAlign="center center">
+        <image-cropper
+        class="profile"
+        [imageChangedEvent]="imageChangedEvent"
+        [maintainAspectRatio]="true"
+        [aspectRatio]="4 / 3"
+        [resizeToWidth]="128"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+        (imageLoaded)="imageLoaded()"
+        (cropperReady)="cropperReady()"
+        (loadImageFailed)="loadImageFailed()"
+    ></image-cropper>
+    
+</div>
+<input type="submit" >
+</form>

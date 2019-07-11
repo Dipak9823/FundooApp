@@ -10,7 +10,7 @@
 module.exports={
     url:"mongodb://localhost/projectDbs",
     secret:"worldisfullofdevelopers",
-    accesskey:"",
-    secretkey:"",
+    accesskey:"AKIAJAATYXHPE3BAFVUA",
+    secretkey: "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",
     region:"us-east-2"
 };

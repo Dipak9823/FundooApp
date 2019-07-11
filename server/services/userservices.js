@@ -77,3 +77,16 @@ exports.resetPassword=(data,callback)=>{
         }
     })
 }
+
+exports.singleUploadServices=(imgObj,callback)=>{
+    
+    usermodel.singleUploadImg(imgObj,(err,data)=>{
+        console.log("userservice 2");
+        if(err) {
+            return callback(err);
+        }
+        else {
+            return callback(null, data);
+        }
+    })
+}

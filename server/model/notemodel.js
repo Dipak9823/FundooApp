@@ -28,12 +28,17 @@ var noteSchema=new mongoose.Schema({
    },
 
    archive:{
-       type:Boolean
+       type:Boolean,
+       default:false
 
     },
 
    reminder:{
         type:String
+   },
+   trash:{
+       type: Boolean,
+       default: false
    }    
 
 });
@@ -133,6 +138,41 @@ class NoteModel{
         });
     }
 
+
+/**
+ * @Description : Here all the archive notes are displayed
+ */
+archiveNotes(archiveobj,callback) {
+    note.find({'userid':archiveobj._id,'archive':true},(err,result)=>{
+        console.log("notemodel",result)
+        if(err) {
+            console.log("Error in finding trash");
+            return callback(err);
+        }
+        else {
+            console.log(result);
+            return callback(null,result);
+        }
+    })
+}
+/**
+ * @Description : Here all the update trash notes
+ */
+    updateArchiveNotes(archiveObj,callback) {
+        console.log("notemodel 1",archiveObj);
+    note.updateOne({'userid': archiveObj._id },{'_id': archiveObj._id},
+                   {$set:{'archive': archiveObj.archive}},(err,result)=>{
+                       console.log("notemodel 2");
+                       if(err) {
+                           console.log("Error in notemodel");
+                           return callback(err);
+                       }
+                       else{
+                            console.log(result);
+                            return callback(null,result);
+                       }
+                   } )
+    }
 /**
  * @Description : Here all the trash notes are displayed
  */
