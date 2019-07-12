@@ -8,7 +8,8 @@ import { MatDialog, MatDialogRef} from '@angular/material/dialog'
   styleUrls: ['./keepnotes.component.css']
 })
 export class KeepnotesComponent implements OnInit {
-  
+  profile:any;
+  email:any;
   token:string;
   toggle:any= true;
   constructor(private router:Router,
@@ -17,6 +18,8 @@ export class KeepnotesComponent implements OnInit {
 
   ngOnInit() {
     this.token=localStorage.getItem('token');
+    this.profile=localStorage.getItem('profile');
+    this.email=localStorage.getItem('email');
     console.log(this.token);
   }
   list() {
@@ -40,6 +43,8 @@ export class KeepnotesComponent implements OnInit {
   onlogout(){
     console.log("Logout");
     localStorage.removeItem('token');
+    localStorage.removeItem('email');
+    localStorage.removeItem('profile');
     console.log(1); 
     this.router.navigate(['/login']);
     console.log(2)

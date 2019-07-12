@@ -1,5 +1,5 @@
 <form [formGroup]="uploadform" (ngSubmit)="onSubmit()">
-<input type="file" name="profiel" (change)="onFileSelected($event)">
+<input type="file" name="profile" (change)="onFileSelected($event)">
 
 <div fxLayout="row" fxLayoutAlign="center center">
         <image-cropper
@@ -14,7 +14,8 @@
         (cropperReady)="cropperReady()"
         (loadImageFailed)="loadImageFailed()"
     ></image-cropper>
-    
 </div>
+
 <input type="submit" >
+
 </form>

@@ -8,8 +8,14 @@ export class UploadimageService {
   url=environment.baseUrl;
   constructor(private http:HttpClient) { }
 
-  uploadProfile(token,img){
-    this.http.post(`${this.url}/uploadimg`,token,img);
+  uploadProfile(token:any,file:File){
+    const formData: FormData = new FormData();
+    formData.append('file',file)
+    this.http.post(`${this.url}/uploadimg`,formData,{
+      headers:{
+        token:token
+      }
+    })
 
   }
 }

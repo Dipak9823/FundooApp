@@ -1,8 +1,8 @@
-<div fxLayout="row nowrap"  >
+<div fxLayout="row"  fxLayoutAlign="space-between">
     
 
   <mat-toolbar >
-    <div fxLayoutAlign="space-between">
+    
     <div >
         <button mat-icon-button (click)="sidenav.toggle()">
             <mat-icon>menu</mat-icon>
@@ -52,15 +52,27 @@
     </div>
     <div >
     <button mat-icon-button [matMenuTriggerFor]="menu">
-      <mat-icon>account_circle</mat-icon>
+      <img mat-card-avatar class="uploadProfile1" src="{{profile}}">
     </button>
-    <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="openDialog()">Upload</button>
+    <mat-menu #menu="matMenu"  >
+    <!-- <button mat-menu-item (click)="openDialog()">Upload</button>
     <button mat-menu-item (click)="onlogout()">Sign Out!</button>
-    <button mat-menu-item>Change your Password</button>
+    <button mat-menu-item>Change your Password</button> -->
+    <mat-card fxLayout="row wrap"  class="profilemenu">
+      <div >
+        <button mat-icon-button (click)="openDialog()"><img class="uploadProfile2" mat-card-avatar src="{{profile}}"></button>
+      </div>
+      <div style="margin-top:13px; margin-left:33px;">
+        <label style="font-size:10px;">{{email}}</label>
+      </div>
+      <div style="margin-top:50px; margin-left:45px;">
+      <button mat-button (click)="onlogout()">Sign Out!</button>
+    </div>
+    </mat-card>
+
     </mat-menu>
    </div>
-  </div>         
+      
 </mat-toolbar>
 
 </div>
@@ -72,12 +84,12 @@
         <mat-sidenav #sidenav mode="side" class="sidenav">
             <mat-nav-list>
             <h3>FundooNotes</h3>
-            <div style="padding-top:5%;"><button mat-button style="width:100%" [routerLink]="['notes']">
+            <div style="padding-top:5%;"><button class="stylebutton" mat-button style="width:100%" [routerLink]="['notes']">
                 <mat-icon>lightbulb_outline</mat-icon><span style="margin:28%">Note</span>
               </button>
             </div>
             
-            <div style="padding-top:5%;padding-bottom:5%;"><button mat-button style="width:100%" [routerLink]="['']">
+            <div style="padding-top:5%;padding-bottom:5%;"><button class="stylebutton" mat-button style="width:100%" [routerLink]="['']">
               <mat-icon>notifications_none</mat-icon><span style="margin:22%">Reminder</span>
             </button>
           </div>
@@ -88,11 +100,14 @@
         </div>
           <mat-divider></mat-divider>
        
-          <div style="margin-top:8%"><button mat-button style="width:100%" [routerLink]="['archive']">
+          <div style="margin-top:8%"><button class="stylebutton" mat-button style="width:100%" [routerLink]="['archive']">
             <mat-icon>archive_outlined</mat-icon><span style="margin:22%">Archive</span>
           </button>
         </div>
-        
+        <div style="margin-top:8%"><button class="stylebutton" mat-button style="width:100%" [routerLink]="['trash']">
+            <mat-icon>archive_outlined</mat-icon><span style="margin:22%">Trash</span>
+          </button>
+        </div>
           </mat-nav-list>
         </mat-sidenav>
         <mat-sidenav-content class="sidenavcontent">

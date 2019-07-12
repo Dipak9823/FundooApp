@@ -19,7 +19,7 @@ router.post('/verification/:token',middleware.checkToken,userController.verifica
 router.post('/login',userController.login);
 router.post('/forgotPassword',userController.forgotPassword);
 router.post('/resetPassword/:token',middleware.checkToken,userController.resetPassword);
-router.post('/uploadimg',userController.uploadFile);
+router.post('/uploadimg',middleware.checkToken,userController.uploadFile);
 router.post('/notes',middleware.checkToken,noteController.noteAddController);
 router.put('/updatenote',noteController.noteUpdateController);
 router.put('/updatelabel',noteController.noteUpdateLableController);

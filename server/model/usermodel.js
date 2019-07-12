@@ -206,23 +206,30 @@ class usermodel {
         })
     }
 /**
- * @Description  : Image Uploading Function
+ * @Description  : Image Uploading Api
  */
-    singleUploadImg(imgObj,callback){
+    uploadImg(req,callback){
         console.log("Usermodel 1");
-        const singleUpload = upload.single('image')
-        singleUpload(imgObj,callback,(err,result)=>{
+        const singleUpload = upload.single('profile')
+        singleUpload(req,callback,(err,result)=>{
             
             if(err) {
                 callback(err);
             }
             else {
-                console.log(imgObj.file.location);
+                console.log(req.file.location);
                 
-                 user.updateOne({'_id':"5d09baf8eeea040b03abda0f"},
+                 user.updateOne({'_id':req.decoded._id},
                         {$set:{
-                                'imgUrl':imgObj.file.location
-                            }},{upsert : true})
+                                'imgUrl':req.file.location
+                            }},{upsert : true},(err,data)=>{
+                                if(err) {
+                                    console.log(err)
+                                }
+                                else{
+                                    console.log(data)
+                                }
+                            })
 
                 return callback(null,result)
             }

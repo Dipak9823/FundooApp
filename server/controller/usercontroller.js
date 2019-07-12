@@ -83,7 +83,9 @@ exports.login=(req,res)=>{
             // })
             return res.status(200).send({
                 message:'token generated',
-                token:token1
+                token:token1,
+                firstname: data.firstName,
+                imgUrl: data.imgUrl
             });
         }
 
@@ -131,8 +133,8 @@ exports.resetPassword=(req,res)=>{
     exports.uploadFile= (req,res) => {
     try{
             var response = { };
-          
-            userservice.singleUploadServices(req,(err,result) => {
+
+            userservice.uploadServices(req,(err,result) => {
             if(err){
                 response.sucess = false,
                 response.error = err,
@@ -140,7 +142,7 @@ exports.resetPassword=(req,res)=>{
             }
             else{
                 response.sucess = true,
-                //response.result = req.file.location,
+                response.result = req.file.location,
                 res.status(200).send(response);
             }
         })

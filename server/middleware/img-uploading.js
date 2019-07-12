@@ -14,7 +14,7 @@ const config=require('../configuration/dbconfig');
 let conf = {
 AccessKeyID : config.accesskey,
 secretAccessKey : config.secretkey,
-region : 'us-east-2',
+region : 'ap-south-1',
 };
 const s3 = new aws.S3();
 /**

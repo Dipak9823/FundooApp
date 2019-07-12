@@ -10,6 +10,7 @@ import {AppRoutingModule} from './app-routing/app-routing.module';
 import { ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RootService} from './Services/root.service';
+import { UploadimageService} from './Services/uploadimage.service';
 import { ForgopasswordComponent } from './Component/forgopassword/forgopassword.component';
 import { ResetpasswordComponent } from './Component/resetpassword/resetpassword.component';
 import { KeepnotesComponent } from './Component/keepnotes/keepnotes.component';
@@ -64,7 +65,7 @@ import { ImageCropperModule } from 'ngx-image-cropper'
   
   ],
   entryComponents:[ ProfiledialogComponent] ,
-  providers: [RootService],
+  providers: [RootService,UploadimageService],
   bootstrap: [AppComponent],
 
 })

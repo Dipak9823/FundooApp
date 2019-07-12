@@ -25,11 +25,13 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     console.log(this.loginForm.value);
     console.log("Email ID"+this.loginForm.value.email)
+    localStorage.setItem('email',this.loginForm.value.email);
     this.rootservice.login(this.loginForm.value.email, this.loginForm.value.password).subscribe((response: any) => {
 
       console.log(response);
       localStorage.setItem('token', response.token);
-      
+      localStorage.setItem('firstname',response.firstname);
+      localStorage.setItem('profile',response.imgUrl);
       console.log("Token stored" + localStorage.getItem("token"));
 
       this.router.navigate(['/keepnotes']);

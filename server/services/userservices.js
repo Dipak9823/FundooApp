@@ -78,9 +78,9 @@ exports.resetPassword=(data,callback)=>{
     })
 }
 
-exports.singleUploadServices=(imgObj,callback)=>{
+exports.uploadServices=(req,callback)=>{
     
-    usermodel.singleUploadImg(imgObj,(err,data)=>{
+    usermodel.uploadImg(req,(err,data)=>{
         console.log("userservice 2");
         if(err) {
             return callback(err);

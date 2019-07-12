@@ -59,9 +59,21 @@ archivenotes(token) {
     }
   })
 }
+uploadProfile(token:any,file:File){
+  const formData: FormData = new FormData();
+  formData.append('file',file)
+  this.http.post(`${this.url}/uploadimg`,formData,{
+    headers:{
+      token:token
+    }
+  })
+
+}
+}
+
 // deleteNote(noteid){
 //   return this.http.post(`${this.url}/deletenotes`,noteid);
 //   //  console.log(noteid)
 // }
- }
+ 
 
