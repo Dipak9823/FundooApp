@@ -33,7 +33,7 @@ exports.register=(req,res)=> {
             console.log(url,req.body.email);
             nodemailer.sendmail(url,req.body.email);
 
-            return res.status(200).send(url);
+            return res.status(200).send(url);1
 
         }
     })

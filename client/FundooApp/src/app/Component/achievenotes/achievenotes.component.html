@@ -1,13 +1,15 @@
 
 <div fxLayout="row wrap" fxLayoutAlign="center start" >
-<mat-card *ngFor="let items of noteDetailsArray" [ngStyle]="{'background-color':'white' }" (click)="openDialog()">
-  
-  <mat-card-title>
+<mat-card *ngFor="let items of noteDetailsArray"  [ngStyle]="{'background-color':'white' }" (click)="openDialog()">
+    
+    <mat-card-title>
    {{items.label}}
   </mat-card-title>
   <mat-card-content>
     {{items.description}}
   </mat-card-content>
+
+
   <mat-card-actions>
       <div fxLayoutAlign="space-between">
       <button mat-icon-button matTooltip="reminder">
@@ -51,6 +53,7 @@
         <mat-icon style="font-size: 20px !important">more_vert</mat-icon>
     </button>
     <mat-menu #more="matMenu">
+        <button mat-menu-item  (click)="trashLabel(items._id)">Delete Label</button>
         <button mat-menu-item >Add Label</button>
         <button mat-menu-item>Add Drawing</button>
         <button mat-menu-item>Show CheckBoxes</button>

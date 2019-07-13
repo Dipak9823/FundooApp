@@ -12,6 +12,7 @@ import { AchievenotesComponent} from '../Component/achievenotes/achievenotes.com
 import { ArchiveComponent} from '../Component/archive/archive.component'
 import { BrowserModule } from '@angular/platform-browser';
 import { RootService} from '../Services/root.service';
+import { TrashComponent } from '../Component/trash/trash.component';
 const appRoutes: Routes=[
   {path: 'login', component: LoginComponent},
   {path: 'register' , component: RegisterComponent},
@@ -21,7 +22,8 @@ const appRoutes: Routes=[
   {path: 'keepnotes', component: KeepnotesComponent,children:[
     {path:'notes',component:NotesComponent},
     {path: 'achievenotes', component:AchievenotesComponent },
-    {path: 'archive', component:ArchiveComponent}
+    {path: 'archive', component:ArchiveComponent},
+    {path: 'trash', component: TrashComponent}
   ]},
   {path: '',  redirectTo:'/login', pathMatch:'full'}
 ];

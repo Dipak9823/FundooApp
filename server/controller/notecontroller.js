@@ -136,6 +136,10 @@ module.exports.noteUpdateArchiveController=(req,res)=>{
     })
 }
 
+/**
+ * @Description : Here Get All The Trash Notes
+ */
+
 module.exports.noteTrashController=(req,res)=>{
     console.log("Controller 1");
     responseResult={};
@@ -148,12 +152,36 @@ module.exports.noteTrashController=(req,res)=>{
         }
         else {
             responseResult.success=true;
-            responseResult.error=result;
+            responseResult.message=result;
             res.status(200).send(responseResult);
         }
      })
 } 
-
+/**
+ *  @Description : Update Trash Api
+ */
+module.exports.noteUpdateTrashController=(req,res)=>{
+    console.log("controller 1",req.body);
+        trashObj={
+        userid:req.decoded._id,
+        _id:req.body._id,
+        trash:req.body.trash
+    }
+    responseResult={}
+    noteservice.noteUpdateTrashServices(trashObj,(err,result)=>{
+        console.log("Controller 2");
+        if(err) {
+            responseResult.success=false;
+            responseResult.error=err;
+            res.status(400).send(responseResult);
+        }
+        else {
+            responseResult.success=true;
+            responseResult.result=result;
+            res.status(200).send(responseResult);
+        }
+    })
+}
 
 module.exports.noteDeleteController=(req,res)=>{
     console.log("Controller 1");

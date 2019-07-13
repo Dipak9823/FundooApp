@@ -20,10 +20,21 @@ router.post('/login',userController.login);
 router.post('/forgotPassword',userController.forgotPassword);
 router.post('/resetPassword/:token',middleware.checkToken,userController.resetPassword);
 router.post('/uploadimg',middleware.checkToken,userController.uploadFile);
+/*Post the Data into notes */
 router.post('/notes',middleware.checkToken,noteController.noteAddController);
-router.put('/updatenote',noteController.noteUpdateController);
+/*Get Data Into Notes */
+router.get('/notes',middleware.checkToken,noteController.getAllNoteController);
+/*Update data of Notes */
+router.put('/notes',noteController.noteUpdateController);
+
+
 router.put('/updatelabel',noteController.noteUpdateLableController);
-router.get('/getNotes',middleware.checkToken,noteController.getAllNoteController);
+/*Get Archive Notes */
 router.get('/archive',middleware.checkToken,noteController.noteArchiveController);
+/*Update Archive notes*/
 router.put('/archive',middleware.checkToken,noteController.noteUpdateArchiveController)
+/*Get Trash Notes */
+router.get('/trash',middleware.checkToken,noteController.noteTrashController)
+/* Update Trash Notes */
+router.put('/trash',middleware.checkToken,noteController.noteUpdateTrashController)
 module.exports=router;

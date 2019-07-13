@@ -45,7 +45,7 @@ notes(note,token) {
 }
 
 achievenotes(token){
-  return this.http.get(`${this.url}/getNotes`,{
+  return this.http.get(`${this.url}/notes`,{
     headers:{
       'token' :token
     }
@@ -68,6 +68,14 @@ uploadProfile(token:any,file:File){
     }
   })
 
+}
+
+trashnote(token:any) {
+  return this.http.get(`${this.url}/trash`,{
+    headers:{
+      'token' :token
+    }
+  })
 }
 }
 

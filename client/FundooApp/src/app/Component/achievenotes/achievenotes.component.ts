@@ -4,6 +4,7 @@ import { UpdateService} from '../../Services/update.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog,MatDialogConfig,MAT_DIALOG_DATA} from '@angular/material/dialog'
 import { UpdateArchiveModel } from 'src/app/model/updatearchivemodel';
+import { UpdateTrashModel} from '../../model/trashmodel';
 @Component({
   selector: 'app-achievenotes',
   templateUrl: './achievenotes.component.html',
@@ -12,7 +13,8 @@ import { UpdateArchiveModel } from 'src/app/model/updatearchivemodel';
 export class AchievenotesComponent implements OnInit {
   notes:any;
   isArchive:boolean=false;
-  
+  isTrash:boolean=false;
+  sample:any;
   public defaultColors: string[] = [
     '#ffffff',
     '#000105',
@@ -30,7 +32,8 @@ export class AchievenotesComponent implements OnInit {
   @Input() color:string;
   @Output() event = new EventEmitter();
   noteDetailsArray = [];
-  model:UpdateArchiveModel=new UpdateArchiveModel();
+  archivemodel:UpdateArchiveModel=new UpdateArchiveModel();
+  trashmodel:UpdateTrashModel=new UpdateTrashModel();
   //aseUrl = 'http://34.213.106.173/api/notes/trashNotes'
   constructor( private service:RootService,private http:HttpClient,
                private updateservice: UpdateService    
@@ -47,13 +50,20 @@ export class AchievenotesComponent implements OnInit {
             
             //console.log("response",res);
             this.notes=res;
-            var sample = this.notes.result;
-            
-            console.log("notes",sample);
-            sample.forEach(element => {
-              this.noteDetailsArray.push(element);
-              console.log(this.noteDetailsArray);
-            });
+             this.sample = this.notes.result;
+            console.log("notes",this.sample);
+            console.log("Print id ", this.sample[0]._id);
+            for(let i=0;i<this.sample.length;i++) {
+              if(this.sample[i].archive==false && this.sample[i].trash==false) {
+                this.noteDetailsArray.push(this.sample[i]);
+              }
+            }
+            // sample.forEach(element => {
+            //   if(element.trash !== true) {
+            //   this.noteDetailsArray.push(element);
+            //   console.log(this.noteDetailsArray);
+            //   }
+            // });
           },
           (err)=>{
             console.log("Error in getting data",err);
@@ -66,21 +76,34 @@ export class AchievenotesComponent implements OnInit {
   console.log(this.color);
     this.event.emit(this.color);
    // this.show = false;
-   
-  }
+}
 
   archive(id){
     this.isArchive=!this.isArchive;
     console.log(id)
-    this.model._id=id;
-    this.model.archive=this.isArchive;
-    console.log(this.model);
-    this.updateservice.archive(this.token,this.model).subscribe(
+    this.archivemodel._id=id;
+    this.archivemodel.archive=this.isArchive;
+    console.log(this.archivemodel);
+    this.updateservice.archive(this.token,this.archivemodel).subscribe(
       (response:any)=>{
         console.log(response);
         
       }
     )
+  }
+
+  trashLabel(id) {
+    this.isTrash=!this.isTrash;
+    console.log(id);
+    this.trashmodel._id=id;
+    this.trashmodel.trash=this.isTrash;
+    console.log(this.trashmodel);
+    this.updateservice.trash(this.token,this.trashmodel).subscribe(
+      (response:any)=>{
+        console.log(response);
+      }
+    )
+
   }
 
   openDialog(){

@@ -29,7 +29,7 @@ var noteSchema=new mongoose.Schema({
 
    archive:{
        type:Boolean,
-       default:false
+        default: false       
 
     },
 
@@ -156,11 +156,11 @@ archiveNotes(archiveobj,callback) {
     })
 }
 /**
- * @Description : Here all the update trash notes
+ * @Description : Here all the update Archive notes
  */
     updateArchiveNotes(archiveObj,callback) {
         console.log("notemodel 1",archiveObj);
-    note.updateOne({'userid': archiveObj._id },{'_id': archiveObj._id},
+    note.updateOne({'userid': archiveObj.userid ,'_id': archiveObj._id},
                    {$set:{'archive': archiveObj.archive}},(err,result)=>{
                        console.log("notemodel 2");
                        if(err) {
@@ -189,6 +189,25 @@ archiveNotes(archiveobj,callback) {
             }
         })
     }
+
+/**
+ * @Description : Here all the update Trash notes
+ */
+updateTrashNotes(trashObj,callback) {
+    console.log("notemodel 1",trashObj);
+note.updateOne({'userid': trashObj.userid ,'_id': trashObj._id},
+               {$set:{'trash': trashObj.trash}},{upsert:true},(err,result)=>{
+                   console.log("notemodel 2");
+                   if(err) {
+                       console.log("Error in notemodel",err);
+                       return callback(err);
+                   }
+                   else{
+                        console.log(result);
+                        return callback(null,result);
+                   }
+               } )
+}
 
 /**
  * @Description : using this api delete all notes from the database

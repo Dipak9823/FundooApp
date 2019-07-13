@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { RootService } from '../../Services/root.service' 
-
+import { RootService } from '../../Services/root.service'
+import { UpdateService} from '../../Services/update.service'
+//import { UpdateArchiveModel} from '../../model/updatearchivemodel'
 @Component({
   selector: 'app-archive',
   templateUrl: './archive.component.html',
@@ -9,15 +10,18 @@ import { RootService } from '../../Services/root.service'
 export class ArchiveComponent implements OnInit {
   noteDetailsArray = [];
   notes:any;
-  constructor( private service : RootService) { }
-
+  isArchive:any;
+  constructor( private service : RootService,
+               // private archivemodel: UpdateArchiveModel,
+                private updateservice: UpdateService) { }
+                token=localStorage.getItem('token');
   ngOnInit() {
     this.getAllNotes();
   }
 
   getAllNotes(){
-    var token=localStorage.getItem('token');
-    this.service.archivenotes(token).subscribe(res =>{
+    
+    this.service.archivenotes(this.token).subscribe(res =>{
         
         //console.log("response",res);
         this.notes=res;
@@ -35,4 +39,19 @@ export class ArchiveComponent implements OnInit {
       }
     )
 }
+// archive(id){
+//   this.isArchive=!this.isArchive;
+//   console.log(id)
+//   this.archivemodel._id=id;
+//   this.archivemodel.archive=this.isArchive;
+//   console.log(this.archivemodel);
+//   this.updateservice.archive(this.token,this.archivemodel).subscribe(
+//     (response:any)=>{
+//       console.log(response);
+      
+//     }
+//   )
+// }
+
+
 }

@@ -84,7 +84,9 @@ module.exports.noteUpdateArchiveServices=(archiveObj,callback)=>{
     })
 }
 
-
+/**
+ * @Description : Here Get All the Trash Component
+ */
 module.exports.noteTrashServices=(body,callback)=>{
     notemodel.trashNotes(body,(err,data)=>{
         if(err) {
@@ -96,7 +98,21 @@ module.exports.noteTrashServices=(body,callback)=>{
     })
 }
 
-
+/** 
+ * @Description : Here Update Trash Component 
+ */ 
+module.exports.noteUpdateTrashServices=(trashObj,callback)=>{
+    console.log("service 1");
+    notemodel.updateTrashNotes(trashObj,(err,data)=>{
+        console.log("service 2");
+        if(err) {
+            return callback(err);
+        }
+        else {
+            return callback(null,data);
+        }
+    })
+}
 module.exports.noteDeleteServices=(body,callback)=>{
     notemodel.deleteNotes(body,(err,data)=>{
     if(err) {

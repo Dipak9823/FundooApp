@@ -16,4 +16,12 @@ export class UpdateService {
     });
   }
 
+  trash(token,model) {
+    return this.http.put(`${this.url}/trash`,model,{
+        headers:{
+          'token' :token
+        }
+    })
+  }
+
 }
