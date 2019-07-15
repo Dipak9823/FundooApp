@@ -1,0 +1,12 @@
+<div fxLayout="column">
+<form [formGroup]="label" (ngSubmit)="onSubmit()"> 
+  <div>
+<mat-form-field >
+  <input matInput formControlName="labelname" placeholder="Create New Label">
+</mat-form-field>
+</div>
+<div fxLayoutAlign="end end">
+  <button mat-button (click)="onSubmit()">Done</button>  
+</div>
+</form>
+</div>

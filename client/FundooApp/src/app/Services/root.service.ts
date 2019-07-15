@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse}  from '@angular/common/http';
 import { catchError, tap} from 'rxjs/operators/';
 import { throwError} from 'rxjs';
+import { LabelComponent } from '../Component/label/label.component';
 
 @Injectable({
   providedIn: 'root'
@@ -77,6 +78,15 @@ trashnote(token:any) {
     }
   })
 }
+
+label(token,labelname) {
+  return this.http.post(`${this.url}/label`,labelname,{
+    headers:{
+      'token':token
+    }
+  })
+}
+
 }
 
 // deleteNote(noteid){

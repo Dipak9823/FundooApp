@@ -24,7 +24,9 @@ import { AchievenotesComponent } from './Component/achievenotes/achievenotes.com
 import { ArchiveComponent } from './Component/archive/archive.component';
 import { ProfiledialogComponent } from './Component/profiledialog/profiledialog.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
-import { TrashComponent } from './Component/trash/trash.component'
+import { TrashComponent } from './Component/trash/trash.component';
+import { UpdatenoteComponent } from './Component/updatenote/updatenote.component';
+import { LabelComponent } from './Component/label/label.component'
 @NgModule({
   declarations: [
     
@@ -39,6 +41,8 @@ import { TrashComponent } from './Component/trash/trash.component'
     ArchiveComponent,
     ProfiledialogComponent,
     TrashComponent,
+    UpdatenoteComponent,
+    LabelComponent,
        
     //AppRoutingModule
   ],
@@ -66,7 +70,7 @@ import { TrashComponent } from './Component/trash/trash.component'
     ImageCropperModule
   
   ],
-  entryComponents:[ ProfiledialogComponent] ,
+  entryComponents:[ ProfiledialogComponent, UpdatenoteComponent, LabelComponent] ,
   providers: [RootService,UploadimageService],
   bootstrap: [AppComponent],
 

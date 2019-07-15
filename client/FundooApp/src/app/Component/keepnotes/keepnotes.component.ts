@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router} from '@angular/router'
 import { ProfiledialogComponent } from '../profiledialog/profiledialog.component';
+import { LabelComponent} from '../label/label.component'
 import { MatDialog, MatDialogRef} from '@angular/material/dialog'
 @Component({
   selector: 'app-keepnotes',
@@ -39,7 +40,17 @@ export class KeepnotesComponent implements OnInit {
     });
   }
 
+  labelDialog():void{
+    const dialogRef = this.dialog.open(LabelComponent, {
+      width: '30%',
+  });
   
+    dialogRef.afterClosed().subscribe(result => {
+      console.log("Dialog was closed"); 
+      
+    });
+  }
+
   onlogout(){
     console.log("Logout");
     localStorage.removeItem('token');

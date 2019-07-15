@@ -73,23 +73,6 @@ module.exports.getAllNoteController=(req,res)=>{
     })
 }
 
-module.exports.noteUpdateLableController=(req,res)=>{
-    console.log("Controller 1");
-    responseResult={};
-    noteservice.noteUpdateLabel(req.body,(err,result)=>{
-        console.log("Controller 2");
-        if(err) {
-            responseResult.success=false;
-            responseResult.error=err;
-            res.status(400).send(responseResult);
-        }
-        else {
-            responseResult.success=true;
-            responseResult.result=result;
-            res.status(200).send(responseResult);
-        }
-    })
-}
 
 module.exports.noteArchiveController=(req,res)=>{
     console.log("Controller 1");
@@ -183,6 +166,7 @@ module.exports.noteUpdateTrashController=(req,res)=>{
     })
 }
 
+/*Delete note*/
 module.exports.noteDeleteController=(req,res)=>{
     console.log("Controller 1");
     responseResult={};
@@ -199,4 +183,77 @@ module.exports.noteDeleteController=(req,res)=>{
             res.status(200).send(responseResult);
         }
     })
+}
+
+/* Add Label */
+module.exports.noteAddLabelController=(req,res)=>{
+    try{
+    console.log("Controller 1");
+    const labelObj={
+        userid:req.decoded._id,
+        labelname: req.body.label
+    }
+    const responseResult={}
+    console.log(labelObj)
+    noteservice.noteLabelServices(labelObj,(err,result)=>{
+        console.log("controller 2");
+        if(err){
+            responseResult.success=false;
+            responseResult.error=err;
+            res.status(400).send(responseResult);
+        }
+        else {
+            responseResult.success=true;
+            responseResult.result=result;
+            res.status(200).send(responseResult);
+        }
+    })
+}catch(err){
+    console.log("in catch",err);
+    res.status(400).send(err);
+}
+}
+
+/* Get All Labels */
+module.exports.noteGetAllLabelController=(req,res)=>{
+    console.log("Controller 1");
+    labelObj={
+        userid: req.decoded._id,
+    }
+    responseResult={}
+    noteservice.noteGelAllLabelController(labelObj,(err,result)=>{
+    if(err) {
+        responseResult.success=false;
+        responseResult.error=err;
+        res.status(400).send(responseResult);
+    }
+    else {
+        responseResult.success=true;
+        responseResult.result=result;
+        res.status(200).send(responseResult);
+    }
+})
+}
+
+/* Update Label */
+
+module.exports.noteLabelUpdateController=(req,res)=>{
+    console.log('Controller 2');
+    labelObj={
+        id:req.decoded._id,
+        label:req.body.label
+    }
+    responseResult={}
+    noteseervice.noteUpdateLabelServices(labelObj,(err,result)=>{
+
+        if(err) {
+        responseResult.success=false;
+        responseResult.error=err;
+        res.status(400).send(responseResult);
+    }
+    else {
+        responseResult.success=true;
+        responseResult.result=result;
+    }
+})
 }

@@ -113,6 +113,8 @@ module.exports.noteUpdateTrashServices=(trashObj,callback)=>{
         }
     })
 }
+
+
 module.exports.noteDeleteServices=(body,callback)=>{
     notemodel.deleteNotes(body,(err,data)=>{
     if(err) {
@@ -123,4 +125,19 @@ module.exports.noteDeleteServices=(body,callback)=>{
     }
 })
 }
+/* Add Label*/
+module.exports.noteLabelServices=(labelObj,callback)=>{
+    console.log("Service  ", labelObj)
+    notemodel.addLabel(labelObj,(err,data)=>{
+        if(err) {
+            return callback(err);
+        }
+        else {
+            return callback(null,data);
+        }
+    })
+}
+
+
+
 

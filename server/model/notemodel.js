@@ -15,9 +15,12 @@ var noteSchema=new mongoose.Schema({
        type: String
    },
 
-   label:{
-       type: String
-   },
+   label:[
+        {
+       type: String,
+       ref: 'labelSchema'
+   }
+    ],
 
    description:{
        type:String
@@ -42,8 +45,26 @@ var noteSchema=new mongoose.Schema({
    }    
 
 });
-
 var note=mongoose.model('addnotes',noteSchema);
+
+
+/**
+ * @Description : Add Label Schema
+ */
+
+var labelSchema=new mongoose.Schema({
+    label:{
+        type: String
+    },
+    userid: {
+       type: String
+    }
+
+})
+var label=mongoose.model("label",labelSchema);
+
+
+
 
 class NoteModel{
 
@@ -58,8 +79,8 @@ class NoteModel{
                     description:req.body.description,
                     color: req.body.color,
                     archive: req.body.archive,
-                    reminder: req.body.reminder
                 })
+               // reminder: req.body.reminder
 
             newnotes.save((err,result)=>
             {
@@ -225,8 +246,48 @@ note.updateOne({'userid': trashObj.userid ,'_id': trashObj._id},
         })
     }
 
+
+/**
+ * @Description : Using this api here we add label
+ */
+    addLabel(labelObj,callback) {
+        console.log(labelObj);
+        const newLabel={
+            userid: labelObj.userid,
+            label:labelObj.label
+        }
+        const data=new label(newLabel);
+        data.save((err,result)=>{
+            if(err) {
+                console.log(err);
+                return callback(err);
+            }
+            else {
+                console.log(result)
+                return callback(null,result);
+            }
+        })
+    }
+/**
+ * @Description : Get Label
+ */
+    getLabel(labelObj,callback) {
+        console.log(labelObj);  
+        label.find({'userid':labelObj.id},(err,result)=>{
+            if(err) {
+                console.log(err);
+                return callback(err);
+            }
+            else {
+                console.log(null,result);
+                return callback(null,result);
+            }
+        })
+
+    }
+/**
+ * @Description : Update Label 
+ */    
+    
 }
-
- 
-
 module.exports=new NoteModel();

@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialog,MatDialogConfig,MAT_DIALOG_DATA} from '@angular/material/dialog'
 import { UpdateArchiveModel } from 'src/app/model/updatearchivemodel';
 import { UpdateTrashModel} from '../../model/trashmodel';
+import { UpdatenoteComponent } from '../updatenote/updatenote.component'
 @Component({
   selector: 'app-achievenotes',
   templateUrl: './achievenotes.component.html',
@@ -36,7 +37,8 @@ export class AchievenotesComponent implements OnInit {
   trashmodel:UpdateTrashModel=new UpdateTrashModel();
   //aseUrl = 'http://34.213.106.173/api/notes/trashNotes'
   constructor( private service:RootService,private http:HttpClient,
-               private updateservice: UpdateService    
+               private updateservice: UpdateService,
+               private dialog : MatDialog    
     ) {}
 
     token:any=localStorage.getItem('token');
@@ -106,7 +108,18 @@ export class AchievenotesComponent implements OnInit {
 
   }
 
-  openDialog(){
+      openDialog():void{
+      const dialogRef = this.dialog.open(UpdatenoteComponent, {
+        height: '12vw',
+        width: '60vw',
+          
+      });
+    
+      dialogRef.afterClosed().subscribe(result => {
+        console.log("Dialog was closed"); 
+        
+      });
+    }
       
   }  
 
@@ -116,4 +129,4 @@ export class AchievenotesComponent implements OnInit {
 
 
 
-}
+

@@ -26,9 +26,7 @@ router.post('/notes',middleware.checkToken,noteController.noteAddController);
 router.get('/notes',middleware.checkToken,noteController.getAllNoteController);
 /*Update data of Notes */
 router.put('/notes',noteController.noteUpdateController);
-
-
-router.put('/updatelabel',noteController.noteUpdateLableController);
+//router.put('/updatelabel',noteController.noteUpdateLableController);
 /*Get Archive Notes */
 router.get('/archive',middleware.checkToken,noteController.noteArchiveController);
 /*Update Archive notes*/
@@ -37,4 +35,8 @@ router.put('/archive',middleware.checkToken,noteController.noteUpdateArchiveCont
 router.get('/trash',middleware.checkToken,noteController.noteTrashController)
 /* Update Trash Notes */
 router.put('/trash',middleware.checkToken,noteController.noteUpdateTrashController)
+/* Post Label */
+router.post('/label',middleware.checkToken,noteController.noteAddLabelController);
+/* Get All Label */
+router.get('/label',noteController.noteGetAllLabelController)
 module.exports=router;
