@@ -13,6 +13,8 @@ import { ArchiveComponent} from '../Component/archive/archive.component'
 import { BrowserModule } from '@angular/platform-browser';
 import { RootService} from '../Services/root.service';
 import { TrashComponent } from '../Component/trash/trash.component';
+import { EditlabelComponent } from '../Component/editlabel/editlabel.component';
+import { IconsComponent } from '../Component/icons/icons.component';
 const appRoutes: Routes=[
   {path: 'login', component: LoginComponent},
   {path: 'register' , component: RegisterComponent},
@@ -23,7 +25,9 @@ const appRoutes: Routes=[
     {path:'notes',component:NotesComponent},
     {path: 'achievenotes', component:AchievenotesComponent },
     {path: 'archive', component:ArchiveComponent},
-    {path: 'trash', component: TrashComponent}
+    {path: 'trash', component: TrashComponent},
+    {path: 'editlabel', component:EditlabelComponent },
+    {path: 'icon' , component: IconsComponent}
   ]},
   {path: '',  redirectTo:'/login', pathMatch:'full'}
 ];

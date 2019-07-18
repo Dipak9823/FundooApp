@@ -49,6 +49,21 @@ module.exports.getAllNoteService=(body,callback)=>{
     })
 }
 
+/*Get All Populate notes*/
+module.exports.getPopulateNotes=(noteObj,callback)=>{
+    console.log("Service 1");
+    notemodel.getPopulateNotes(noteObj,(err,data)=>{
+        console.log("service 2");
+        if(err) {
+            return callback(err);
+        }
+        else {
+            return callback(null,data);
+        }
+    })
+}
+
+
 module.exports.noteUpdateLabel=(body,callback)=>{
     notemodel.updateLabel(body,(err,data)=>{
         if(err){
@@ -125,8 +140,10 @@ module.exports.noteDeleteServices=(body,callback)=>{
     }
 })
 }
+
+
 /* Add Label*/
-module.exports.noteLabelServices=(labelObj,callback)=>{
+module.exports.noteAddLabelServices=(labelObj,callback)=>{
     console.log("Service  ", labelObj)
     notemodel.addLabel(labelObj,(err,data)=>{
         if(err) {
@@ -138,6 +155,44 @@ module.exports.noteLabelServices=(labelObj,callback)=>{
     })
 }
 
+/* Get Label */
+module.exports.noteGetLabelServices=(labelObj,callback)=>{
+    console.log("Service  ", labelObj)
+    notemodel.getLabel(labelObj,(err,data)=>{
+        if(err) {
+            return callback(err);
+        }
+        else {
+            return callback(null,data);
+        }
+    })
+}
+
+/* Update Label */
+module.exports.noteUpdateLabelServices=(labelObj,callback)=>{
+    console.log("Service  ", labelObj)
+    notemodel.updateLabel(labelObj,(err,data)=>{
+        if(err) {
+            return callback(err);
+        }
+        else {
+            return callback(null,data);
+        }
+    })
+}
+
+/*Delete Label */
+module.exports.noteDeleteLabelServices=(labelObj,callback)=>{
+    console.log("Service  ", labelObj)
+    notemodel.deleteLabel(labelObj,(err,data)=>{
+        if(err) {
+            return callback(err);
+        }
+        else {
+            return callback(null,data);
+        }
+    })
+}
 
 
 

@@ -6,6 +6,8 @@ import { MatDialog,MatDialogConfig,MAT_DIALOG_DATA} from '@angular/material/dial
 import { UpdateArchiveModel } from 'src/app/model/updatearchivemodel';
 import { UpdateTrashModel} from '../../model/trashmodel';
 import { UpdatenoteComponent } from '../updatenote/updatenote.component'
+import { LabelserviceService } from '../../Services/labelservice.service'
+import { FunctionService } from 'src/app/Services/function.service';
 @Component({
   selector: 'app-achievenotes',
   templateUrl: './achievenotes.component.html',
@@ -16,6 +18,7 @@ export class AchievenotesComponent implements OnInit {
   isArchive:boolean=false;
   isTrash:boolean=false;
   sample:any;
+  
   public defaultColors: string[] = [
     '#ffffff',
     '#000105',
@@ -33,17 +36,33 @@ export class AchievenotesComponent implements OnInit {
   @Input() color:string;
   @Output() event = new EventEmitter();
   noteDetailsArray = [];
+  labelArray= [];
+
+  searchInputValue : string;
+
   archivemodel:UpdateArchiveModel=new UpdateArchiveModel();
   trashmodel:UpdateTrashModel=new UpdateTrashModel();
   //aseUrl = 'http://34.213.106.173/api/notes/trashNotes'
   constructor( private service:RootService,private http:HttpClient,
                private updateservice: UpdateService,
-               private dialog : MatDialog    
+               private dialog : MatDialog,
+               private labelservice: LabelserviceService,
+               private functionService: FunctionService    
     ) {}
-
+    toggle:any;
     token:any=localStorage.getItem('token');
   ngOnInit() {
     this.getAllNotes();
+    this.view();
+    this.getValue();
+    console.log("Labels Array of service",this.labelArray);
+  }
+
+  getValue(){
+    this.functionService.searchValue.subscribe((data:any) =>{
+      console.log("achivenotes....",data);
+      this.searchInputValue = data;
+    })
   }
 
   getAllNotes(){
@@ -60,12 +79,7 @@ export class AchievenotesComponent implements OnInit {
                 this.noteDetailsArray.push(this.sample[i]);
               }
             }
-            // sample.forEach(element => {
-            //   if(element.trash !== true) {
-            //   this.noteDetailsArray.push(element);
-            //   console.log(this.noteDetailsArray);
-            //   }
-            // });
+            
           },
           (err)=>{
             console.log("Error in getting data",err);
@@ -75,11 +89,18 @@ export class AchievenotesComponent implements OnInit {
 
   changeColor(color){
     this.color = color;
-  console.log(this.color);
+    console.log(this.color);
     this.event.emit(this.color);
    // this.show = false;
 }
 
+  view() {
+    this.functionService.change.subscribe(value=>{
+        console.log(value);
+        this.toggle=value;
+        console.log("Achieve notes",this.toggle);
+    })
+  }
   archive(id){
     this.isArchive=!this.isArchive;
     console.log(id)
@@ -108,7 +129,7 @@ export class AchievenotesComponent implements OnInit {
 
   }
 
-      openDialog():void{
+  openDialog():void{
       const dialogRef = this.dialog.open(UpdatenoteComponent, {
         height: '12vw',
         width: '60vw',
@@ -120,8 +141,17 @@ export class AchievenotesComponent implements OnInit {
         
       });
     }
-      
-  }  
+
+  getAllLabels() {
+    this.labelArray=this.labelservice.getLabel()
+    console.log("call in funciton",this.labelArray)
+  }
+  
+  
+
+  
+  
+  }
 
   // deleteNote(noteId){
   //   this.service.deleteNote(noteId);

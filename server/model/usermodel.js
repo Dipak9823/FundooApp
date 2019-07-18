@@ -211,6 +211,7 @@ class usermodel {
     uploadImg(req,callback){
         console.log("Usermodel 1");
         const singleUpload = upload.single('profile')
+       
         singleUpload(req,callback,(err,result)=>{
             
             if(err) {

@@ -73,7 +73,29 @@ module.exports.getAllNoteController=(req,res)=>{
     })
 }
 
-
+module.exports.getPopulateNotes=(req,res)=>{
+    responseResult={};
+    noteObj={
+        // id:req.decoded._id,
+        // noteid: req.body.noteid,
+        // _id: req.body.label,
+        label:req.body.label
+    }
+    console.log("Controller 1");
+    noteservice.getPopulateNotes(noteObj,(err,result)=>{
+        console.log("Controller 2");
+        if(err) {
+            responseResult.success=false;
+            responseresult.error=err;
+            res.status(400).send(responseResult);
+        }
+        else {
+            responseResult.sucess=true;
+            responseResult.result=result;
+            res.status(200).send(responseResult);
+        }
+    })
+}
 module.exports.noteArchiveController=(req,res)=>{
     console.log("Controller 1");
     console.log(req.decoded._id);
@@ -191,11 +213,11 @@ module.exports.noteAddLabelController=(req,res)=>{
     console.log("Controller 1");
     const labelObj={
         userid:req.decoded._id,
-        labelname: req.body.label
+        label: req.body.labelname
     }
     const responseResult={}
     console.log(labelObj)
-    noteservice.noteLabelServices(labelObj,(err,result)=>{
+    noteservice.noteAddLabelServices(labelObj,(err,result)=>{
         console.log("controller 2");
         if(err){
             responseResult.success=false;
@@ -221,7 +243,7 @@ module.exports.noteGetAllLabelController=(req,res)=>{
         userid: req.decoded._id,
     }
     responseResult={}
-    noteservice.noteGelAllLabelController(labelObj,(err,result)=>{
+    noteservice.noteGetLabelServices(labelObj,(err,result)=>{
     if(err) {
         responseResult.success=false;
         responseResult.error=err;
@@ -237,11 +259,32 @@ module.exports.noteGetAllLabelController=(req,res)=>{
 
 /* Update Label */
 
-module.exports.noteLabelUpdateController=(req,res)=>{
+module.exports.noteUpdateLabelController=(req,res)=>{
     console.log('Controller 2');
     labelObj={
-        id:req.decoded._id,
-        label:req.body.label
+        userid:req.decoded._id,
+        _id:req.body._id
+    }
+    responseResult={}
+    noteseervice.noteUpdateLabelServices(labelObj,(err,result)=>{
+
+        if(err) {
+        responseResult.success=false;
+        responseResult.error=err;
+        res.status(400).send(responseResult);
+    }
+    else {
+        responseResult.success=true;
+        responseResult.result=result;
+    }
+})
+}
+/*Delete Label*/
+module.exports.noteDeleteLabelController=(req,res)=>{
+    console.log('Controller 2');
+    labelObj={
+        userid:req.decoded._id,
+        _id:req.body._id
     }
     responseResult={}
     noteseervice.noteUpdateLabelServices(labelObj,(err,result)=>{

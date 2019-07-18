@@ -11,6 +11,7 @@ import { ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { RootService} from './Services/root.service';
 import { UploadimageService} from './Services/uploadimage.service';
+import { LabelserviceService} from './Services/labelservice.service';
 import { ForgopasswordComponent } from './Component/forgopassword/forgopassword.component';
 import { ResetpasswordComponent } from './Component/resetpassword/resetpassword.component';
 import { KeepnotesComponent } from './Component/keepnotes/keepnotes.component';
@@ -26,7 +27,10 @@ import { ProfiledialogComponent } from './Component/profiledialog/profiledialog.
 import { ImageCropperModule } from 'ngx-image-cropper';
 import { TrashComponent } from './Component/trash/trash.component';
 import { UpdatenoteComponent } from './Component/updatenote/updatenote.component';
-import { LabelComponent } from './Component/label/label.component'
+import { LabelComponent } from './Component/label/label.component';
+import { EditlabelComponent } from './Component/editlabel/editlabel.component';
+import { SearchPipe } from './search.pipe';
+import { IconsComponent } from './Component/icons/icons.component'
 @NgModule({
   declarations: [
     
@@ -43,6 +47,9 @@ import { LabelComponent } from './Component/label/label.component'
     TrashComponent,
     UpdatenoteComponent,
     LabelComponent,
+    EditlabelComponent,
+    SearchPipe,
+    IconsComponent,
        
     //AppRoutingModule
   ],
@@ -71,7 +78,7 @@ import { LabelComponent } from './Component/label/label.component'
   
   ],
   entryComponents:[ ProfiledialogComponent, UpdatenoteComponent, LabelComponent] ,
-  providers: [RootService,UploadimageService],
+  providers: [RootService,UploadimageService,LabelserviceService],
   bootstrap: [AppComponent],
 
 })

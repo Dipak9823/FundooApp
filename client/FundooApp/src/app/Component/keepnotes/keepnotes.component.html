@@ -1,7 +1,4 @@
-
-    
-
-  <mat-toolbar >
+<mat-toolbar >
    <div  style="display:flex; justify-content:space-between;">
     
         <button mat-icon-button (click)="sidenav.toggle()">
@@ -15,26 +12,27 @@
           <button mat-icon-button class="searchButton">
             <mat-icon>search</mat-icon>
           </button>
-          <input mat-input class="searchInput" placeholder="Search">
+          <input  class="searchInput" [(ngModel)]="searchTerm" (keyup)="getSearch()" placeholder="Search">
         </mat-card>
     
       <button mat-icon-button>
         <mat-icon>refresh</mat-icon>
       </button>
      
-         
-    <div *ngIf="toggle==true">
+       
+      <div *ngIf="toggle==true">
+        <button mat-icon-button (click)="list()">
+          <mat-icon style="font-size:30px">view_module</mat-icon>
+        </button>
+      </div>  
+    
+    <div *ngIf="toggle==false">
       <button mat-icon-button (click)="list()">
         <mat-icon>view_agenda</mat-icon>
       </button>
     </div>  
 
-    <div *ngIf="toggle==false">
-        <button mat-icon-button (click)="list()">
-          <mat-icon style="font-size:30px">view_module</mat-icon>
-        </button>
-      </div>  
-  
+    
     <div>
       <button mat-icon-button>
         <mat-icon>settings</mat-icon>
@@ -76,7 +74,7 @@
         <mat-sidenav #sidenav mode="side" class="sidenav">
             <mat-nav-list>
             <h3>FundooNotes</h3>
-            <div style="padding-top:5%;"><button class="stylebutton" mat-button style="width:100%" [routerLink]="['notes']">
+            <div style="padding-top:5%;"><button class="stylebutton" mat-button style="width:100%" [routerLink]="['achievenotes']">
                 <mat-icon>lightbulb_outline</mat-icon><span style="margin:28%">Note</span>
               </button>
             </div>
@@ -90,10 +88,17 @@
           <div style="padding-top:8%; padding-bottom:15%;">
           <label>Labels</label>
 
-          <div style="padding-top:5%;padding-bottom:5%;"><button class="stylebutton" mat-button style="width:100%" (click)="labelDialog()">
-            <mat-icon>border_color</mat-icon><span style="margin:22%">Edit Label</span>
-          </button>
-          </div>
+          <div *ngFor="let item of labelArray">  
+            <button class="stylebutton" mat-button style="width:100%" (click)="labelnote(item.label)" [routerLink]="['editlabel']">
+                  <mat-icon>label_outline</mat-icon><span style="margin:20%">{{item.label}}</span>
+            </button>
+            </div> 
+
+            <div><button class="stylebutton" (click)="labelDialog()" mat-button style="width:100%" >
+              <mat-icon>create</mat-icon><span style="margin:22%">Edit Label</span>
+            </button>
+            </div>
+          
         </div>
           <mat-divider></mat-divider>
        

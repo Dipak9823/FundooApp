@@ -3,6 +3,8 @@ import { Component, OnInit,EventEmitter, Input, Output} from '@angular/core';
 import { RootService} from '../../Services/root.service';
 import { NoteModel } from "../../model/notemodel";
 import { AchievenotesComponent} from "../achievenotes/achievenotes.component"
+import { LabelserviceService } from "../../Services/labelservice.service"
+import { IconsService } from 'src/app/Services/icons.service';
 @Component({
   selector: 'app-notes',
   templateUrl: './notes.component.html',
@@ -28,11 +30,14 @@ export class NotesComponent implements OnInit {
   @Output() event = new EventEmitter();
  popUp: boolean;
  isArchive:boolean;
+ datetime:any;
+ _id:any;
 noteModel:NoteModel=new NoteModel();
-
+  labelArray:any[];
   constructor(
     private service:RootService,
-   // private snackbar:MatSnackBar
+    private labelservice: LabelserviceService,
+    private iconservice: IconsService
   ) { }
 
   ngOnInit() {
@@ -54,10 +59,20 @@ noteModel:NoteModel=new NoteModel();
     this.isArchive=true;
   }
 
+  label(id){
+    console.log(id);
+    this._id=id;
+  }
+  reminder(){
+    this.datetime=this.iconservice.remindervalue;
+  }
+
   onSubmit() {
    this.popUp=!this.popUp;
    this.noteModel.color=this.color;
    this.noteModel.archive=this.isArchive;
+   this.noteModel.label=this._id;
+   this.noteModel.reminder=this.datetime;
    // console.log("The Data is:-",this.addNote.value);
    console.log("Note is created"+this.noteModel.label)
    console.log("Note is created"+this.noteModel.description)
@@ -77,4 +92,9 @@ noteModel:NoteModel=new NoteModel();
     )
 
   }
+
+  getAllLabels() {
+    this.labelArray=this.labelservice.getLabel()
+    console.log("call in funciton",this.labelArray.values)
+   }  
 }

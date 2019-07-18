@@ -79,19 +79,43 @@ trashnote(token:any) {
   })
 }
 
-label(token,labelname) {
-  return this.http.post(`${this.url}/label`,labelname,{
+
+addlabel(label,token) {
+  return this.http.post(`${this.url}/label`,label,{
     headers:{
       'token':token
     }
   })
 }
 
+getLabel(token){
+  return this.http.get(`${this.url}/label`,{
+    headers:{
+      'token' : token
+    }
+  })
 }
 
+
+updateLabel(token,label) {
+  return this.http.put(`${this.url}/label`,{
+    headers:{
+      'token':token
+    }
+  })
+}
+
+// deleteLabel(id,token) {
+//   return this.http.post(`${this.url}/label`,id,{
+//     headers:{
+//       'token':token
+//     }
+//   })
+//}
 // deleteNote(noteid){
 //   return this.http.post(`${this.url}/deletenotes`,noteid);
 //   //  console.log(noteid)
 // }
  
 
+}

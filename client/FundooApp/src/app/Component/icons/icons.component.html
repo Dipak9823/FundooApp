@@ -1,0 +1,9 @@
+<button mat-icon-button matTooltip="reminder" [matMenuTriggerFor]="reminder">
+  <mat-icon style="font-size: 20px !important">notifications_none</mat-icon>
+</button>
+<mat-menu #reminder="matMenu">
+<p mat-menu-item>Reminder:</p>
+<button mat-menu-item (click)="todayDate()">Today   8pm</button>
+<button mat-menu-item (click)="tommorowDate()">Tomorrow      8am</button>
+<button mat-menu-item>Next Week   Monday 8am</button>
+</mat-menu>

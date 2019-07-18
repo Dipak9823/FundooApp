@@ -15,16 +15,20 @@ var noteSchema=new mongoose.Schema({
        type: String
    },
 
-   label:[
-        {
-       type: String,
-       ref: 'labelSchema'
+   title:{
+       type: String
    }
-    ],
+    ,
 
    description:{
        type:String
    },
+   label:[
+    {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: label
+    }
+    ],
 
    color:{
        type:String
@@ -53,6 +57,10 @@ var note=mongoose.model('addnotes',noteSchema);
  */
 
 var labelSchema=new mongoose.Schema({
+
+    noteid :{
+        type: mongoose.Schema.Types.ObjectId, ref: note
+    },
     label:{
         type: String
     },
@@ -75,6 +83,7 @@ class NoteModel{
         console.log("Note model addNotes",req.body);
                     var newnotes=new note({
                     userid: req.decoded._id,
+                    title: req.body.title,
                     label: req.body.label,
                     description:req.body.description,
                     color: req.body.color,
@@ -118,28 +127,8 @@ class NoteModel{
         })
     }
 
-/**
- * @Description : here stored a trash notes
- */
    
 
-/**
- * @Descritpion :  using this api update the existing note label
- */    
-    updateLabel(body,callback) {
-        note.updateOne({"userid":body.userid},{
-            $set:{"label" :body.label}
-        }),(err,result)=>{
-            if(err) {
-                console.log("Error in finding id",err);
-                return callback(err);
-            }
-            else {
-                console.log("Successfully Updated");
-                return callback(null,result);
-            }
-        }
-    }
 
 /**
  * @Description : using this api get all notes from database
@@ -159,7 +148,25 @@ class NoteModel{
         });
     }
 
-
+/**
+* @description: Here All The Populate notes from labels
+* @param {*} noteobj 
+* @param {*} callback 
+*/
+    getPopulateNotes(noteObj,callback) {
+        console.log("Model 1",noteObj);
+        label.findOne({label:noteObj.label}).populate('note').exec((err ,result)=>{
+            console.log("Model 2",result);
+            if(err) {
+                console.log(err);
+                return callback(err);
+            }
+            else {
+                console.log(result);
+                return callback(null,result);
+            }
+        })
+    }
 /**
  * @Description : Here all the archive notes are displayed
  */
@@ -247,23 +254,33 @@ note.updateOne({'userid': trashObj.userid ,'_id': trashObj._id},
     }
 
 
+
+/**
+ * @description : Populate Label 
+ * @param {*} labelObj 
+ * @param {*} callback 
+ */
+
+    
+
 /**
  * @Description : Using this api here we add label
  */
     addLabel(labelObj,callback) {
         console.log(labelObj);
         const newLabel={
-            userid: labelObj.userid,
-            label:labelObj.label
+            label:labelObj.label,
+            userid: labelObj.userid
         }
         const data=new label(newLabel);
+        console.log("label model",data);
         data.save((err,result)=>{
             if(err) {
                 console.log(err);
                 return callback(err);
             }
             else {
-                console.log(result)
+                console.log("result",result)
                 return callback(null,result);
             }
         })
@@ -273,7 +290,7 @@ note.updateOne({'userid': trashObj.userid ,'_id': trashObj._id},
  */
     getLabel(labelObj,callback) {
         console.log(labelObj);  
-        label.find({'userid':labelObj.id},(err,result)=>{
+        label.find({'userid':labelObj.userid},(err,result)=>{
             if(err) {
                 console.log(err);
                 return callback(err);
@@ -287,7 +304,40 @@ note.updateOne({'userid': trashObj.userid ,'_id': trashObj._id},
     }
 /**
  * @Description : Update Label 
- */    
+ */  
+    updateLabel(labelObj,callback) {
+        console.log(labelObj);  
+        label.updateOne({'userid':labelObj.id,'_id':labelObj._id},{
+                    $set:{ 'label':labelObj.label } },(err,result)=>{
+            if(err) {
+                console.log(err);
+                return callback(err);
+            }
+            else {
+                console.log(null,result);
+                return callback(null,result);
+            }
+        })
+
+    }
+
+/**
+ * @Description : Delete Label
+ */
+    deleteLabel(labelObj,callback) {
+        console.log(labelObj);  
+        label.delete({'userid':labelObj.id,'_id':labelObj._id},(err,result)=>{
+            if(err) {
+                console.log(err);
+                return callback(err);
+            }
+            else {
+                console.log(null,result);
+                return callback(null,result);
+            }
+        })
+    }
     
 }
+
 module.exports=new NoteModel();

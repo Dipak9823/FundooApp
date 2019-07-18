@@ -24,6 +24,8 @@ router.post('/uploadimg',middleware.checkToken,userController.uploadFile);
 router.post('/notes',middleware.checkToken,noteController.noteAddController);
 /*Get Data Into Notes */
 router.get('/notes',middleware.checkToken,noteController.getAllNoteController);
+/*Get Populate Notes */
+router.get('/populatenotes',middleware.checkToken,noteController.getPopulateNotes);
 /*Update data of Notes */
 router.put('/notes',noteController.noteUpdateController);
 //router.put('/updatelabel',noteController.noteUpdateLableController);
@@ -38,5 +40,9 @@ router.put('/trash',middleware.checkToken,noteController.noteUpdateTrashControll
 /* Post Label */
 router.post('/label',middleware.checkToken,noteController.noteAddLabelController);
 /* Get All Label */
-router.get('/label',noteController.noteGetAllLabelController)
+router.get('/label',middleware.checkToken,noteController.noteGetAllLabelController)
+/* update Label */
+router.put('/label',middleware.checkToken,noteController.noteUpdateLabelController)
+/*Delete Label */
+router.delete('/label',middleware.checkToken,noteController.noteDeleteLabelController)
 module.exports=router;

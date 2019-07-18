@@ -1,6 +1,8 @@
 export class NoteModel{
-    label:string;
+    title:string;
     description:string;
+    reminder:string;
+    label:string;
     color:string;
     archive:boolean;
 }

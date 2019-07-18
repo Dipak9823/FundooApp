@@ -10,20 +10,26 @@ export class LabelComponent implements OnInit {
   label:FormGroup;  
   constructor(private formBuilder:FormBuilder,
               private service: RootService) { }
-
+    sample:any;
+    labelsArray:any[]=[];
+    isUpdate:boolean=false;
             
   ngOnInit() {
 
     this.label=this.formBuilder.group({
       labelname:['']
     });
-
+    
+    //this.getLabel();
   }
- onSubmit(){
+ 
+  onSubmit(){
+   console.log(this.label.value);
        var labelname=this.label.value
        console.log(labelname);
        var token=localStorage.getItem('token');
-       this.service.label(labelname,token).subscribe(
+       console.log(token);
+       this.service.addlabel(labelname,token).subscribe(
          (res)=>{
          console.log(res);
          },
@@ -32,6 +38,33 @@ export class LabelComponent implements OnInit {
       }
     )
 
+  }
+
+  getLabel() {
+
+    var token=localStorage.getItem('token');
+    console.log(token);
+    this.service.getLabel(token).subscribe(
+      (res)=>{
+        this.sample=res;
+        var labels=this.sample.result;
+        labels.forEach(element => {
+            this.labelsArray.push(element);         
+        });
+        console.log(this.sample.result);
+      },
+      (err) =>{
+        console.log(err);
+      }
+    )
+  }
+
+  change() {
+    this.isUpdate=!this.isUpdate;
+  }
+
+  update(){
+    
   }
 
 }

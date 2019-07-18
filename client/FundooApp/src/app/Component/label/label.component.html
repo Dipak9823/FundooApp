@@ -5,8 +5,18 @@
   <input matInput formControlName="labelname" placeholder="Create New Label">
 </mat-form-field>
 </div>
-<div fxLayoutAlign="end end">
-  <button mat-button (click)="onSubmit()">Done</button>  
-</div>
+<input type="submit" value="Submit"> 
 </form>
+
+<div *ngFor="let item of labelsArray" fxLayout="row">
+  <button mat-icon-button (click)="deleteLabel(item._id)"><mat-icon>delete</mat-icon></button>
+  <span *ngIf="!update">{{item.label}}</span>
+  <input matInput *ngIf="update" value="{{item.label}}" > 
+  <button mat-icon-button *ngIf="!update" (click)="change()"><mat-icon>create</mat-icon></button>
+  <button mat-icon-button *ngIf="update" (click)="update()"><mat-icon>check</mat-icon></button>
+</div>
+<div fxLayoutAlign="end end">
+   
+</div>
+
 </div>
