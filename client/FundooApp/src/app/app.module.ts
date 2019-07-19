@@ -17,7 +17,7 @@ import { ResetpasswordComponent } from './Component/resetpassword/resetpassword.
 import { KeepnotesComponent } from './Component/keepnotes/keepnotes.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatButtonModule, MatLabel,MatInputModule, MatCheckboxModule, MatSidenavModule,MatIconModule,MatListModule, MatToolbarModule} from '@angular/material';
-import {  MatFormFieldModule, MatDialogModule} from '@angular/material';
+import {  MatFormFieldModule, MatDialogModule, MatChipsModule} from '@angular/material';
 import { MatMenuModule,MatCardModule,MatExpansionModule} from '@angular/material'
 import { FlexLayoutModule} from '@angular/flex-layout';
 import { NotesComponent } from './Component/notes/notes.component';
@@ -74,6 +74,7 @@ import { IconsComponent } from './Component/icons/icons.component'
     MatExpansionModule,
     FlexLayoutModule,
     MatDialogModule,
+    MatChipsModule,
     ImageCropperModule
   
   ],

@@ -1,12 +1,21 @@
 <app-notes></app-notes>
 <div fxLayout="row wrap" fxLayoutAlign="center start" class="displaynotes">
-<mat-card *ngFor="let items of noteDetailsArray | search : searchInputValue" [style.width]="(this.toggle==false) ? '50vw': null" [ngStyle]="{'background-color':'white' }" >
+<mat-card *ngFor="let items of noteDetailsArray | search : searchInputValue" [style.width]="(this.toggle==false) ? '50vw': null" [ngStyle]="{'background-color':items.color }" >
     <div (click)="openDialog()">
     <mat-card-title>
    {{items.title}}
     </mat-card-title>
   <mat-card-content>
     {{items.description}}
+
+    <div>
+      <mat-chip-list >
+      <mat-chip color="primary">{{items.reminder}}
+        <button mat-icon-button (click)="deleteReminder(items._id,items.reminder)"><mat-icon>cancel</mat-icon></button>
+      </mat-chip>
+      
+    </mat-chip-list>
+    </div>
   </mat-card-content>
   </div>
 

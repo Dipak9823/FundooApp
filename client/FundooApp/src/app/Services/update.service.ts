@@ -7,7 +7,7 @@ import { environment } from 'src/environments/environment.prod';
 export class UpdateService {
   url=environment.baseUrl;
   constructor(private http: HttpClient) { }
-
+  token=localStorage.getItem('token');
   archive(token,model){
     return this.http.put(`${this.url}/archive`,model,{
       headers:{
@@ -21,6 +21,25 @@ export class UpdateService {
         headers:{
           'token' :token
         }
+    })
+  }
+
+  addReminder(reminder){
+    return this.http.post(`${this.url}/addreminder`,reminder,{
+      headers:{
+        token:this.token
+      }
+    })
+  }
+
+  deleteReminder(model) {
+    console.log("updateService",model);
+
+    return this.http.post(`${this.url}/deletereminder`,model,{
+      headers: {
+        'token' :this.token
+      }
+
     })
   }
 

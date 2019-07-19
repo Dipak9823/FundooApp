@@ -63,11 +63,18 @@ noteModel:NoteModel=new NoteModel();
     console.log(id);
     this._id=id;
   }
+
   reminder(){
+    
     this.datetime=this.iconservice.remindervalue;
+    console.log(this.datetime);
   }
 
   onSubmit() {
+
+  this.datetime=this.iconservice.remindervalue;
+  console.log("notes",this.datetime);
+
    this.popUp=!this.popUp;
    this.noteModel.color=this.color;
    this.noteModel.archive=this.isArchive;
@@ -76,10 +83,10 @@ noteModel:NoteModel=new NoteModel();
    // console.log("The Data is:-",this.addNote.value);
    console.log("Note is created"+this.noteModel.label)
    console.log("Note is created"+this.noteModel.description)
-    console.log("Color is",this.noteModel.color);
-    console.log("Archive=",this.noteModel.archive);
-    console.log(this.noteModel);
-    var token=localStorage.getItem('token');
+   console.log("Color is",this.noteModel.color);
+   console.log("Archive=",this.noteModel.archive);
+   console.log(this.noteModel);
+   var token=localStorage.getItem('token');
    this.service.notes(this.noteModel,token).subscribe(
       (response:any)=>{
         console.log(response);

@@ -45,4 +45,8 @@ router.get('/label',middleware.checkToken,noteController.noteGetAllLabelControll
 router.put('/label',middleware.checkToken,noteController.noteUpdateLabelController)
 /*Delete Label */
 router.delete('/label',middleware.checkToken,noteController.noteDeleteLabelController)
+/*Add Reminder */
+router.post('/addreminder',middleware.checkToken,noteController.noteAddReminderController)
+/*Delete Reminder */
+router.post('/deletereminder',middleware.checkToken,noteController.noteDeleteReminderController);
 module.exports=router;

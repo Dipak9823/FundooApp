@@ -1,7 +1,7 @@
 export class NoteModel{
     title:string;
     description:string;
-    reminder:string;
+    reminder:'';
     label:string;
     color:string;
     archive:boolean;

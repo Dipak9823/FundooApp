@@ -24,7 +24,7 @@ module.exports.noteAddController=(req,res)=>{
         console.log("Addnote controller 2",result);
         
         if(err) {
-            resposneResult.sucess=false;
+            responseResult.sucess=false;
             responseResult.error=err;
             res.status(400).send(responseResult);
         }
@@ -297,6 +297,61 @@ module.exports.noteDeleteLabelController=(req,res)=>{
     else {
         responseResult.success=true;
         responseResult.result=result;
+    }
+})
+}
+
+/**
+ * @description : Add Reminder
+ */
+
+module.exports.noteAddReminderController=(req,res)=>{
+    console.log("Body",req.body);
+    renminderObj={
+        noteid: req.body.id,
+        reminder: req.body.reminder
+    }
+    responseResult={}
+    noteservice.noteAddReminderServices(reminderObj,(err,result)=>{
+        console.log('controller 2');
+        if(err){
+            console.log(err);
+            responseResult.success=false;
+            responseResult.error=err;
+            res.status(400).send(responseResult);
+        }
+        else {
+            responseResult.success=true;
+            responseResult.result=result;
+            res.status(200).send(responseResult);
+        }
+    })
+
+} 
+/**
+ * @description : Delete Reminder
+ */
+
+module.exports.noteDeleteReminderController=(req,res)=>{
+    console.log('Controller 1');
+    console.log("body",req.body);
+    reminderObj={
+        
+        noteid:req.body.id,
+        reminder:req.body.reminder
+    }
+    responseResult={}
+    noteservice.noteDeleteReminderServices(reminderObj,(err,result)=>{
+        console.log('Controller 2');
+        if(err) {
+        responseResult.success=false;
+        responseResult.error=err;
+        res.status(400).send(responseResult);
+    }
+    else {
+        responseResult.success=true;
+        responseResult.result=result;
+        res.status(200).send(responseResult);
     }
 })
 }

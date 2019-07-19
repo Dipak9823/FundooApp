@@ -193,6 +193,33 @@ module.exports.noteDeleteLabelServices=(labelObj,callback)=>{
         }
     })
 }
+/* Add Reminder */
 
+module.exports.noteAddReminderServices=(reminderObj,callback)=>{
+    console.log("Service  1", reminderObj)
+    notemodel.addReminder(reminderObj,(err,data)=>{
+        console.log("Service 2");
+        if(err) {
+            return callback(err);
+        }
+        else {
+            return callback(null,data);
+        }
+    })
+}
+
+/*Delete Reminder*/
+module.exports.noteDeleteReminderServices=(reminderObj,callback)=>{
+    console.log("Service  1", reminderObj)
+    notemodel.deleteReminder(reminderObj,(err,data)=>{
+        console.log("Service 2");
+        if(err) {
+            return callback(err);
+        }
+        else {
+            return callback(null,data);
+        }
+    })
+}
 
 

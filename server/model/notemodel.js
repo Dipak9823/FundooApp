@@ -15,19 +15,17 @@ var noteSchema=new mongoose.Schema({
        type: String
    },
 
-   title:{
-       type: String
-   }
+   title: {type: String}
     ,
 
    description:{
        type:String
    },
    label:[
-    {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: label
-    }
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: label
+        }
     ],
 
    color:{
@@ -36,13 +34,14 @@ var noteSchema=new mongoose.Schema({
 
    archive:{
        type:Boolean,
-        default: false       
+       default: false       
 
     },
 
-   reminder:{
-        type:String
-   },
+   reminder:[{
+            type:Date
+        }]
+    ,
    trash:{
        type: Boolean,
        default: false
@@ -87,6 +86,7 @@ class NoteModel{
                     label: req.body.label,
                     description:req.body.description,
                     color: req.body.color,
+                    reminder:req.body.reminder,
                     archive: req.body.archive,
                 })
                // reminder: req.body.reminder
@@ -141,7 +141,7 @@ class NoteModel{
                 return callback(err);
             }
             else{
-                console.log("Successfully Run",result);
+                //console.log("Successfully Run",result);
                 return callback(null,result);
             }
 
@@ -296,7 +296,7 @@ note.updateOne({'userid': trashObj.userid ,'_id': trashObj._id},
                 return callback(err);
             }
             else {
-                console.log(null,result);
+                //console.log(null,result);
                 return callback(null,result);
             }
         })
@@ -332,12 +332,58 @@ note.updateOne({'userid': trashObj.userid ,'_id': trashObj._id},
                 return callback(err);
             }
             else {
-                console.log(null,result);
+                console.log(result);
                 return callback(null,result);
             }
         })
     }
-    
+
+/**
+ * @description : Add Reminder
+ * @param {*} reminderObj 
+ * @param {*} callback 
+ */
+    addReminder(reminderObj,callback) {
+    console.log('NoteModel 1',reminderObj);
+    note.updateOne({'_id':reminderObj.noteid},
+    {
+        $set: { 'reminder':reminderObj.reminder } 
+    },(err,result)=>{
+        console.log("Note model 2",result);
+        if(err) {
+            console.log(err);
+            return callback(err);
+        }
+        else {
+            //console.log(result);
+            return callback(null,result);
+        }
+    })
+
 }
+ 
+/**
+ * @description : Delete Reminder
+ */
+    deleteReminder(reminderObj,callback) {
+        console.log('NoteModel 1',reminderObj);
+        note.findOneAndUpdate({'_id':reminderObj.noteid},
+        {
+            $pull: { 'reminder':reminderObj.reminder } 
+        },(err,result)=>{
+            console.log("Note model 2",result);
+            if(err) {
+                console.log(err);
+                return callback(err);
+            }
+            else {
+                //console.log(result);
+                return callback(null,result);
+            }
+        })
+
+    }
+}
+
 
 module.exports=new NoteModel();

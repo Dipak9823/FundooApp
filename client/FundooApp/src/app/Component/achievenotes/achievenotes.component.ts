@@ -5,9 +5,12 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialog,MatDialogConfig,MAT_DIALOG_DATA} from '@angular/material/dialog'
 import { UpdateArchiveModel } from 'src/app/model/updatearchivemodel';
 import { UpdateTrashModel} from '../../model/trashmodel';
+import { DeleteReminderModel} from '../../model/deleteremindermodel'
 import { UpdatenoteComponent } from '../updatenote/updatenote.component'
 import { LabelserviceService } from '../../Services/labelservice.service'
 import { FunctionService } from 'src/app/Services/function.service';
+import { IconsService } from 'src/app/Services/icons.service';
+
 @Component({
   selector: 'app-achievenotes',
   templateUrl: './achievenotes.component.html',
@@ -37,17 +40,20 @@ export class AchievenotesComponent implements OnInit {
   @Output() event = new EventEmitter();
   noteDetailsArray = [];
   labelArray= [];
-
+  reminderObj:any;
   searchInputValue : string;
-
+  datetime:any;
   archivemodel:UpdateArchiveModel=new UpdateArchiveModel();
   trashmodel:UpdateTrashModel=new UpdateTrashModel();
+  remindermodel:DeleteReminderModel=new DeleteReminderModel();
   //aseUrl = 'http://34.213.106.173/api/notes/trashNotes'
   constructor( private service:RootService,private http:HttpClient,
                private updateservice: UpdateService,
                private dialog : MatDialog,
                private labelservice: LabelserviceService,
-               private functionService: FunctionService    
+               private functionService: FunctionService,
+               private iconservice:IconsService
+                
     ) {}
     toggle:any;
     token:any=localStorage.getItem('token');
@@ -76,6 +82,7 @@ export class AchievenotesComponent implements OnInit {
             console.log("Print id ", this.sample[0]._id);
             for(let i=0;i<this.sample.length;i++) {
               if(this.sample[i].archive==false && this.sample[i].trash==false) {
+                
                 this.noteDetailsArray.push(this.sample[i]);
               }
             }
@@ -146,8 +153,32 @@ export class AchievenotesComponent implements OnInit {
     this.labelArray=this.labelservice.getLabel()
     console.log("call in funciton",this.labelArray)
   }
-  
-  
+
+  /**
+   * @description :Add Reminder
+   */
+  reminder(){
+    
+    this.datetime=this.iconservice.remindervalue;
+    console.log(this.datetime);
+    this.updateservice.addReminder(this.datetime).subscribe(
+      (res)=>{
+        console.log(res);
+      }
+    )
+  }
+  deleteReminder(_id,reminder){
+      
+      this.remindermodel.id=_id;
+      this.remindermodel.reminder=reminder[0];
+      console.log(reminder);
+      this.updateservice.deleteReminder(this.remindermodel).subscribe(
+        (res)=>{
+          console.log(res);
+        }
+      );
+
+  }
 
   
   
