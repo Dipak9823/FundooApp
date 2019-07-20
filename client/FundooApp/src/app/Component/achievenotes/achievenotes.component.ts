@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { MatDialog,MatDialogConfig,MAT_DIALOG_DATA} from '@angular/material/dialog'
 import { UpdateArchiveModel } from 'src/app/model/updatearchivemodel';
 import { UpdateTrashModel} from '../../model/trashmodel';
-import { DeleteReminderModel} from '../../model/deleteremindermodel'
+import { ReminderModel} from '../../model/remindermodel'
 import { UpdatenoteComponent } from '../updatenote/updatenote.component'
 import { LabelserviceService } from '../../Services/labelservice.service'
 import { FunctionService } from 'src/app/Services/function.service';
@@ -38,6 +38,7 @@ export class AchievenotesComponent implements OnInit {
   ];
   @Input() color:string;
   @Output() event = new EventEmitter();
+  noteid:any;
   noteDetailsArray = [];
   labelArray= [];
   reminderObj:any;
@@ -45,14 +46,14 @@ export class AchievenotesComponent implements OnInit {
   datetime:any;
   archivemodel:UpdateArchiveModel=new UpdateArchiveModel();
   trashmodel:UpdateTrashModel=new UpdateTrashModel();
-  remindermodel:DeleteReminderModel=new DeleteReminderModel();
+  remindermodel:ReminderModel=new ReminderModel();
   //aseUrl = 'http://34.213.106.173/api/notes/trashNotes'
   constructor( private service:RootService,private http:HttpClient,
                private updateservice: UpdateService,
                private dialog : MatDialog,
                private labelservice: LabelserviceService,
                private functionService: FunctionService,
-               private iconservice:IconsService
+               private iconservice:IconsService,
                 
     ) {}
     toggle:any;
@@ -61,9 +62,11 @@ export class AchievenotesComponent implements OnInit {
     this.getAllNotes();
     this.view();
     this.getValue();
+    
     console.log("Labels Array of service",this.labelArray);
   }
 
+ 
   getValue(){
     this.functionService.searchValue.subscribe((data:any) =>{
       console.log("achivenotes....",data);
@@ -160,13 +163,20 @@ export class AchievenotesComponent implements OnInit {
   reminder(){
     
     this.datetime=this.iconservice.remindervalue;
+    this.noteid=this.iconservice.noteid;
+    
+    this.remindermodel.id=this.noteid;
+    this.remindermodel.reminder=this.datetime;
+    console.log(this.remindermodel);
     console.log(this.datetime);
-    this.updateservice.addReminder(this.datetime).subscribe(
+    
+    this.updateservice.addReminder(this.remindermodel).subscribe(
       (res)=>{
         console.log(res);
       }
     )
   }
+
   deleteReminder(_id,reminder){
       
       this.remindermodel.id=_id;
@@ -184,10 +194,7 @@ export class AchievenotesComponent implements OnInit {
   
   }
 
-  // deleteNote(noteId){
-  //   this.service.deleteNote(noteId);
-  // }
-
+  
 
 
 

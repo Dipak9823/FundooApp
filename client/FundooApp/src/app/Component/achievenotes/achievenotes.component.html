@@ -8,12 +8,11 @@
   <mat-card-content>
     {{items.description}}
 
-    <div>
+    <div *ngFor="let rem of items.reminder">
       <mat-chip-list >
-      <mat-chip color="primary">{{items.reminder}}
+      <mat-chip color="primary">{{rem}}
         <button mat-icon-button (click)="deleteReminder(items._id,items.reminder)"><mat-icon>cancel</mat-icon></button>
       </mat-chip>
-      
     </mat-chip-list>
     </div>
   </mat-card-content>
@@ -30,7 +29,7 @@
         <button mat-menu-item>Tomorrow    8am</button>
         <button mat-menu-item>Next Week   Monday 8am</button>
        </mat-menu> -->
-       <app-icons></app-icons>
+       <app-icons [id]='items._id'></app-icons>
     
     <button mat-icon-button matTooltip="Collaborator" >
         <mat-icon style="font-size: 20px !important">group_add</mat-icon>

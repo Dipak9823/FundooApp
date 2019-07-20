@@ -307,12 +307,13 @@ module.exports.noteDeleteLabelController=(req,res)=>{
 
 module.exports.noteAddReminderController=(req,res)=>{
     console.log("Body",req.body);
-    renminderObj={
-        noteid: req.body.id,
+    reminder={
+        noteid:req.body.id,
         reminder: req.body.reminder
     }
     responseResult={}
-    noteservice.noteAddReminderServices(reminderObj,(err,result)=>{
+    console.log("Controller 1");
+    noteservice.noteAddReminderServices(reminder,(err,result)=>{
         console.log('controller 2');
         if(err){
             console.log(err);

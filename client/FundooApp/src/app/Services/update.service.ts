@@ -24,8 +24,8 @@ export class UpdateService {
     })
   }
 
-  addReminder(reminder){
-    return this.http.post(`${this.url}/addreminder`,reminder,{
+  addReminder(model){
+    return this.http.post(`${this.url}/addreminder`,model,{
       headers:{
         token:this.token
       }

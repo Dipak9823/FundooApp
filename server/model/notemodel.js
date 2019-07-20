@@ -343,24 +343,30 @@ note.updateOne({'userid': trashObj.userid ,'_id': trashObj._id},
  * @param {*} reminderObj 
  * @param {*} callback 
  */
-    addReminder(reminderObj,callback) {
-    console.log('NoteModel 1',reminderObj);
-    note.updateOne({'_id':reminderObj.noteid},
-    {
-        $set: { 'reminder':reminderObj.reminder } 
-    },(err,result)=>{
-        console.log("Note model 2",result);
-        if(err) {
-            console.log(err);
-            return callback(err);
-        }
-        else {
-            //console.log(result);
-            return callback(null,result);
-        }
+    addReminder(reminder,callback) {
+    console.log('NoteModel 1',reminder);
+        
+    note.findOneAndUpdate({'_id':reminder.noteid},
+            {
+                $push:{
+                    'reminder':reminder.reminder
+                }
+            },
+        (err,result)=>{
+            if(err){
+                console.log(err);
+                return callback(err);
+            }
+            else {
+                console.log(result);
+                return callback(null,result);
+            }
+          
     })
-
-}
+    
+      
+        
+    }
  
 /**
  * @description : Delete Reminder
