@@ -1,24 +1,36 @@
-<mat-toolbar >
-   <div  style="display:flex; justify-content:space-between;">
-    
-        <button mat-icon-button (click)="sidenav.toggle()">
+<mat-toolbar fxLayout="row" fxLayoutAlign="space-between center" >
+  
+  
+      <div fxLayout="row" fxLayoutGap="10px">   
+        <div>   
+          <button mat-icon-button (click)="sidenav.toggle()">
             <mat-icon>menu</mat-icon>
-        </button>
-           <img mat-img src="https://ssl.gstatic.com/keep/keep.ico" />
-    
-      <span class="title">FundooNotes</span>
-    
+          </button>
+        </div>
+        <div>
+          <img mat-img src="https://ssl.gstatic.com/keep/keep.ico" />
+        </div>
+        
+        <div >
+          <span class="title">FundooNotes</span>
+        </div>
+
+      </div>
+      <div >
         <mat-card  fxLayoutAlign="center center" class="searchInput">
           <button mat-icon-button class="searchButton">
             <mat-icon>search</mat-icon>
           </button>
           <input  class="searchInput" [(ngModel)]="searchTerm" (keyup)="getSearch()" placeholder="Search">
         </mat-card>
-    
+      </div>
+
+    <div fxLayout="row" fxLayoutGap="10px">
+      <div>
       <button mat-icon-button>
         <mat-icon>refresh</mat-icon>
       </button>
-     
+    </div>
        
       <div *ngIf="toggle==true">
         <button mat-icon-button (click)="list()">
@@ -26,43 +38,25 @@
         </button>
       </div>  
     
-    <div *ngIf="toggle==false">
-      <button mat-icon-button (click)="list()">
-        <mat-icon>view_agenda</mat-icon>
-      </button>
-    </div>  
+      <div *ngIf="toggle==false">
+        <button mat-icon-button (click)="list()">
+          <mat-icon>view_agenda</mat-icon>
+        </button>
+      </div>  
 
     
-    <div>
-      <button mat-icon-button>
-        <mat-icon>settings</mat-icon>
-      </button>
-    </div>
-  <div>
-    <button mat-icon-button [matMenuTriggerFor]="menu">
-      <img mat-card-avatar class="uploadProfile1" src="{{profile}}">
-    </button>
-  </div>
-</div> 
-    <mat-menu #menu="matMenu"  >
-    <!-- <button mat-menu-item (click)="openDialog()">Upload</button>
-    <button mat-menu-item (click)="onlogout()">Sign Out!</button>
-    <button mat-menu-item>Change your Password</button> -->
-    <mat-card fxLayout="row wrap"  class="profilemenu">
+      <div>
+        <button mat-icon-button>
+          <mat-icon>settings</mat-icon>
+        </button>
+      </div>
+    </div>   
       <div >
-        <button mat-icon-button (click)="openDialog()"><img class="uploadProfile2" mat-card-avatar src="{{profile}}"></button>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <img mat-card-avatar class="uploadProfile1" src="{{profile}}">
+        </button>
       </div>
-      <div style="margin-top:13px; margin-left:33px;">
-        <label style="font-size:10px;">{{email}}</label>
-      </div>
-      <div style="margin-top:50px; margin-left:45px;">
-      <button mat-button (click)="onlogout()">Sign Out!</button>
-    </div>
-    </mat-card>
-
-    </mat-menu>
-  
-       
+         
 </mat-toolbar>
 
 
@@ -74,6 +68,7 @@
         <mat-sidenav #sidenav mode="side" class="sidenav">
             <mat-nav-list>
             <h3>FundooNotes</h3>
+            
             <div style="padding-top:5%;"><button class="stylebutton" mat-button style="width:100%" [routerLink]="['achievenotes']">
                 <mat-icon>lightbulb_outline</mat-icon><span style="margin:28%">Note</span>
               </button>
@@ -122,6 +117,19 @@
 
 <!-- <router-outlet></router-outlet> -->
 
-
+<mat-menu #menu="matMenu"  >
+    <mat-card fxLayout="row wrap"  class="profilemenu">
+      <div >
+          <button mat-icon-button (click)="openDialog()"><img class="uploadProfile2" mat-card-avatar src="{{profile}}"></button>
+      </div>
+      <div style="margin-top:13px; margin-left:33px;">
+          <label style="font-size:10px;">{{email}}</label>
+      </div>
+     
+      <div style="margin-top:50px; margin-left:45px;">
+           <button mat-button (click)="onlogout()">Sign Out!</button>
+      </div>
+    </mat-card>
+  </mat-menu>
 
 

@@ -171,7 +171,7 @@ class NoteModel{
  * @Description : Here all the archive notes are displayed
  */
 archiveNotes(archiveobj,callback) {
-    note.find({'userid':archiveobj._id,'archive':true},(err,result)=>{
+    note.find({'userid':archiveobj._id,'archive':true,'trash':false},(err,result)=>{
         console.log("notemodel",result)
         if(err) {
             console.log("Error in finding trash");
@@ -184,7 +184,7 @@ archiveNotes(archiveobj,callback) {
     })
 }
 /**
- * @Description : Here all the update Archive notes
+ * @Description : Here update notes to the Archive
  */
     updateArchiveNotes(archiveObj,callback) {
         console.log("notemodel 1",archiveObj);
@@ -201,6 +201,27 @@ archiveNotes(archiveobj,callback) {
                        }
                    } )
     }
+
+/**
+ * @Description : Here update note Color
+ */
+updateColorNotes(colorObj,callback) {
+    console.log("notemodel 1",colorObj);
+note.updateOne({'userid': colorObj.userid ,'_id': colorObj._id},
+               {$set:{'color': colorObj.color}},(err,result)=>{
+                   console.log("notemodel 2");
+                   if(err) {
+                       console.log("Error in notemodel",err);
+                       return callback(err);
+                   }
+                   else{
+                        console.log(result);
+                        return callback(null,result);
+                   }
+               } )
+}
+
+
 /**
  * @Description : Here all the trash notes are displayed
  */

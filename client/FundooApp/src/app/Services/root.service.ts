@@ -12,6 +12,7 @@ export class RootService {
 url="http://localhost:8000";
   constructor(private http: HttpClient) { }
 
+  token=localStorage.getItem('token');
 register(userData){
 
  // let user=JSON.stringify(userData.value);
@@ -45,6 +46,14 @@ notes(note,token) {
   );
 }
 
+updateNotes(model) {
+  return this.http.post(`${this.url}/updatenotes`,model,{
+    headers:{
+    'token':this.token
+    }
+  })
+}
+
 achievenotes(token){
   return this.http.get(`${this.url}/notes`,{
     headers:{
@@ -54,7 +63,7 @@ achievenotes(token){
 }
 
 archivenotes(token) {
-  return this.http.get(`${this.url}/archive`,{
+  return this.http.get(`${this.url}/getArchive`,{
     headers:{
       'token' :token
     }
@@ -89,7 +98,7 @@ addlabel(label,token) {
 }
 
 getLabel(token){
-  return this.http.get(`${this.url}/label`,{
+  return this.http.get(`${this.url}/getlabel`,{
     headers:{
       'token' : token
     }

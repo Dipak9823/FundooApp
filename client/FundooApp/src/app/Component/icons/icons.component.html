@@ -1,3 +1,4 @@
+<div fxLayoutAlign="space-between">
 <button mat-icon-button matTooltip="reminder" [matMenuTriggerFor]="reminder">
   <mat-icon style="font-size: 20px !important">notifications_none</mat-icon>
 </button>
@@ -7,3 +8,44 @@
 <button mat-menu-item (click)="nextDate()">Tomorrow      8am</button>
 <button mat-menu-item>Next Week   Monday 8am</button>
 </mat-menu>
+
+<button mat-icon-button  >
+  <mat-icon matTooltip="Collaborator" style="font-size: 17px !important">group_add</mat-icon>
+</button>
+
+
+<mat-menu #color="matMenu" yPosition="above">
+  <div class="colors">
+    <div  mat-menu-item (click)="changeColor(paint)" *ngFor="let paint of defaultColors" class="circle" [ngStyle]="{'background':paint}" ></div>
+  </div>
+</mat-menu>
+
+<button mat-icon-button  [matMenuTriggerFor]="color">
+    <mat-icon matTooltip="Change color" style="font-size: 17px !important">palette</mat-icon>
+</button>
+
+<button mat-icon-button matTooltip="Add image">
+  <mat-icon style="font-size: 20px !important">image</mat-icon>
+</button>
+
+<button mat-icon-button matTooltip="Archive" (click)="archive()">
+  <mat-icon style="font-size: 20px !important">archive_outline</mat-icon>
+</button>
+
+<button mat-icon-button matTooltip="More" [matMenuTriggerFor]="more"> 
+  <mat-icon style="font-size: 20px !important">more_vert</mat-icon>
+</button>
+<mat-menu #more="matMenu">
+  <button mat-menu-item  (click)="trashnote()">Delete Label</button>
+  <button mat-menu-item [matMenuTriggerFor]="addLabel" (click)="getAllLabels()">Add Label</button>
+  <button mat-menu-item>Add Drawing</button>
+  <button mat-menu-item>Show CheckBoxes</button>
+</mat-menu>
+
+<mat-menu #addLabel="matMenu">
+
+<p mat-menu-item *ngFor="let i of labelArray">
+  <mat-checkbox>{{i.label}}</mat-checkbox>
+</p>
+</mat-menu>
+</div>

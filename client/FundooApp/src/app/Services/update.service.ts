@@ -8,21 +8,7 @@ export class UpdateService {
   url=environment.baseUrl;
   constructor(private http: HttpClient) { }
   token=localStorage.getItem('token');
-  archive(token,model){
-    return this.http.put(`${this.url}/archive`,model,{
-      headers:{
-        'token':token
-      }
-    });
-  }
-
-  trash(token,model) {
-    return this.http.put(`${this.url}/trash`,model,{
-        headers:{
-          'token' :token
-        }
-    })
-  }
+  
 
   addReminder(model){
     return this.http.post(`${this.url}/addreminder`,model,{
@@ -40,6 +26,46 @@ export class UpdateService {
         'token' :this.token
       }
 
+    })
+  }
+
+  deleteLabel(model) {
+    console.log(model);
+
+    return this.http.post(`${this.url}/deleteLabel`,model,{
+      headers:{
+        'token': this.token
+      }
+    })
+  }
+
+  addColor(model) {
+    console.log("color is", model);
+
+    return this.http.put(`${this.url}/updatecolor`,model,{
+      headers:{
+        'token' : this.token
+      }
+    })
+  }
+
+  addArchive(model){
+    console.log("Archive:-",model );
+
+    return this.http.put(`${this.url}/addArchive`,model,{
+      headers:{
+        'token' :this.token
+      }
+    })
+  }
+
+  updateTrash(model) {
+    console.log("Delete model",model);
+
+    return this.http.put(`${this.url}/addTrash`,model,{
+      headers:{
+        'token': this.token 
+      }
     })
   }
 

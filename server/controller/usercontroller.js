@@ -70,7 +70,7 @@ exports.login=(req,res)=>{
         }
         else {
             email=req.body.email
-            let token1=jwt.sign({_id:data._id}, config.secret, {expiresIn : '1d'});
+            let token1=jwt.sign({'_id':data._id}, config.secret, {expiresIn : '1d'});
             
             console.log("controller 2",data);
             client.set(token1, token1,redis.print)

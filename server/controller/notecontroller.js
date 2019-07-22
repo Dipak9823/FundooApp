@@ -118,11 +118,36 @@ module.exports.noteArchiveController=(req,res)=>{
      })
 } 
 
+module.exports.noteUpdateColorController=(req,res)=>{
+    console.log("Controller 1",req.body);
+    colorObj={
+        userid:req.decoded._id,
+        _id:req.body.id,
+        color:req.body.color
+    }
+    console.log(colorObj);
+    responseResult={}
+    noteservice.noteUpdateColorServices(colorObj,(err,result)=>{
+        console.log("Controller 2");
+        if(err) {
+            responseResult.success=false;
+            responseResult.error=err;
+            res.status(400).send(responseResult);
+        }
+        else {
+            responseResult.success=true;
+            responseResult.message=result;
+            res.status(200).send(responseResult);
+        }
+    })
+
+}
+
 module.exports.noteUpdateArchiveController=(req,res)=>{
     console.log("controller 1",req.body);
     archiveObj={
         userid:req.decoded._id,
-        _id:req.body._id,
+        _id:req.body.id,
         archive:req.body.archive
     }
     responseResult={}
@@ -169,7 +194,7 @@ module.exports.noteUpdateTrashController=(req,res)=>{
     console.log("controller 1",req.body);
         trashObj={
         userid:req.decoded._id,
-        _id:req.body._id,
+        _id:req.body.id,
         trash:req.body.trash
     }
     responseResult={}

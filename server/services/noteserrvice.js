@@ -75,6 +75,7 @@ module.exports.noteUpdateLabel=(body,callback)=>{
     })
 }
 
+
 module.exports.noteArchiveServices=(archiveobj,callback)=>{
     notemodel.archiveNotes(archiveobj,(err,data)=>{
         if(err) {
@@ -98,6 +99,20 @@ module.exports.noteUpdateArchiveServices=(archiveObj,callback)=>{
         }
     })
 }
+
+module.exports.noteUpdateColorServices=(colorObj,callback)=>{
+    console.log("service 1");
+    notemodel.updateColorNotes(colorObj,(err,data)=>{
+        console.log("service 2");
+        if(err) {
+            return callback(err);
+        }
+        else {
+            return callback(null,data);
+        }
+    })
+}
+
 
 /**
  * @Description : Here Get All the Trash Component

@@ -27,24 +27,27 @@ router.get('/notes',middleware.checkToken,noteController.getAllNoteController);
 /*Get Populate Notes */
 router.get('/populatenotes',middleware.checkToken,noteController.getPopulateNotes);
 /*Update data of Notes */
-router.put('/notes',noteController.noteUpdateController);
+router.put('/updatenotes',middleware.checkToken,noteController.noteUpdateController);
 //router.put('/updatelabel',noteController.noteUpdateLableController);
+/* Update Color */
+router.put('/updatecolor',middleware.checkToken,noteController.noteUpdateColorController)
+
 /*Get Archive Notes */
-router.get('/archive',middleware.checkToken,noteController.noteArchiveController);
+router.get('/getArchive',middleware.checkToken,noteController.noteArchiveController);
 /*Update Archive notes*/
-router.put('/archive',middleware.checkToken,noteController.noteUpdateArchiveController)
+router.put('/addArchive',middleware.checkToken,noteController.noteUpdateArchiveController)
 /*Get Trash Notes */
 router.get('/trash',middleware.checkToken,noteController.noteTrashController)
 /* Update Trash Notes */
-router.put('/trash',middleware.checkToken,noteController.noteUpdateTrashController)
+router.put('/addTrash',middleware.checkToken,noteController.noteUpdateTrashController)
 /* Post Label */
 router.post('/label',middleware.checkToken,noteController.noteAddLabelController);
 /* Get All Label */
-router.get('/label',middleware.checkToken,noteController.noteGetAllLabelController)
+router.get('/getlabel',middleware.checkToken,noteController.noteGetAllLabelController)
 /* update Label */
-router.put('/label',middleware.checkToken,noteController.noteUpdateLabelController)
+router.put('/updatelabel',middleware.checkToken,noteController.noteUpdateLabelController)
 /*Delete Label */
-router.delete('/label',middleware.checkToken,noteController.noteDeleteLabelController)
+router.delete('/deletelabel',middleware.checkToken,noteController.noteDeleteLabelController)
 /*Add Reminder */
 router.post('/addreminder',middleware.checkToken,noteController.noteAddReminderController)
 /*Delete Reminder */

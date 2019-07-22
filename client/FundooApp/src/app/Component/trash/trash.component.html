@@ -1,8 +1,8 @@
 <div fxLayout="row wrap" fxLayoutAlign="center start" >
-    <mat-card *ngFor="let items of noteDetailsArray"  [ngStyle]="{'background-color':'white' }" >
+    <mat-card *ngFor="let items of noteDetailsArray"  [ngStyle]="{'background-color':items.color }" >
         
         <mat-card-title>
-       {{items.label}}
+       {{items.title}}
       </mat-card-title>
       <mat-card-content>
         {{items.description}}

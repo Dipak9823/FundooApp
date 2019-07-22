@@ -21,4 +21,26 @@ export class IconsService {
       console.log(res);
     })
   }
+
+  addColor(model) {
+    console.log(this.model);
+
+    this.updateservice.addColor(model).subscribe((res)=>{
+      console.log(res);
+    })
+  }
+
+  addArchive(model) {
+    console.log(this.model);
+    this.updateservice.addArchive(model).subscribe((res)=>{
+      console.log(res);
+    })
+  }
+
+  addTrash(model) {
+    console.log(this.model);
+    this.updateservice.updateTrash(model).subscribe((res)=>{
+      console.log(res);
+    })
+  }
 }

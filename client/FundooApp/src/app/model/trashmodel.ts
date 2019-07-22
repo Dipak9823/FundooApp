@@ -1,4 +1,4 @@
-export class UpdateTrashModel{
-    _id: string;
+export class TrashModel{
+    id: string;
     trash:boolean;
 }

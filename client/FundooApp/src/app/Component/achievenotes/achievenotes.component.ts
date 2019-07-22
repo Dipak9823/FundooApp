@@ -3,13 +3,15 @@ import { RootService } from '../../Services/root.service';
 import { UpdateService} from '../../Services/update.service';
 import { HttpClient } from '@angular/common/http';
 import { MatDialog,MatDialogConfig,MAT_DIALOG_DATA} from '@angular/material/dialog'
-import { UpdateArchiveModel } from 'src/app/model/updatearchivemodel';
-import { UpdateTrashModel} from '../../model/trashmodel';
+//import { UpdateArchiveModel } from 'src/app/model/updatearchivemodel';
+// import { UpdateTrashModel} from '../../model/trashmodel';
 import { ReminderModel} from '../../model/remindermodel'
 import { UpdatenoteComponent } from '../updatenote/updatenote.component'
 import { LabelserviceService } from '../../Services/labelservice.service'
 import { FunctionService } from 'src/app/Services/function.service';
 import { IconsService } from 'src/app/Services/icons.service';
+import { fadeInItems } from '@angular/material';
+import { LabelModel } from 'src/app/model/labelmodel';
 
 @Component({
   selector: 'app-achievenotes',
@@ -44,9 +46,10 @@ export class AchievenotesComponent implements OnInit {
   reminderObj:any;
   searchInputValue : string;
   datetime:any;
-  archivemodel:UpdateArchiveModel=new UpdateArchiveModel();
-  trashmodel:UpdateTrashModel=new UpdateTrashModel();
+  //archivemodel:UpdateArchiveModel=new UpdateArchiveModel();
+  //trashmodel:UpdateTrashModel=new UpdateTrashModel();
   remindermodel:ReminderModel=new ReminderModel();
+  labelmodel:LabelModel=new LabelModel();
   //aseUrl = 'http://34.213.106.173/api/notes/trashNotes'
   constructor( private service:RootService,private http:HttpClient,
                private updateservice: UpdateService,
@@ -111,39 +114,45 @@ export class AchievenotesComponent implements OnInit {
         console.log("Achieve notes",this.toggle);
     })
   }
-  archive(id){
-    this.isArchive=!this.isArchive;
-    console.log(id)
-    this.archivemodel._id=id;
-    this.archivemodel.archive=this.isArchive;
-    console.log(this.archivemodel);
-    this.updateservice.archive(this.token,this.archivemodel).subscribe(
-      (response:any)=>{
-        console.log(response);
+  // archive(id){
+  //   this.isArchive=!this.isArchive;
+  //   console.log(id)
+  //   this.archivemodel._id=id;
+  //   this.archivemodel.archive=this.isArchive;
+  //   console.log(this.archivemodel);
+  //   this.updateservice.archive(this.token,this.archivemodel).subscribe(
+  //     (response:any)=>{
+  //       console.log(response);
         
-      }
-    )
-  }
+  //     }
+  //   )
+  // }
 
-  trashLabel(id) {
-    this.isTrash=!this.isTrash;
-    console.log(id);
-    this.trashmodel._id=id;
-    this.trashmodel.trash=this.isTrash;
-    console.log(this.trashmodel);
-    this.updateservice.trash(this.token,this.trashmodel).subscribe(
-      (response:any)=>{
-        console.log(response);
-      }
-    )
+  // trashLabel(id) {
+  //   this.isTrash=!this.isTrash;
+  //   console.log(id);
+  //   this.trashmodel._id=id;
+  //   this.trashmodel.trash=this.isTrash;
+  //   console.log(this.trashmodel);
+  //   this.updateservice.trash(this.token,this.trashmodel).subscribe(
+  //     (response:any)=>{
+  //       console.log(response);
+  //     }
+  //   )
 
-  }
+  // }
 
-  openDialog():void{
+  openDialog(items):void{
       const dialogRef = this.dialog.open(UpdatenoteComponent, {
-        height: '12vw',
-        width: '60vw',
-          
+        
+            data:{
+              id:items._id,
+              title:items.title,
+              description:items.description,
+              color:items.color,
+              reminder:items.reminder,
+              label:items.label
+            }
       });
     
       dialogRef.afterClosed().subscribe(result => {
@@ -151,6 +160,7 @@ export class AchievenotesComponent implements OnInit {
         
       });
     }
+
 
   getAllLabels() {
     this.labelArray=this.labelservice.getLabel()
@@ -190,7 +200,16 @@ export class AchievenotesComponent implements OnInit {
 
   }
 
-  
+  deleteLabel(_id,label) {
+      this.labelmodel.id=_id;
+      this.labelmodel.label=label;
+      console.log(this.labelmodel);
+      this.updateservice.deleteLabel(this.labelmodel).subscribe(
+        (res)=>{
+          console.log(res)
+        }
+      )
+  }  
   
   }
 
