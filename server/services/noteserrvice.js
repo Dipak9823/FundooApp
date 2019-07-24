@@ -23,9 +23,9 @@ module.exports.noteaddServices=(req,callback)=>{
     });
 }
 
-module.exports.noteUpdateServices=(body,callback)=>{
+module.exports.noteUpdateServices=(noteObj,callback)=>{
     console.log("Service 1");
-    notemodel.updateNotes(body,(err,data)=>{
+    notemodel.updateNotes(noteObj,(err,data)=>{
         console.log("Service 2");
         if(err) {
             return callback(err);
@@ -77,9 +77,9 @@ module.exports.noteUpdateLabel=(body,callback)=>{
 
 
 module.exports.noteArchiveServices=(archiveobj,callback)=>{
-    notemodel.archiveNotes(archiveobj,(err,data)=>{
+    notemodel.getArchiveNotes(archiveobj,(err,data)=>{
         if(err) {
-            return callback(err);
+            return callback(err);   
         }
         else {
             return callback(null,data);

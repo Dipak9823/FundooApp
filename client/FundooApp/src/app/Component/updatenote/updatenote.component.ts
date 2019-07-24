@@ -1,6 +1,6 @@
 import { Component, OnInit, Inject, Input,Output, EventEmitter } from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material';
-import { NoteModel } from '../../model/notemodel'
+import { UpdateNoteModel } from '../../model/UpdateModel'
 import { RootService } from 'src/app/Services/root.service';
 import { LabelserviceService } from 'src/app/Services/labelservice.service';
 @Component({
@@ -34,7 +34,7 @@ export class UpdatenoteComponent implements OnInit {
   @Output() event = new EventEmitter();
   popUp: boolean;
   isArchive:boolean;
-  noteModel:NoteModel=new NoteModel();
+  noteModel:UpdateNoteModel=new UpdateNoteModel();
   labelArray:any[];
   _id:any;
   dateTime:any;
@@ -87,7 +87,7 @@ export class UpdatenoteComponent implements OnInit {
 
     
     //console.log("notes",this.datetime);
-  
+     this.noteModel.noteid=this.data.id; 
      this.popUp=!this.popUp;
      this.noteModel.color=this.color;
      this.noteModel.archive=this.isArchive;
@@ -100,7 +100,7 @@ export class UpdatenoteComponent implements OnInit {
      console.log("Archive=",this.noteModel.archive);
      console.log(this.noteModel);
      var token=localStorage.getItem('token');
-     this.service.notes(this.noteModel,token).subscribe(
+     this.service.updateNotes(this.noteModel).subscribe(
         (response:any)=>{
           console.log(response);
           if(response.status===200) {
@@ -110,6 +110,6 @@ export class UpdatenoteComponent implements OnInit {
           }
         }
       )
-      }  
+    }  
   
 }

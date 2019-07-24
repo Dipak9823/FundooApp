@@ -12,8 +12,27 @@ var token=require('../middleware/token')
 var nodemailer=require('../middleware/mail');
 var upload=require('../middleware/img-uploading');
 exports.register=(req,res)=> {
-    console.log("controller1");
+    console.log("controller1",req.body);
+    
+    req.checkBody('name.firstname', 'Firstname is not valid').isLength({ min: 3 }).isAlpha();
+    req.checkBody('name.lastname', 'Lastname is not valid').isLength({ min: 3 }).isAlpha();
+    req.checkBody('username', 'Username is not valid').isLength({ min: 3 })
+    req.checkBody('email', 'Email is not valid').isEmail();
+    req.checkBody('password', 'password is not valid').isLength({ min: 8 });
+    req.checkBody('phone_no','Number is not valid').isLength({min:10,max:10});
+    req.checkBody('address.street', 'Street is not valid').isLength({ min: 3 })
+    req.checkBody('address.city','City is not valid ').not().isEmpty();
+
+
+    var errors = req.validationErrors();
     responseresult={};
+
+    if(errors) {
+        responseresult.sucess=false;
+        responseresult.message=errors;
+        res.status(400).send(responseresult)
+    }
+    else {
     userservice.register(req.body,(err,data)=>{
         console.log("control2",req.body);
         if(err) {
@@ -35,8 +54,9 @@ exports.register=(req,res)=> {
 
             return res.status(200).send(url);1
 
-        }
-    })
+            }
+        })
+    }
 }
 
 exports.verification=(req,res)=>{
@@ -60,9 +80,18 @@ exports.verification=(req,res)=>{
 
 exports.login=(req,res)=>{
     console.log("controller 1");
-    
+    req.checkBody('email', 'Email is not valid').isEmail();
+    req.checkBody('password', 'password is not valid').isLength({ min: 6 });
+
+    var errors=req.validationErrors();
     responseresult={}
-    userservice.login(req.body,(err,data)=>{
+    if(errors) {
+        responseresult.success=false;
+        responseresult.message=errors;
+        return res.status(400).send(responseresult);
+    }
+    else {
+        userservice.login(req.body,(err,data)=>{
         if(err) {
             responseresult.success=false;
             responseresult.error=err;
@@ -90,6 +119,7 @@ exports.login=(req,res)=>{
         }
 
     })
+    }
 }
 
 exports.forgotPassword=(req,res)=>{

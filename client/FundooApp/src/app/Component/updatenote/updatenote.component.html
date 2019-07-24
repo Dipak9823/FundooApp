@@ -1,15 +1,17 @@
-<div  class="maindiv" class="popinput" fxLayout="column" fxLayoutAlign="start center" [ngStyle]="{'background-color':data.color }"  >  
+<div   class="maindiv" fxLayout="column" fxLayoutAlign="start center" [ngStyle]="{'background-color':data.color }"  >  
  
  <div class="noteInputPop">      
           
           <div>
-            <input matInput [(ngModel)]="this.data.title" class="inputLabelPop" >
+            <input matInput [(ngModel)]="this.data.title" class="inputLabelPop" style="background-color:inherit" >
           </div>
       
           <div style="margin-top:20px;">   
-            <input matInput [(ngModel)]="this.data.description" class="inputNotePop"  >
+            <input matInput [(ngModel)]="this.data.description" class="inputNotePop" style="background-color:inherit" >
           </div>
-          <div style="margin-top:12px;">
+
+ 
+          <div fxLayoutAlign="space-between" style="padding-top:50px;">
             <button mat-icon-button matTooltip="Remind me" [matMenuTriggerFor]="reminder">
                 <mat-icon style="font-size: 17px !important">add_alert</mat-icon>
             </button>
@@ -67,7 +69,5 @@
             </button>
             
             <button mat-button (click)="onSubmit()">Close</button>
-          </div>
-       
-  
-  </div>
+        </div>
+</div>

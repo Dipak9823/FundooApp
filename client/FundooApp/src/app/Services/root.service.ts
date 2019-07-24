@@ -47,7 +47,7 @@ notes(note,token) {
 }
 
 updateNotes(model) {
-  return this.http.post(`${this.url}/updatenotes`,model,{
+  return this.http.put(`${this.url}/notes`,model,{
     headers:{
     'token':this.token
     }

@@ -15,6 +15,8 @@ import { RootService} from '../Services/root.service';
 import { TrashComponent } from '../Component/trash/trash.component';
 import { EditlabelComponent } from '../Component/editlabel/editlabel.component';
 import { IconsComponent } from '../Component/icons/icons.component';
+import { ReminderComponent } from '../Component/reminder/reminder.component';
+
 const appRoutes: Routes=[
   {path: 'login', component: LoginComponent},
   {path: 'register' , component: RegisterComponent},
@@ -24,6 +26,7 @@ const appRoutes: Routes=[
   {path: 'keepnotes', component: KeepnotesComponent,children:[
     {path:'notes',component:NotesComponent},
     {path: 'achievenotes', component:AchievenotesComponent },
+    {path: 'reminder', component: ReminderComponent},
     {path: 'archive', component:ArchiveComponent},
     {path: 'trash', component: TrashComponent},
     {path: 'editlabel', component:EditlabelComponent },

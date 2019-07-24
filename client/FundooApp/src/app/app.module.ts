@@ -30,7 +30,8 @@ import { UpdatenoteComponent } from './Component/updatenote/updatenote.component
 import { LabelComponent } from './Component/label/label.component';
 import { EditlabelComponent } from './Component/editlabel/editlabel.component';
 import { SearchPipe } from './search.pipe';
-import { IconsComponent } from './Component/icons/icons.component'
+import { IconsComponent } from './Component/icons/icons.component';
+import { ReminderComponent } from './Component/reminder/reminder.component'
 @NgModule({
   declarations: [
     
@@ -50,6 +51,7 @@ import { IconsComponent } from './Component/icons/icons.component'
     EditlabelComponent,
     SearchPipe,
     IconsComponent,
+    ReminderComponent,
        
     //AppRoutingModule
   ],

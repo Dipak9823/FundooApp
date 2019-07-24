@@ -25,9 +25,9 @@ router.post('/notes',middleware.checkToken,noteController.noteAddController);
 /*Get Data Into Notes */
 router.get('/notes',middleware.checkToken,noteController.getAllNoteController);
 /*Get Populate Notes */
-router.get('/populatenotes',middleware.checkToken,noteController.getPopulateNotes);
+//router.get('/populatenotes',middleware.checkToken,noteController.getPopulateNotes);
 /*Update data of Notes */
-router.put('/updatenotes',middleware.checkToken,noteController.noteUpdateController);
+router.put('/notes',middleware.checkToken,noteController.noteUpdateController);
 //router.put('/updatelabel',noteController.noteUpdateLableController);
 /* Update Color */
 router.put('/updatecolor',middleware.checkToken,noteController.noteUpdateColorController)

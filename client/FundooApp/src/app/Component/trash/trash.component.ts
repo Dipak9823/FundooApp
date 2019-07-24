@@ -22,7 +22,7 @@ getAllNotes(){
         var sample = this.notes.message;
       
         console.log("notes",sample);
-        console.log("trash:",sample[0].trash);
+        //console.log("trash:",sample[0].trash);
         sample.forEach(element => {
           this.noteDetailsArray.push(element);
           console.log(this.noteDetailsArray);

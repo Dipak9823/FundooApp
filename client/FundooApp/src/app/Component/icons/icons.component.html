@@ -28,8 +28,12 @@
   <mat-icon style="font-size: 20px !important">image</mat-icon>
 </button>
 
-<button mat-icon-button matTooltip="Archive" (click)="archive()">
+<button mat-icon-button matTooltip="Archive" (click)="archive()" *ngIf="isArchive==false">
   <mat-icon style="font-size: 20px !important">archive_outline</mat-icon>
+</button>
+
+<button mat-icon-button matTooltip="Archive" (click)="archive()" *ngIf="isArchive==true">
+  <mat-icon style="font-size: 20px !important">unarchive</mat-icon>
 </button>
 
 <button mat-icon-button matTooltip="More" [matMenuTriggerFor]="more"> 

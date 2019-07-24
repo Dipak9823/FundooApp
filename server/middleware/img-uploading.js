@@ -1,20 +1,19 @@
-/*********************************************************************************************************************
+/** 
  * @purpose : Here upload image on aws 
  * @File : img-uploading.js
  * @author : DipakPatil
  * @version : 1.0
  * @since :
- ***********************************************************************************************************************/
-
+ */
 
 const aws = require('aws-sdk');
 const multer = require('multer')
 const multerS3 = require('multer-s3');
 const config=require('../configuration/dbconfig');
 let conf = {
-AccessKeyID : config.accesskey,
-secretAccessKey : config.secretkey,
-region : 'ap-south-1',
+    AccessKeyID : config.accesskey,
+    secretAccessKey : config.secretkey,
+    region : 'ap-south-1',
 };
 const s3 = new aws.S3();
 /**

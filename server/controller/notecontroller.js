@@ -1,4 +1,4 @@
-/*********************************************************************************************************************
+/** *******************************************************************************************************************
  * @purpose : here, write our note controller to sending req to backend or to sending res to frontend
  * @File : notecontroller.js
  * @author : DipakPatil
@@ -13,6 +13,15 @@ module.exports.noteAddController=(req,res)=>{
     console.log(req.decoded._id);
     req.checkBody('description','Description is required').not().isEmpty();
     var errors=req.validationErrors();
+    var noteObj={
+        _id:req.decoded._id,
+        title: req.body.title,
+        label: req.body.label,
+        description:req.body.description,
+        color: req.body.color,
+        reminder:req.body.reminder,
+        archive: req.body.archive
+    }
     responseResult={};
     if(errors){
         responseResult.success=false;
@@ -20,7 +29,7 @@ module.exports.noteAddController=(req,res)=>{
         return res.status(400).send(responseResult)
     }
     else {
-    noteservice.noteaddServices(req,(err,result)=>{
+    noteservice.noteaddServices(noteObj,(err,result)=>{
         console.log("Addnote controller 2",result);
         
         if(err) {
@@ -40,7 +49,19 @@ module.exports.noteAddController=(req,res)=>{
 module.exports.noteUpdateController=(req,res)=>{
     responseResult={};
     console.log("controller 1");
-    noteservice.noteUpdateServices(req.body,(err,result)=>{
+
+
+    var noteObj={
+        _id:req.body.noteid,
+        userid:req.decoded._id,
+        title: req.body.title,
+        label: req.body.label,
+        description:req.body.description,
+        color: req.body.color,
+        reminder:req.body.reminder,
+        archive: req.body.archive
+    }
+    noteservice.noteUpdateServices(noteObj,(err,result)=>{
         console.log("Controller 2")
         if(err) {
             responseResult.success=false;
@@ -48,14 +69,12 @@ module.exports.noteUpdateController=(req,res)=>{
             res.status(400).send(responseResult);
         }
         else{
-            responseResult.success=false;
+            responseResult.success=True;
             responseResult.result=result;
             res.status(200).send(responseResult);
         }
     })
 }
-
-
 
 module.exports.getAllNoteController=(req,res)=>{
     responseResult={};
@@ -73,34 +92,35 @@ module.exports.getAllNoteController=(req,res)=>{
     })
 }
 
-module.exports.getPopulateNotes=(req,res)=>{
-    responseResult={};
-    noteObj={
-        // id:req.decoded._id,
-        // noteid: req.body.noteid,
-        // _id: req.body.label,
-        label:req.body.label
-    }
-    console.log("Controller 1");
-    noteservice.getPopulateNotes(noteObj,(err,result)=>{
-        console.log("Controller 2");
-        if(err) {
-            responseResult.success=false;
-            responseresult.error=err;
-            res.status(400).send(responseResult);
-        }
-        else {
-            responseResult.sucess=true;
-            responseResult.result=result;
-            res.status(200).send(responseResult);
-        }
-    })
-}
+// module.exports.getPopulateNotes=(req,res)=>{
+//     responseResult={};
+//     noteObj={
+//         // id:req.decoded._id,
+//         // noteid: req.body.noteid,
+//         // _id: req.body.label,
+//         label:req.body.label
+//     }
+//     console.log("Controller 1");
+//     noteservice.getPopulateNotes(noteObj,(err,result)=>{
+//         console.log("Controller 2");
+//         if(err) {
+//             responseResult.success=false;
+//             responseresult.error=err;
+//             res.status(400).send(responseResult);
+//         }
+//         else {
+//             responseResult.sucess=true;
+//             responseResult.result=result;
+//             res.status(200).send(responseResult);
+//         }
+//     })
+// }
+
 module.exports.noteArchiveController=(req,res)=>{
     console.log("Controller 1");
     console.log(req.decoded._id);
     archiveobj={
-        _id:req.decoded._id
+        userid:req.decoded._id
     }
     responseResult={};
     noteservice.noteArchiveServices(archiveobj,(err,result)=>{
@@ -120,6 +140,12 @@ module.exports.noteArchiveController=(req,res)=>{
 
 module.exports.noteUpdateColorController=(req,res)=>{
     console.log("Controller 1",req.body);
+    
+    req.checkBody('id','_id is required').not().isEmpty();
+    req.checkBody('color','color required').not().isEmpty();
+    var errors=req.validationErrors();
+
+
     colorObj={
         userid:req.decoded._id,
         _id:req.body.id,
@@ -127,6 +153,10 @@ module.exports.noteUpdateColorController=(req,res)=>{
     }
     console.log(colorObj);
     responseResult={}
+    if(errors) {
+
+    }
+    else {
     noteservice.noteUpdateColorServices(colorObj,(err,result)=>{
         console.log("Controller 2");
         if(err) {
@@ -140,30 +170,41 @@ module.exports.noteUpdateColorController=(req,res)=>{
             res.status(200).send(responseResult);
         }
     })
+}
 
 }
 
 module.exports.noteUpdateArchiveController=(req,res)=>{
     console.log("controller 1",req.body);
+    req.checkBody('id','id required').not().isEmpty();
+    req.checkBody('isArchive','isArchive Required').not().isEmpty();
+    var errors=req.validationErrors();
+
     archiveObj={
         userid:req.decoded._id,
         _id:req.body.id,
-        archive:req.body.archive
+        isArchive:req.body.isArchive
     }
     responseResult={}
-    noteservice.noteUpdateArchiveServices(archiveObj,(err,result)=>{
-        console.log("Controller 2");
-        if(err) {
-            responseResult.success=false;
-            responseResult.error=err;
-            res.status(400).send(responseResult);
-        }
-        else {
-            responseResult.success=true;
-            responseResult.message=result;
-            res.status(200).send(responseResult);
-        }
-    })
+    if(errors){
+        responseResult.sucess=false;
+        responseResult.message=errors;
+    }
+    else{
+        noteservice.noteUpdateArchiveServices(archiveObj,(err,result)=>{
+            console.log("Controller 2");
+            if(err) {
+                responseResult.success=false;
+                responseResult.error=err;
+                res.status(400).send(responseResult);
+            }
+            else {
+                responseResult.success=true;
+                responseResult.message=result;
+                res.status(200).send(responseResult);
+            }
+        })
+    }
 }
 
 /**
@@ -172,6 +213,7 @@ module.exports.noteUpdateArchiveController=(req,res)=>{
 
 module.exports.noteTrashController=(req,res)=>{
     console.log("Controller 1");
+    
     responseResult={};
     noteservice.noteTrashServices(req.body,(err,result)=>{
         console.log("Controller 2",result);
@@ -186,31 +228,45 @@ module.exports.noteTrashController=(req,res)=>{
             res.status(200).send(responseResult);
         }
      })
-} 
+}
+
 /**
  *  @Description : Update Trash Api
  */
+
 module.exports.noteUpdateTrashController=(req,res)=>{
     console.log("controller 1",req.body);
-        trashObj={
+
+    req.checkBody('id','id required').not().isEmpty();
+    req.checkBody('isTrash','isTrash Required').not().isEmpty();
+    var errors=req.validationErrors();
+
+    trashObj={
         userid:req.decoded._id,
         _id:req.body.id,
-        trash:req.body.trash
+        trash:req.body.isTrash
     }
-    responseResult={}
-    noteservice.noteUpdateTrashServices(trashObj,(err,result)=>{
-        console.log("Controller 2");
-        if(err) {
-            responseResult.success=false;
-            responseResult.error=err;
-            res.status(400).send(responseResult);
-        }
-        else {
-            responseResult.success=true;
-            responseResult.result=result;
-            res.status(200).send(responseResult);
-        }
-    })
+    var responseResult={}
+    if(errors) {
+        responseResult.success=false;
+        responseResult.message=errors;
+        res.status(200).send(responseResult);
+    }
+    else {
+        noteservice.noteUpdateTrashServices(trashObj,(err,result)=>{
+            console.log("Controller 2");
+            if(err) {
+                responseResult.success=false;
+                responseResult.error=err;
+                res.status(400).send(responseResult);
+            }
+            else {
+                responseResult.success=true;
+                responseResult.result=result;
+                res.status(200).send(responseResult);
+            }
+        })
+    }
 }
 
 /*Delete note*/

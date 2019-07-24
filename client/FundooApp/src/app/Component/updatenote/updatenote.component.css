@@ -1,9 +1,15 @@
+.myapp-no-padding-dialog .popinput {
+  padding: 0;
+}
+
+.maindiv{
+ padding:20px;
+}
+
 .input{
     padding-top:4%;
-  }
-  
-  
-  .noteInput{
+}
+.noteInput{
       display: flex;
     border:none;
     height: 4vw;
@@ -13,7 +19,7 @@
     box-shadow: 3px 3px 5px 5px rgba(0, 0, 0, 0.14);
     outline: none;
   
-  }
+}
   
     
   .inputnote{

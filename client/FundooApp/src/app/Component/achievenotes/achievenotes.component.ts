@@ -143,7 +143,7 @@ export class AchievenotesComponent implements OnInit {
   // }
 
   openDialog(items):void{
-      const dialogRef = this.dialog.open(UpdatenoteComponent, {
+      const dialogRef = this.dialog.open(UpdatenoteComponent,{panelClass: 'myapp-no-padding-dialog',
         
             data:{
               id:items._id,

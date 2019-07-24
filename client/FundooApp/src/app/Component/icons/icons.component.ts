@@ -87,7 +87,7 @@ export class IconsComponent implements OnInit {
   }  
 
   archive() { 
-    this.isArchive=true;
+    this.isArchive=!this.isArchive;
     console.log("Archive:",this.isArchive);
     this.archivemodel.id=this.id;
     this.archivemodel.isArchive=this.isArchive;
@@ -98,7 +98,8 @@ export class IconsComponent implements OnInit {
     this.isTrash=!this.isTrash;
     console.log("Trash:",this.isTrash);
     this.trashmodel.id=this.id;
-    this.trashmodel.trash=this.isTrash;
+    this.trashmodel.isTrash=this.isTrash;
+    console.log(this.trashmodel);
     this.iconservice.addTrash(this.trashmodel);
   }
 
